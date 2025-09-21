@@ -1,3 +1,7 @@
+body {
+  background-color: #28071b;  /* Цвет основного фона */
+}
+a{ color: rgb(218, 108, 165); }
 /* === ШАПКА САЙТА === */
 .site-header {
   display: flex;               /* выравнивание в строку */
@@ -211,3 +215,4 @@
 .anime-card:hover .anime-info {
   transform: translateY(0);
 }
+
