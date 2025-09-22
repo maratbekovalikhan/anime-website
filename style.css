@@ -216,3 +216,183 @@ a{ color: rgb(218, 108, 165); }
   transform: translateY(0);
 }
 
+/* Заголовок страницы — просто по центру, чтобы выглядел солидно */
+.page-title {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Шапка сайта (слева логотип, справа меню) */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
+  color: white;
+  padding: 12px 24px;
+}
+
+/* Логотипчик с картинкой и названием */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.logo img {
+  width: 40px; 
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Навигация (ссылки по сайту) */
+.main-nav {
+  display: flex; 
+  gap: 20px;
+}
+.main-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+/* Подсветка активной или наведённой ссылки */
+.main-nav a:hover,
+.main-nav a.active {
+  background: #ff6600;
+}
+
+/* Каталог аниме (обёртка с отступами) */
+.catalog { 
+  padding: 20px; 
+}
+
+/* Фильтры жанров (типа кнопочки) */
+.catalog-filters {
+  display: flex;
+  gap: 15px;
+  margin: 15px 0;
+}
+.catalog-filters label {
+  background: #eee;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+/* Прячу стандартные радио, оставляю только мои кнопки */
+.catalog-filters input { display: none; }
+/* Когда выбрал жанр или навёл мышку — красота */
+.catalog-filters input:checked + span,
+.catalog-filters label:hover {
+  background: #ff6600; 
+  color: white;
+}
+
+/* Сетка карточек аниме */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Карточка с аниме */
+.anime-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+/* Чтоб карточка поднималась при наведении */
+.anime-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Картинка внутри карточки */
+.card-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+/* Лёгкий зум картинки при наведении */
+.anime-card:hover .card-image img {
+  transform: scale(1.1);
+}
+
+/* Название и описание аниме */
+.anime-card h3 {
+  margin: 10px;
+  font-size: 18px;
+}
+.anime-card p {
+  margin: 0 10px 10px;
+  color: #666;
+}
+
+/* Общий стиль для кнопок внутри карточки */
+.anime-card button {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  color: #fff;
+}
+
+/* Кнопка "Добавить в закладки" (зелёная) */
+.bookmark-btn {
+  background: #28a745;
+}
+.bookmark-btn:hover {
+  background: #218838;
+  transform: scale(1.05);
+}
+
+/* Кнопка "Убрать из закладок" (красная) */
+.remove-btn {
+  background: #dc3545;
+}
+.remove-btn:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+/* Тут логика фильтрации жанров — показываю только нужные карточки */
+input[name="genre"] { 
+  display: none; 
+}
+.anime-card { 
+  display: block; 
+}
+input[value="Action"]:checked ~ .anime-grid .anime-card:not([data-genre="Action"]) { 
+  display: none; 
+}
+input[value="Fantasy"]:checked ~ .anime-grid .anime-card:not([data-genre="Fantasy"]) { 
+  display: none; 
+}
+input[value="Drama"]:checked ~ .anime-grid .anime-card:not([data-genre="Drama"]) { 
+  display: none; 
+}
+input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"]) { 
+  display: none; 
+}
+
+/* Сообщение, если у пользователя пока нет закладок */
+.empty-msg {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  margin: 20px auto;
+}
