@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Закладки - AnimeWorld</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo">
+      <span>AnimeWorld</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="player.html">Плеер</a>
+      <a href="bookmarks.html" class="active">Закладки</a>
+    </nav>
+  </header>
+
+  <main class="catalog">
+    <h2>Мои закладки</h2>
+    <div class="anime-grid" id="bookmarks-grid"></div>
+  </main>
+
+  <footer>
+    <p>Команда: Alikhan и Arman</p>
+  </footer>
+
+  <script>
+    const container = document.getElementById("bookmarks-grid");
+    let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+    function renderBookmarks() {
+      container.innerHTML = "";
+
+      if (bookmarks.length === 0) {
+        container.innerHTML = "<p class='empty-msg'>Закладок пока нет 🙁</p>";
+        return;
+      }
+
+      bookmarks.forEach(item => {
+        const card = document.createElement("article");
+        card.classList.add("anime-card");
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.title}">
+          <h3>${item.title}</h3>
+          <p>${item.genre || ""}</p>
+          <button class="remove-btn">Убрать</button>
+        `;
+
+        card.querySelector(".remove-btn").addEventListener("click", () => {
+          bookmarks = bookmarks.filter(b => b.title !== item.title);
+          localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+          renderBookmarks();
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    renderBookmarks();
+  </script>
+</body>
+</html>

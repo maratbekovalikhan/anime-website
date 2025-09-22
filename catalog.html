@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог аниме - AnimeWorld</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo">
+      <span>AnimeWorld</span>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="player.html">Плеер</a>
+      <a href="bookmarks.html">Закладки</a>
+    </nav>
+  </header>
+
+  <main class="catalog">
+    <h2>Каталог аниме</h2>
+
+    <!-- Фильтры -->
+    <div class="catalog-filters">
+      <input type="text" placeholder="Поиск по названию...">
+      <select>
+        <option value="">Все жанры</option>
+        <option>Action</option>
+        <option>Fantasy</option>
+        <option>Drama</option>
+        <option>Comedy</option>
+        <option>Sci-Fi</option>
+        <option>Romance</option>
+      </select>
+    </div>
+
+    <!-- Сетка карточек -->
+    <div class="anime-grid">
+      <!-- 1 -->
+      <article class="anime-card">
+        <img src="naruto.jpg" alt="Naruto">
+        <h3>Naruto</h3>
+        <p>Shounen · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 2 -->
+      <article class="anime-card">
+        <img src="bleach.jpg" alt="Bleach">
+        <h3>Bleach</h3>
+        <p>Shounen · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 3 -->
+      <article class="anime-card">
+        <img src="onepiece.jpg" alt="One Piece">
+        <h3>One Piece</h3>
+        <p>Adventure · Shounen</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 4 -->
+      <article class="anime-card">
+        <img src="attakontitan.jpg" alt="Attack on Titan">
+        <h3>Attack on Titan</h3>
+        <p>Action · Drama</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 5 -->
+      <article class="anime-card">
+        <img src="deathnote.jpg" alt="Death Note">
+        <h3>Death Note</h3>
+        <p>Thriller · Supernatural</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 6 -->
+      <article class="anime-card">
+        <img src="demonslayer.jpg" alt="Demon Slayer">
+        <h3>Demon Slayer</h3>
+        <p>Shounen · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 7 -->
+      <article class="anime-card">
+        <img src="jujutsu.jpg" alt="Jujutsu Kaisen">
+        <h3>Jujutsu Kaisen</h3>
+        <p>Action · Fantasy</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 8 -->
+      <article class="anime-card">
+        <img src="fullmetal.jpg" alt="Fullmetal Alchemist">
+        <h3>Fullmetal Alchemist</h3>
+        <p>Adventure · Drama</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 9 -->
+      <article class="anime-card">
+        <img src="hxh.jpg" alt="Hunter x Hunter">
+        <h3>Hunter x Hunter</h3>
+        <p>Adventure · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 10 -->
+      <article class="anime-card">
+        <img src="myhero.jpg" alt="My Hero Academia">
+        <h3>My Hero Academia</h3>
+        <p>Action · Superpowers</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 11 -->
+      <article class="anime-card">
+        <img src="boruto.jpg" alt="Boruto">
+        <h3>Boruto</h3>
+        <p>Shounen · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 12 -->
+      <article class="anime-card">
+        <img src="tokyoghoul.jpg" alt="Tokyo Ghoul">
+        <h3>Tokyo Ghoul</h3>
+        <p>Dark Fantasy · Horror</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 13 -->
+      <article class="anime-card">
+        <img src="fairytail.jpg" alt="Fairy Tail">
+        <h3>Fairy Tail</h3>
+        <p>Fantasy · Adventure</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 14 -->
+      <article class="anime-card">
+        <img src="sao.jpg" alt="Sword Art Online">
+        <h3>Sword Art Online</h3>
+        <p>Fantasy · Sci-Fi</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 15 -->
+      <article class="anime-card">
+        <img src="codegeass.jpg" alt="Code Geass">
+        <h3>Code Geass</h3>
+        <p>Sci-Fi · Mecha</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 16 -->
+      <article class="anime-card">
+        <img src="evangelion.jpg" alt="Evangelion">
+        <h3>Neon Genesis Evangelion</h3>
+        <p>Psychological · Mecha</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 17 -->
+      <article class="anime-card">
+        <img src="rezero.jpg" alt="Re:Zero">
+        <h3>Re:Zero</h3>
+        <p>Fantasy · Drama</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 18 -->
+      <article class="anime-card">
+        <img src="nozaki.jpg.webp" alt="Monthly Girls' Nozaki-kun">
+        <h3>Monthly Girls' Nozaki-kun</h3>
+        <p>Comedy · Romance</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 19 -->
+      <article class="anime-card">
+        <img src="erased.jpg" alt="Erased">
+        <h3>Erased</h3>
+        <p>Thriller · Mystery</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 20 -->
+      <article class="anime-card">
+        <img src="steinsgate.jpg"Steins;Gate">
+        <h3>Steins;Gate</h3>
+        <p>Sci-Fi · Thriller</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 21 -->
+      <article class="anime-card">
+        <img src="clannad.jpg" alt="Clannad">
+        <h3>Clannad</h3>
+        <p>Drama · Romance</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 22 -->
+      <article class="anime-card">
+        <img src="angelbeats.jpg" alt="Angel Beats!">
+        <h3>Angel Beats!</h3>
+        <p>Drama · Fantasy</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 23 -->
+      <article class="anime-card">
+        <img src="parasyte.jpg" alt="Parasyte">
+        <h3>Parasyte</h3>
+        <p>Horror · Sci-Fi</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 24 -->
+      <article class="anime-card">
+        <img src="drstone.jpg" alt="Dr. Stone">
+        <h3>Dr. Stone</h3>
+        <p>Sci-Fi · Adventure</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 25 -->
+      <article class="anime-card">
+        <img src="blackclover.jpeg"Black Clover">
+        <h3>Black Clover</h3>
+        <p>Fantasy · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 26 -->
+      <article class="anime-card">
+        <img src="fireforce.jpg" alt="Fire Force">
+        <h3>Fire Force</h3>
+        <p>Action · Supernatural</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 27 -->
+      <article class="anime-card">
+        <img src="blueperiod.jpg" alt="Blue Period">
+        <h3>Blue Period</h3>
+        <p>Drama · Slice of Life</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 28 -->
+      <article class="anime-card">
+        <img src="vivy.jpeg"Vivy: Fluorite Eye's Song">
+        <h3>Vivy: Fluorite Eye's Song</h3>
+        <p>Sci-Fi · Drama</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 29 -->
+      <article class="anime-card">
+        <img src="spyxfamily.jpg" alt="Spy x Family">
+        <h3>Spy x Family</h3>
+        <p>Comedy · Action</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+      <!-- 30 -->
+      <article class="anime-card">
+        <img src="chainsaw.jpg" alt="Chainsaw Man">
+        <h3>Chainsaw Man</h3>
+        <p>Action · Horror</p>
+        <button class="bookmark-btn">Добавить в закладки</button>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <p>Команда: Alikhan и Arman</p>
+  </footer>
+
+  <!-- JS для добавления в закладки -->
+  <script>
+    const buttons = document.querySelectorAll(".bookmark-btn");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".anime-card");
+        const title = card.querySelector("h3").innerText;
+        const img = card.querySelector("img").getAttribute("src");
+        const genre = card.querySelector("p").innerText;
+
+        let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+        if (!bookmarks.some(item => item.title === title)) {
+          bookmarks.push({ title, img, genre });
+          localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+          alert(`«${title}» добавлено в закладки!`);
+        } else {
+          alert(`«${title}» уже есть в закладках.`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
