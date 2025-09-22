@@ -24,18 +24,36 @@
     <button>🔍</button>
   </div>
 </header>
-<maiv>
-<p class="center-text">Выберите аниме из каталога или главной страницы.</p>
-<img src="ChatGPT Image 23 сент. 2025 г., 05_32_43.png" alt="Anime girl" class="center-img">
-</maiv>  
+<main id="mainContent">
+  <p class="center-text">Выберите аниме из каталога или главной страницы</p>
+  <img src="anime-girl.png" alt="Anime girl" class="center-img">
+</main>
+
 <style>
   body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    background: #222;
+    color: #fff;
+    padding: 10px 20px;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+  }
+
+  main {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* по вертикали */
-    align-items: center;     /* по горизонтали */
-    min-height: 100vh;       /* занимаем весь экран */
-    margin: 0;
+    justify-content: center; /* вертикально */
+    align-items: center;     /* горизонтально */
+    min-height: calc(100vh - 50px); /* вычитаем высоту шапки */
     text-align: center;
   }
 
@@ -49,12 +67,12 @@
     border-radius: 10px;
   }
 </style>
-
   <footer>
     <p>Команда: Alikhan и Arman.</p>
   </footer>
 </body>
 </html>
+
 
 
 
