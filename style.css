@@ -1,5 +1,5 @@
 body {
-  color: white; /* все тексты белые */
+  color: white; /* все тексты белые. */
 }
 
 
@@ -401,6 +401,7 @@ input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"
   text-align: center;
   margin: 20px auto;
 }
+
 
 
 
