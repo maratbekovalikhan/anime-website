@@ -1,7 +1,9 @@
 body {
   color: white; /* все тексты белые. */
 }
-
+.black-text {
+  color: black; /* текст который нужно сделать черным */
+}
 
 body {
   background-color: #28071b;  /* Цвет основного фона */
@@ -401,6 +403,7 @@ input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"
   text-align: center;
   margin: 20px auto;
 }
+
 
 
 
