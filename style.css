@@ -2,7 +2,7 @@ body {
   color: white; /* все тексты белые */
 }
 .black-text {
-  color: black; /* текст который нужно сделать черным */
+  color: black; /* текст который нужно сделать черным. */
 }
 .anime-card * {
   color: black;
@@ -406,6 +406,7 @@ input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"
   text-align: center;
   margin: 20px auto;
 }
+
 
 
 
