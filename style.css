@@ -3,7 +3,7 @@ body, header, nav, main, footer, p, span {
 }
 
 body {
-  background-color: #28071b;  /* Цвет основного фона. */
+  background-color: #28071b;  /* Цвет основного фона */
 }
 a{ color: rgb(218, 108, 165); }
 /* === ШАПКА САЙТА === */
@@ -400,6 +400,7 @@ input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"
   text-align: center;
   margin: 20px auto;
 }
+
 
 
 
