@@ -1,6 +1,7 @@
-body, header, nav, main, footer, p, span, h{
-  color: white !important;
+body {
+  color: white; /* все тексты белые */
 }
+
 
 body {
   background-color: #28071b;  /* Цвет основного фона */
@@ -400,6 +401,7 @@ input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"
   text-align: center;
   margin: 20px auto;
 }
+
 
 
 
