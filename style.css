@@ -1,4 +1,4 @@
-body, header, nav, main, footer, p, span {
+body, header, nav, main, footer, p, span, h{
   color: white !important;
 }
 
@@ -400,6 +400,7 @@ input[value="Comedy"]:checked ~ .anime-grid .anime-card:not([data-genre="Comedy"
   text-align: center;
   margin: 20px auto;
 }
+
 
 
 
