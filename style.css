@@ -84,9 +84,12 @@ a {
   transform: scale(1.05);
 }
 
-/* ===== ЛЕНТА АНИМЕ ===== */
 .anime-section {
   padding: 20px;
+  background: linear-gradient(145deg, rgba(30,30,40,0.95), rgba(20,20,30,0.95));
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(255, 71, 126, 0.2);
+  margin-bottom: 30px;
 }
 
 .section-header {
@@ -94,20 +97,33 @@ a {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #ff477e;
+  color: #ffffff;
+}
+
+.view-more-btn {
+  font-size: 0.9rem;
+  padding: 6px 14px;
+  background: #ff477e;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.view-more-btn:hover {
+  background: #e63c6f;
+  transform: scale(1.05);
 }
 
 .anime-carousel {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
-  padding-bottom: 25px;
+  padding-bottom: 10px;
   scroll-behavior: smooth;
-  background: rgb(20, 20, 25); /* фон под каруселью */
-  border-radius: 12px;
-  padding: 20px; /* внутренние отступы */
 }
 
 .anime-carousel::-webkit-scrollbar {
@@ -115,81 +131,47 @@ a {
 }
 
 .anime-carousel::-webkit-scrollbar-thumb {
-  background: rgba(103, 70, 80, 0.5);
+  background: rgba(255, 71, 126, 0.5);
   border-radius: 10px;
 }
 
-/* ===== КАРТОЧКА ===== */
+/* Карточки */
 .anime-card {
-  flex: 0 0 220px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(8px);
-  border-radius: 15px;
+  flex: 0 0 200px;
+  background: rgba(40,40,50,0.9);
+  border-radius: 12px;
   overflow: hidden;
   text-align: center;
-  display: flex;
-  flex-direction: column;
   transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
 .anime-card:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 12px 30px rgba(255,71,126,0.5);
+  box-shadow: 0 12px 30px rgba(255, 71, 126, 0.5);
 }
 
 .anime-card img {
   width: 100%;
-  height: 250px;
+  height: 220px;
   object-fit: cover;
-  transition: transform 0.4s;
-  border-bottom: 2px solid rgba(255,71,126,0.3);
+  border-bottom: 2px solid rgba(255,71,126,0.2);
+  transition: transform 0.3s;
 }
 
 .anime-card:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .anime-card h3 {
-  margin: 10px;
-  font-size: 1.15rem;
-  color: #ff477e;
+  margin: 8px 0 4px;
+  font-size: 1.1rem;
+  color: #ff71a0;
 }
 
 .anime-card p {
-  margin: 0 10px 10px;
-  font-size: 0.9rem;
+  margin: 0 5px 10px;
+  font-size: 0.85rem;
   color: #ccc;
-}
-
-/* Кнопки */
-.bookmark-btn, .remove-btn {
-  margin: 10px;
-  padding: 8px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.bookmark-btn {
-  background: #28a745;
-}
-
-.bookmark-btn:hover {
-  background: #218838;
-  transform: scale(1.05);
-}
-
-.remove-btn {
-  background: #dc3545;
-}
-
-.remove-btn:hover {
-  background: #c82333;
-  transform: scale(1.05);
 }
 
 /* ================= GRID макет ================= */
@@ -208,7 +190,7 @@ a {
 
 .sidebar h3 {
   margin-bottom:10px;
-  color:#ff6b81;
+  color:#ffffff;
 }
 
 .sidebar ul {
@@ -377,12 +359,17 @@ a {
   }
 }
 
-/* ===== Recently Viewed / Недавно просмотренные ===== */
+/* ===== Recently Viewed / Блок ===== */
 .recently-section {
   margin: 40px 0;
   padding: 20px;
+  background: rgba(20,20,25,0.9); /* тёмный блок на фоне сайта */
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(255,71,126,0.2);
+  border: 1px solid rgba(255,71,126,0.15);
 }
 
+/* Заголовок блока */
 .recently-section .section-header {
   display: flex;
   justify-content: space-between;
@@ -391,6 +378,7 @@ a {
   font-size: 1.4rem;
   font-weight: bold;
   color: #ff477e;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 /* Горизонтальная карусель */
@@ -403,28 +391,33 @@ a {
 }
 
 .recently-carousel::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
 }
 
 .recently-carousel::-webkit-scrollbar-thumb {
-  background: rgba(255, 71, 126, 0.5);
-  border-radius: 10px;
+  background: rgba(255,71,126,0.5);
+  border-radius: 12px;
+  transition: background 0.3s;
 }
 
-/* ===== Карточка недавно просмотренного — улучшенный стиль ===== */
+.recently-carousel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,71,126,0.8);
+}
+
+/* Карточки внутри блока */
 .recently-card {
   flex: 0 0 180px;
   background: linear-gradient(145deg, rgba(30,30,35,0.95), rgba(20,20,25,0.95));
   border-radius: 14px;
   overflow: hidden;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(255, 71, 126, 0.25);
+  box-shadow: 0 6px 18px rgba(255,71,126,0.25);
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
 .recently-card:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 12px 30px rgba(255, 71, 126, 0.5);
+  box-shadow: 0 12px 30px rgba(255,71,126,0.5);
   background: linear-gradient(145deg, rgba(40,40,50,0.95), rgba(28,28,36,0.95));
 }
 
@@ -470,7 +463,6 @@ a {
     height: 120px;
   }
 }
-
 /* Сетка карточек — универсальная для каталога и закладок */
 .anime-grid {
   display: grid;
