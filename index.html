@@ -10,7 +10,7 @@
 <header class="site-header">
   <div class="logo">
     <img src="icon Image .png" alt="Anime Website Logo">
-    <span>Anime World</span>
+    <span>SAKURA</span>
   </div>
 
   <nav class="main-nav">
@@ -27,88 +27,178 @@
 </header>
 
 
+<!-- GRID макет -->
+<section class="grid-layout">
+  <aside class="sidebar">
+    <h3>Жанры</h3>
+    <ul>
+      <li>Сёнэн</li>
+      <li>Сёдзё</li>
+      <li>Сейнен</li>
+      <li>Фэнтези</li>
+      <li>Романтика</li>
+    </ul>
+  </aside>
 
-    <!-- Горизонтальная лента аниме-->
-    <section class="anime-section">
-      <div class="section-header">
-        <h2 class="black-text">Популярное прямо сейчас</h2>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="prev-btn" aria-label="предыдущие">◀</button>
-          <button class="carousel-btn" id="next-btn" aria-label="следующие">▶</button>
-        </div>
+  <div class="grid-main">
+    <h3>Новости аниме</h3>
+    <p>В этом блоке можно показывать свежие новости, новые серии или обновления каталога.</p>
+    <div class="news-cards">
+      <article class="news-card">
+        <h4>Новая серия Naruto</h4>
+        <p>Сегодня вышла новая серия Naruto Shippuden!</p>
+      </article>
+      <article class="news-card">
+        <h4>Обновление каталога</h4>
+        <p>Добавлены новые аниме-тайтлы для просмотра онлайн.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- Горизонтальная лента аниме -->
+<section class="anime-section">
+  <div class="section-header">
+    <h2>Популярное прямо сейчас</h2>
+    <div class="carousel-controls">
+      <button id="prev-btn">◀</button>
+      <button id="next-btn">▶</button>
+    </div>
+  </div>
+
+  <div class="anime-carousel" id="anime-carousel">
+    <article class="anime-card">
+      <img src="proxy-image.jpg" alt="Naruto" title="История о мальчике-ниндзя, мечтающем стать Хокаге">
+      <h3>Naruto</h3>
+      <p class="meta">Shounen · Action</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (1).jpg" alt="Demon Slayer" title="Тандзиро борется с демонами, чтобы спасти свою сестру.">
+      <h3>Demon Slayer</h3>
+      <p class="meta">Shounen · Fantasy</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (2).jpg" alt="Attack on Titan" title="Люди сражаются с гигантами, угрожающими их миру">
+      <h3>Attack on Titan</h3>
+      <p class="meta">Seinen · Drama</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (3).jpg" alt="One Piece" title="Луффи и его команда ищут легендарное сокровище One Piece.">
+      <h3>One Piece</h3>
+      <p class="meta">Adventure · Comedy</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (4).jpg" alt="Jujutsu Kaisen" title="Юдзи Итадори сталкивается с проклятиями и учится в школе магии.">
+      <h3>Jujutsu Kaisen</h3>
+      <p class="meta">Action · Supernatural</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (6).jpg" alt="Overlord">
+      <h3>Overlord</h3>
+      <p class="meta">Action · Supernatural</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (7).jpg" alt="Tokyo Ghoul">
+      <h3>Tokyo Ghoul</h3>
+      <p class="meta">Action · Drama</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (8).jpg" alt="One-Punch Man">
+      <h3>One-Punch Man</h3>
+      <p class="meta">Action · Comedy</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (9).jpg" alt="Sword Art Online (SAO)">
+      <h3>Sword Art Online (SAO)</h3>
+      <p class="meta">Action · Fantasy</p>
+    </article>
+  </div>
+</section>
+
+
+
+<section class="recently-section">
+  <!-- Недавно просмотренные -->
+<div class="recently-carousel">
+  <!-- 1 -->
+  <article class="recently-card">
+    <img src="demonslayer.jpg" alt="Demon Slayer">
+    <h4>Demon Slayer</h4>
+    <p>Shounen · Action</p>
+  </article>
+  <!-- 2 -->
+  <article class="recently-card">
+    <img src="jujutsu.jpg" alt="Jujutsu Kaisen">
+    <h4>Jujutsu Kaisen</h4>
+    <p>Action · Fantasy</p>
+  </article>
+  <!-- 3 -->
+  <article class="recently-card">
+    <img src="fullmetal.jpg" alt="Fullmetal Alchemist">
+    <h4>Fullmetal Alchemist</h4>
+    <p>Adventure · Drama</p>
+  </article>
+  <!-- 4 -->
+  <article class="recently-card">
+    <img src="hxh.jpg" alt="Hunter x Hunter">
+    <h4>Hunter x Hunter</h4>
+    <p>Adventure · Action</p>
+  </article>
+</div>
+</section>
+
+  <footer class="site-footer">
+  <div class="footer-container">
+    <!-- Колонка 1 -->
+    <div class="footer-column">
+      <h3>О нас</h3>
+      <p>SAKURA — это проект для аниме-фанов. Здесь можно искать, смотреть и сохранять любимые тайтлы.</p>
+    </div>
+
+    <!-- Колонка 2 -->
+    <div class="footer-column">
+      <h3>Навигация</h3>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="player.html">Плеер</a></li>
+        <li><a href="bookmarks.html">Закладки</a></li>
+      </ul>
+    </div>
+
+    <!-- Колонка 3 -->
+    <div class="footer-column">
+      <h3>Контакты</h3>
+      <ul>
+        <li>Email: support@sakura-anime.com</li>
+        <li>Телефон: +7 (700) 123-45-67</li>
+      </ul>
+    </div>
+
+    <!-- Колонка 4 -->
+    <div class="footer-column">
+      <h3>Мы в соцсетях</h3>
+      <div class="social-links">
+        <a href="#">VK</a>
+        <a href="#">Telegram</a>
+        <a href="#">Instagram</a>
       </div>
+    </div>
+  </div>
 
-      <div class="anime-carousel" id="anime-carousel">
-        <!-- карточки с популярными аниме -->
-        <article class="anime-card">
-        <div class="card-image">
-    
-        </div>
-          <img src="proxy-image.jpg" alt="Anime 1 poster" title="История о мальчике-ниндзя, мечтающем стать Хокаге" />
-         <a href="player.html"><h3>Naruto</h3></a>  
-          <p class="meta">Shounen · Action</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (1).jpg" alt="Anime 2 poster" title="Тандзиро борется с демонами, чтобы спасти свою сестру."/>
-          <a href="https://site.yummyani.me/catalog/item/klinok-rassekayushij-demonov"><h3>Demon Slayer</h3></a>
-          <p class="meta">Shounen · Fantasy</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (2).jpg" alt="Anime 3 poster" title="Люди сражаются с гигантами, угрожающими их миру" />
-          <a href="https://ataka-titanov.com"><h3>Attack on Titan</h3></a> 
-          <p class="meta">Seinen · Drama</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (3).jpg" alt="Anime 4 poster" title="Луффи и его команда ищут легендарное сокровище One Piece." />
-          <a href="https://site.yummyani.me/catalog/item/van-pis-tv"><h3>One Piece</h3></a> 
-          <p class="meta">Adventure · Comedy</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (4).jpg" alt="Anime 5 poster" title="Юдзи Итадори сталкивается с проклятиями и учится в школе магии." />
-          <a href="https://site.yummyani.me/catalog/item/magicheskaya-bitva"><h3>Jujutsu Kaisen</h3></a> 
-          <p class="meta">Action · Supernatural</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (6).jpg" alt="Anime 6 poster" />
-          <a href="https://site.yummyani.me/catalog/item/vladyka"><h3>Overlord</h3></a> 
-          <p class="meta">Action · Supernatural</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (7).jpg" alt="Anime 7 poster" />
-          <a href="https://site.yummyani.me/catalog/item/tokijskij-gul"><h3>Tokyo Ghoul</h3></a> 
-          <p class="meta">Action · Drama</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (8).jpg" alt="Anime 8 poster" />
-          <a href="https://site.yummyani.me/catalog/item/vanpanchmen-1"><h3>One-punch-men</h3></a> 
-          <p class="meta">Action · Drama</p>
-        </article>
-
-        <article class="anime-card">
-          <img src="proxy-image (9).jpg" alt="Anime 9 poster" />
-          <a href="https://site.yummyani.me/catalog/item/mastera-mecha-onlajn"><h3>Sword Art Online(SAO)</h3></a> 
-          <p class="meta">Action · Drama</p>
-        </article>
-        <!-- Добавляй сколько нужно карточек -->
-      </div>
-    </section>
-
-    <section class="about-section">
-      <h2 style="color: white;">О проекте</h2>
-      <p style="color: white;">Этот сайт посвящён аниме. Здесь можно искать тайтлы, смотреть серии и сохранять в закладки.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p style="color: white;">Команда: Alikhan и Arman</p>
-  </footer>
+  <div class="footer-bottom">
+    <p>© 2025 SAKURA Anime. Все права защищены.</p>
+  </div>
+</footer>
 
   <script>
     // Мини-код для кнопок прокрутки.
@@ -139,16 +229,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
