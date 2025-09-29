@@ -1,4 +1,4 @@
-/* ===== ОБЩИЕ СТИЛИ ===== */
+/* ===== ОБЩИЕ СТИЛИ =====  */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -565,3 +565,4 @@ a {
   opacity: 1;
   transform: translateY(0);     /* плавно поднимается */
 }
+
