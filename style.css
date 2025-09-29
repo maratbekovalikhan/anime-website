@@ -544,7 +544,7 @@ a {
 
 .tooltip .tooltip-text {
   visibility: hidden;
-  width: 200px;
+  width: 200px;          /* ← вот тут */
   background: rgba(0,0,0,0.85);
   color: #fff;
   text-align: center;
@@ -552,12 +552,13 @@ a {
   padding: 10px;
   position: absolute;
   z-index: 10;
-  bottom: 110%;
+  bottom: 110%;          /* ← и вот тут */
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.3s;
 }
+
 
 .tooltip .tooltip-text::after {
   content: "";
