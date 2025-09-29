@@ -543,26 +543,25 @@ a {
   border-radius: 8px;
 }
 
+/* Мини-баннер */
 .tooltip .tooltip-text {
   visibility: hidden;
-  width: 100%;                  /* ширина = картинка */
-  background: rgba(0,0,0,0.85);
+  width: 100%;
+  background: rgba(0,0,0,0.7); /* полупрозрачный фон */
   color: #fff;
+  font-size: 14px;
   text-align: center;
-  border-radius: 0 0 8px 8px;   /* скругление снизу */
-  padding: 12px;
+  padding: 6px 10px;           /* тонкая полоса */
   position: absolute;
   z-index: 10;
-  bottom: 0;                    /* прижали к низу */
-  left: 0;                      /* растянули по ширине */
+  bottom: 0;                   /* прилипает к низу */
+  left: 0;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: translateY(100%);  /* изначально скрыт ниже */
+  transition: opacity 0.3s ease;
+  border-radius: 0 0 8px 8px;  /* скругление только снизу */
 }
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
-  transform: translateY(0);     /* плавно поднимается */
 }
-
