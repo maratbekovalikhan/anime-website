@@ -531,37 +531,3 @@ a {
   }
 }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-.tooltip img {
-  display: block;
-  width: 100%;
-  border-radius: 8px;
-}
-
-/* Мини-баннер */
-.tooltip .tooltip-text {
-  visibility: hidden;
-  width: 100%;
-  background: rgba(0,0,0,0.7); /* полупрозрачный фон */
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  padding: 6px 10px;           /* тонкая полоса */
-  position: absolute;
-  z-index: 10;
-  bottom: 0;                   /* прилипает к низу */
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 0 0 8px 8px;  /* скругление только снизу */
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
