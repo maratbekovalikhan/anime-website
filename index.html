@@ -5,138 +5,67 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Главная - Anime World</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* фиксированный хэдер. */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      z-index: 1000;
-    }
-
-    body {
-      margin: 0;
-      padding-top: 80px; /* чтобы контент не залезал под хэдер */
-      background: #1a1a1a;
-      font-family: Arial, sans-serif;
-    }
-
-    /* макет жанры + новости */
-    .main-layout {
-      display: flex;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    aside.sidebar {
-      width: 200px;
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    aside.sidebar h3 {
-      margin-top: 0;
-    }
-
-    .news-box {
-      flex: 1;
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      color: white;
-    }
-
-    /* блок с аниме */
-    .anime-section {
-      padding: 20px;
-    }
-
-    .anime-carousel {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-    }
-
-    .anime-card {
-      min-width: 180px;
-      background: #2a2a2a;
-      border-radius: 10px;
-      overflow: hidden;
-      color: white;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
-    .anime-card img {
-      width: 100%;
-      display: block;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-    }
-  </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="logo">
-    <img src="icon Image .png" alt="Anime Website Logo" style="height:40px;">
-    <span style="color:white; font-weight:bold; margin-left:10px;">Anime World</span>
-  </div>
+  <!-- ===== ХЭДЕР ===== -->
+  <header class="site-header">
+    <div class="logo">
+      <img src="icon Image .png" alt="Anime Website Logo">
+      <span>Anime World</span>
+    </div>
 
-  <nav class="main-nav">
-    <a href="index.html" style="color:white; margin:0 10px;">Главная</a>
-    <a href="catalog.html" style="color:white; margin:0 10px;">Каталог</a>
-    <a href="player.html" style="color:white; margin:0 10px;">Плеер</a>
-    <a href="bookmarks.html" style="color:white; margin:0 10px;">Закладки</a>
-  </nav>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="player.html">Плеер</a>
+      <a href="bookmarks.html">Закладки</a>
+    </nav>
 
-  <div class="search-box">
-    <input type="text" placeholder="Что ищем семпай?">
-    <button>🔍</button>
-  </div>
-</header>
+    <div class="search-box">
+      <input type="text" placeholder="Что ищем, семпай?">
+      <button>🔍</button>
+    </div>
+  </header>
 
-<main>
-  <!-- Жанры и новости -->
-  <div class="main-layout">
+  <!-- ===== GRID макет: Жанры + Новости ===== -->
+  <main class="grid-layout">
+    <!-- Сайдбар слева -->
     <aside class="sidebar">
       <h3>Жанры</h3>
       <ul>
-        <li>Action</li>
-        <li>Drama</li>
-        <li>Fantasy</li>
-        <li>Comedy</li>
-        <li>Romance</li>
         <li>Shounen</li>
         <li>Seinen</li>
+        <li>Fantasy</li>
+        <li>Action</li>
+        <li>Romance</li>
+        <li>Comedy</li>
       </ul>
     </aside>
 
-    <section class="news-box">
+    <!-- Основной блок справа -->
+    <section class="grid-main">
       <h3>Что нового?</h3>
-      <p>🔥 Вышла новая серия Jujutsu Kaisen!</p>
-      <p>⚔️ Attack on Titan: финальный сезон продолжается.</p>
-      <p>⛵ One Piece перевалил за 1000 серий.</p>
+      <div class="news-cards">
+        <article class="news-card">
+          <h4>Обновление каталога</h4>
+          <p>Добавлены новые тайтлы весеннего сезона.</p>
+        </article>
+        <article class="news-card">
+          <h4>Фича недели</h4>
+          <p>Теперь можно сохранять любимые серии в закладки.</p>
+        </article>
+        <article class="news-card">
+          <h4>Сообщество</h4>
+          <p>Открылся форум для обсуждений.</p>
+        </article>
+      </div>
     </section>
-  </div>
+  </main>
 
-  <!-- Горизонтальная лента аниме -->
+  <!-- ===== Популярное ===== -->
   <section class="anime-section">
     <div class="section-header">
-      <h2 class="black-text" style="color:white;">Популярное прямо сейчас</h2>
+      <h2>Популярное прямо сейчас</h2>
       <div class="carousel-controls">
         <button class="carousel-btn" id="prev-btn" aria-label="предыдущие">◀️</button>
         <button class="carousel-btn" id="next-btn" aria-label="следующие">▶️</button>
@@ -144,66 +73,126 @@
     </div>
 
     <div class="anime-carousel" id="anime-carousel">
-      <!-- твои карточки -->
+      <!-- карточки -->
       <article class="anime-card">
-        <img src="proxy-image.jpg" alt="Anime 1 poster" />
+        <img src="proxy-image.jpg" alt="Naruto poster" />
         <a href="player.html"><h3>Naruto</h3></a>
         <p class="meta">Shounen · Action</p>
       </article>
 
       <article class="anime-card">
-        <img src="proxy-image (1).jpg" alt="Anime 2 poster"/>
-        <h3>Demon Slayer</h3>
+        <img src="proxy-image (1).jpg" alt="Demon Slayer poster" />
+        <a href="https://site.yummyani.me/catalog/item/klinok-rassekayushij-demonov"><h3>Demon Slayer</h3></a>
         <p class="meta">Shounen · Fantasy</p>
       </article>
 
       <article class="anime-card">
-        <img src="proxy-image (2).jpg" alt="Anime 3 poster"/>
-        <h3>Attack on Titan</h3>
+        <img src="proxy-image (2).jpg" alt="Attack on Titan poster" />
+        <a href="https://ataka-titanov.com"><h3>Attack on Titan</h3></a>
         <p class="meta">Seinen · Drama</p>
       </article>
 
-      <!-- остальные -->
+      <article class="anime-card">
+        <img src="proxy-image (3).jpg" alt="One Piece poster" />
+        <a href="https://site.yummyani.me/catalog/item/van-pis-tv"><h3>One Piece</h3></a>
+        <p class="meta">Adventure · Comedy</p>
+      </article>
+
+      <article class="anime-card">
+        <img src="proxy-image (4).jpg" alt="Jujutsu Kaisen poster" />
+        <a href="https://site.yummyani.me/catalog/item/magicheskaya-bitva"><h3>Jujutsu Kaisen</h3></a>
+        <p class="meta">Action · Supernatural</p>
+      </article>
+
+      <article class="anime-card">
+        <img src="proxy-image (6).jpg" alt="Overlord poster" />
+        <a href="https://site.yummyani.me/catalog/item/vladyka"><h3>Overlord</h3></a>
+        <p class="meta">Action · Supernatural</p>
+      </article>
+
+      <article class="anime-card">
+        <img src="proxy-image (7).jpg" alt="Tokyo Ghoul poster" />
+        <a href="https://site.yummyani.me/catalog/item/tokijskij-gul"><h3>Tokyo Ghoul</h3></a>
+        <p class="meta">Action · Drama</p>
+      </article>
+
+      <article class="anime-card">
+        <img src="proxy-image (8).jpg" alt="One Punch Man poster" />
+        <a href="https://site.yummyani.me/catalog/item/vanpanchmen-1"><h3>One Punch Man</h3></a>
+        <p class="meta">Action · Drama</p>
+      </article>
+
+      <article class="anime-card">
+        <img src="proxy-image (9).jpg" alt="Sword Art Online poster" />
+        <a href="https://site.yummyani.me/catalog/item/mastera-mecha-onlajn"><h3>Sword Art Online</h3></a>
+        <p class="meta">Action · Drama</p>
+      </article>
     </div>
   </section>
 
-  <!-- О проекте -->
+  <!-- ===== О проекте ===== -->
   <section class="about-section">
     <h2 style="color: white;">О проекте</h2>
     <p style="color: white;">Этот сайт посвящён аниме. Здесь можно искать тайтлы, смотреть серии и сохранять в закладки.</p>
   </section>
-</main>
 
-<footer>
-  <p style="color: white;">Команда: Alikhan и Arman</p>
-</footer>
+  <!-- ===== Футер ===== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Навигация</h3>
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="catalog.html">Каталог</a></li>
+          <li><a href="player.html">Плеер</a></li>
+          <li><a href="bookmarks.html">Закладки</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>О нас</h3>
+        <p>Проект сделан командой Alikhan и Arman для фанатов аниме.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Контакты</h3>
+        <ul>
+          <li><a href="#">Telegram</a></li>
+          <li><a href="#">Discord</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Anime World. Все права защищены.
+    </div>
+  </footer>
 
-<script>
-  (function () {
-    const carousel = document.getElementById('anime-carousel');
-    const prev = document.getElementById('prev-btn');
-    const next = document.getElementById('next-btn');
+  <!-- ===== JS для карусели ===== -->
+  <script>
+    (function () {
+      const carousel = document.getElementById('anime-carousel');
+      const prev = document.getElementById('prev-btn');
+      const next = document.getElementById('next-btn');
 
-    function scrollByCard(dir = 1) {
-      const card = carousel.querySelector('.anime-card');
-      if (!card) return;
-      const style = getComputedStyle(carousel);
-      const gap = parseInt(style.columnGap || style.gap || 16);
-      const cardWidth = card.offsetWidth + gap;
-      carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
-    }
+      function scrollByCard(dir = 1) {
+        const card = carousel.querySelector('.anime-card');
+        if (!card) return;
+        const style = getComputedStyle(carousel);
+        const gap = parseInt(style.columnGap || style.gap || 16);
+        const cardWidth = card.offsetWidth + gap;
+        carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
+      }
 
-    prev.addEventListener('click', () => scrollByCard(-1));
-    next.addEventListener('click', () => scrollByCard(1));
+      prev.addEventListener('click', () => scrollByCard(-1));
+      next.addEventListener('click', () => scrollByCard(1));
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') scrollByCard(-1);
-      if (e.key === 'ArrowRight') scrollByCard(1);
-    });
-  })();
-</script>
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') scrollByCard(-1);
+        if (e.key === 'ArrowRight') scrollByCard(1);
+      });
+    })();
+  </script>
 </body>
 </html>
+
 
 
 
