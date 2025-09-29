@@ -6,7 +6,7 @@
   <title>Главная - Anime World</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Делаем хэдер статическим */
+    /* фиксированный хэдер */
     .site-header {
       position: fixed;
       top: 0;
@@ -22,11 +22,12 @@
 
     body {
       margin: 0;
-      padding-top: 80px; /* отступ, чтобы контент не залезал под хэдер */
+      padding-top: 80px; /* чтобы контент не залезал под хэдер */
       background: #1a1a1a;
       font-family: Arial, sans-serif;
     }
 
+    /* макет жанры + новости */
     .main-layout {
       display: flex;
       gap: 20px;
@@ -54,7 +55,7 @@
       color: white;
     }
 
-    /* Лента аниме ниже */
+    /* блок с аниме */
     .anime-section {
       padding: 20px;
     }
@@ -109,7 +110,7 @@
 </header>
 
 <main>
-  <!-- Секция с жанрами и новостями -->
+  <!-- Жанры и новости -->
   <div class="main-layout">
     <aside class="sidebar">
       <h3>Жанры</h3>
@@ -143,6 +144,7 @@
     </div>
 
     <div class="anime-carousel" id="anime-carousel">
+      <!-- твои карточки -->
       <article class="anime-card">
         <img src="proxy-image.jpg" alt="Anime 1 poster" />
         <a href="player.html"><h3>Naruto</h3></a>
@@ -160,7 +162,15 @@
         <h3>Attack on Titan</h3>
         <p class="meta">Seinen · Drama</p>
       </article>
+
+      <!-- остальные -->
     </div>
+  </section>
+
+  <!-- О проекте -->
+  <section class="about-section">
+    <h2 style="color: white;">О проекте</h2>
+    <p style="color: white;">Этот сайт посвящён аниме. Здесь можно искать тайтлы, смотреть серии и сохранять в закладки.</p>
   </section>
 </main>
 
@@ -194,4 +204,5 @@
 </script>
 </body>
 </html>
+
 
