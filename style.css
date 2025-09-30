@@ -531,28 +531,41 @@ a {
   }
 }
 /* тут свиток с жанрами */
-.accordion-content {
-  display: block; /* По умолчанию список виден */
-  margin-top: 5px;
-  padding-left: 15px;
-}
-
 .accordion-header {
   cursor: pointer;
   user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.accordion-header span {
-  float: right;
-  transition: transform 0.3s;
+#arrow {
+  transition: transform 0.25s;
 }
 
-.accordion-header.active span {
-  transform: rotate(180deg);
+/* Контент с анимацией через max-height */
+.accordion-content {
+  overflow: hidden;
+  max-height: 1000px; /* достаточно большое значение для всех пунктов */
+  transition: max-height 300ms ease, opacity 200ms ease;
+  opacity: 1;
+  margin-top: 8px;
+  padding-left: 16px;
 }
 
 .accordion-content.hidden {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
+
+/* Поворот стрелки при активном состоянии */
+.accordion-header.active #arrow,
+.accordion-header.active > #arrow {
+  transform: rotate(180deg);
+}
+
 /* тут свиток с жанрами заканчивается */
+
 
