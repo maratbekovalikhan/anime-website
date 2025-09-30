@@ -532,7 +532,7 @@ a {
 }
 /* тут свиток с жанрами */
 .accordion-content {
-  display: block; /* по умолчанию раскрыто */
+  display: block; /* По умолчанию список виден */
   margin-top: 5px;
   padding-left: 15px;
 }
@@ -548,10 +548,11 @@ a {
 }
 
 .accordion-header.active span {
-  transform: rotate(180deg); /* стрелка вверх при сворачивании */
+  transform: rotate(180deg);
 }
 
 .accordion-content.hidden {
   display: none;
 }
 /* тут свиток с жанрами заканчивается */
+
