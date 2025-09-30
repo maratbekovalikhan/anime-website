@@ -32,11 +32,12 @@
   <!-- ===== GRID макет: Жанры + Новости ===== -->
   <main class="grid-layout">
     <!-- Сайдбар слева. -->
-    <aside class="sidebar">
-  <h3 id="genres-header" class="accordion-header">
+   <aside class="sidebar">
+  <h3 id="genres-header" class="accordion-header" role="button" tabindex="0" aria-expanded="true">
     Жанры
-    <span id="arrow">▼</span>
+    <span id="arrow" aria-hidden="true">▲</span>
   </h3>
+
   <ul id="genres-list" class="accordion-content">
     <li>Сёнэн</li>
     <li>Сёдзё</li>
@@ -51,7 +52,6 @@
     <li>Драма</li>
   </ul>
 </aside>
-
     <!-- Основной блок справа -->
     <section class="grid-main">
       <h3>Что нового?</h3>
@@ -139,6 +139,8 @@
       </article>
     </div>
   </section>
+  
+<script src="js/index.js" defer></script>
 
   <!-- ===== О проекте ===== -->
   <section class="about-section">
@@ -216,10 +218,10 @@
       });
     })();
   </script>
-  <script src="https://github.com/maratbekovalikhan/anime-website/blob/main/index.js" defer></script>
-
+ 
 </body>
 </html>
+
 
 
 
