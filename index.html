@@ -32,26 +32,15 @@
   <!-- ===== GRID макет: Жанры + Новости ===== -->
   <main class="grid-layout">
     <!-- Сайдбар слева. -->
-   <aside class="sidebar">
-  <h3 id="genres-header" class="accordion-header" role="button" tabindex="0" aria-expanded="true">
-    Жанры
-    <span id="arrow" aria-hidden="true">▲</span>
-  </h3>
-
-  <ul id="genres-list" class="accordion-content">
-    <li>Сёнэн</li>
-    <li>Сёдзё</li>
-    <li>Фэнтези</li>
-    <li>Экшн</li>
-    <li>Научная фантастика</li>
-    <li>Сэйнен</li>
-    <li>Дзёсэй</li>
-    <li>Романтика</li>
-    <li>Комедия</li>
-    <li>Ужасы</li>
-    <li>Драма</li>
-  </ul>
-</aside>
+     <div class="genre-scroll-container">
+        <span class="genre-item">Фантастика</span>
+        <span class="genre-item">Детектив</span>
+        <span class="genre-item">Приключения</span>
+        <span class="genre-item">Комедия</span>
+        <span class="genre-item">Драма</span>
+        <span class="genre-item">Триллер</span>
+        <!-- Добавьте столько жанров, сколько нужно -->
+    </div>
     <!-- Основной блок справа -->
     <section class="grid-main">
       <h3>Что нового?</h3>
@@ -221,6 +210,7 @@
  
 </body>
 </html>
+
 
 
 
