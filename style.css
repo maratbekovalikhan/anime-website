@@ -531,41 +531,19 @@ a {
   }
 }
 /* тут свиток с жанрами */
-.accordion-header {
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .genre-scroll-container {
+        height: 200px; /* Или max-height */
+        overflow-y: auto; /* Или overflow-y: scroll; */
+        border: 1px solid #ccc; /* Для наглядности */
+        padding: 10px;
+    }
 
-#arrow {
-  transition: transform 0.25s;
-}
-
-/* Контент с анимацией через max-height */
-.accordion-content {
-  overflow: hidden;
-  max-height: 1000px; /* достаточно большое значение для всех пунктов */
-  transition: max-height 300ms ease, opacity 200ms ease;
-  opacity: 1;
-  margin-top: 8px;
-  padding-left: 16px;
-}
-
-.accordion-content.hidden {
-  max-height: 0;
-  opacity: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* Поворот стрелки при активном состоянии */
-.accordion-header.active #arrow,
-.accordion-header.active > #arrow {
-  transform: rotate(180deg);
-}
+    .genre-item {
+        display: block; /* Чтобы каждый жанр занимал новую строку */
+        margin-bottom: 5px;
+    }
 
 /* тут свиток с жанрами заканчивается */
+
 
 
