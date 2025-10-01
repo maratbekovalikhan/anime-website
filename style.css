@@ -531,18 +531,51 @@ a {
   }
 }
 /* Жанры на главном */
+/* Две колонки: слева жанры, справа контент */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr; /* ширина sidebar + контент */
+  gap: 20px;
+}
+
+/* Сайдбар */
+.sidebar {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Заголовок меню */
+.menu-title {
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Скрытый список */
 .genre-dropdown {
   display: none;
-  position: absolute;
-  background: white;
   list-style: none;
   margin: 0;
-  padding: 5px;
-  border: 1px solid #ccc;
+  padding: 0;
 }
-#genres:hover .genre-dropdown {
+
+.genre-dropdown li {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.genre-dropdown li:hover {
+  color: darkred;
+}
+
+/* Активное меню */
+.menu-item.active .genre-dropdown {
   display: block;
 }
+
+
 
 
 
