@@ -531,18 +531,34 @@ a {
   }
 }
 /* Жанры на главном */
-/* Чтобы список красиво скрывался */
-#genres-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Стили для всего блока жанров */
+.sidebar {
+  background-color: #1e1e1e; /* тот же фон, что и новости */
+  color: white;              /* текст белым */
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-#genres-list.hidden {
-  display: none;
-}
-
+/* Шапка "Жанры" */
 #genres-header {
+  background-color: #2a2a2a; /* как заголовок у карточек */
+  padding: 10px;
+  border-radius: 6px;
+  color: #ffcc00;            /* выделим текст */
   cursor: pointer;
-  user-select: none;
+}
+
+/* Список жанров */
+#genres-list {
+  background-color: #2a2a2a; /* как у news-card */
+  color: #f2f2f2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+#genres-list li {
+  margin: 5px 0;
+  padding: 5px;
 }
