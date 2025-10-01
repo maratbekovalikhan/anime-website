@@ -530,20 +530,8 @@ a {
     height: 180px;
   }
 }
-/* тут свиток с жанрами */
-    .genre-scroll-container {
-        height: 200px; /* Или max-height */
-        overflow-y: auto; /* Или overflow-y: scroll; */
-        border: 1px solid #ccc; /* Для наглядности */
-        padding: 10px;
-    }
 
-    .genre-item {
-        display: block; /* Чтобы каждый жанр занимал новую строку */
-        margin-bottom: 5px;
-    }
 
-/* тут свиток с жанрами заканчивается */
 
 
 
