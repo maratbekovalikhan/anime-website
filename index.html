@@ -32,21 +32,21 @@
   <!-- ===== GRID макет: Жанры + Новости ===== -->
   <main class="grid-layout">
     <!-- Сайдбар слева. -->
-     <<aside class="sidebar">
-  <h3 id="genres-header" class="accordion-header" role="button" tabindex="0" aria-expanded="true">
-    Жанры
-    <span id="arrow">▲</span>
-  </h3>
+          <div class="menu">
+        <div class="menu-item" id="genres">
+          Жанры
+          <ul class="genre-dropdown">
+            <li>Экшен</li>
+            <li>Фэнтези</li>
+            <li>Драма</li>
+            <li>Комедия</li>
+          </ul>
+        </div>
+        <div class="menu-item">
+          Новости сайта
+        </div>
+      </div>
 
-  <ul id="genres-list" class="accordion-content">
-    <li>Фантастика</li>
-    <li>Детектив</li>
-    <li>Приключения</li>
-    <li>Комедия</li>
-    <li>Драма</li>
-    <li>Триллер</li>
-  </ul>
-</aside>
 
     <!-- Основной блок справа -->
     <section class="grid-main">
@@ -214,21 +214,10 @@
     })();
   </script>
   
- <script>
-  const header = document.getElementById('genres-header');
-  const list = document.getElementById('genres-list');
-  const arrow = document.getElementById('arrow');
-
-  header.addEventListener('click', () => {
-    const expanded = header.getAttribute('aria-expanded') === 'true';
-    header.setAttribute('aria-expanded', !expanded);
-    list.style.display = expanded ? 'none' : 'block';
-    arrow.textContent = expanded ? '▼' : '▲';
-  });
-</script>
 
 </body>
 </html>
+
 
 
 
