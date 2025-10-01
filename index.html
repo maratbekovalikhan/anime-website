@@ -32,17 +32,20 @@
 <!-- ===== GRID макет: Жанры + Новости ===== -->
 <main class="grid-layout">
   <!-- Сайдбар слева -->
-  <aside class="sidebar">
-    <div class="menu-item" id="genres">
-      <span class="menu-title">Жанры ▼</span>
-      <ul class="genre-dropdown">
-        <li>Экшен</li>
-        <li>Фэнтези</li>
-        <li>Драма</li>
-        <li>Комедия</li>
-      </ul>
-    </div>
-  </aside>
+ <aside class="sidebar">
+  <h3 id="genres-header" role="button" tabindex="0" aria-expanded="true">
+    Жанры <span id="arrow">▲</span>
+  </h3>
+  <ul id="genres-list">
+    <li>Экшен</li>
+    <li>Фэнтези</li>
+    <li>Драма</li>
+    <li>Комедия</li>
+    <li>Романтика</li>
+    <li>Ужасы</li>
+  </ul>
+</aside>
+
 
   <!-- Основной блок справа -->
   <section class="grid-main">
@@ -216,6 +219,7 @@
 
 </body>
 </html>
+
 
 
 
