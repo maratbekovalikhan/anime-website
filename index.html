@@ -29,54 +29,52 @@
     </div>
   </header>
 
-  <!-- ===== GRID макет: Жанры + Новости ===== -->
-  <main class="grid-layout">
-    <!-- Сайдбар слева. -->
-          <div class="menu">
-        <div class="menu-item" id="genres">
-          Жанры
-          <ul class="genre-dropdown">
-            <li>Экшен</li>
-            <li>Фэнтези</li>
-            <li>Драма</li>
-            <li>Комедия</li>
-          </ul>
-        </div>
-        <div class="menu-item">
-          Новости сайта
-        </div>
-      </div>
-
-
-    <!-- Основной блок справа -->
-    <section class="grid-main">
-      <h3>Что нового?</h3>
-      <div class="news-cards">
-        <article class="news-card">
-          <h4>Обновление каталога</h4>
-          <p>Добавлены новые тайтлы весеннего сезона.</p>
-        </article>
-        <article class="news-card">
-          <h4>Фича недели</h4>
-          <p>Теперь можно сохранять любимые серии в закладки.</p>
-        </article>
-        <article class="news-card">
-          <h4>Сообщество</h4>
-          <p>Открылся форум для обсуждений.</p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== Популярное ===== -->
-  <section class="anime-section">
-    <div class="section-header">
-      <h2>Популярное прямо сейчас</h2>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="prev-btn" aria-label="предыдущие">◀️</button>
-        <button class="carousel-btn" id="next-btn" aria-label="следующие">▶️</button>
-      </div>
+<!-- ===== GRID макет: Жанры + Новости ===== -->
+<main class="grid-layout">
+  <!-- Сайдбар слева -->
+  <aside class="menu">
+    <div class="menu-item" id="genres">
+      Жанры
+      <ul class="genre-dropdown">
+        <li>Экшен</li>
+        <li>Фэнтези</li>
+        <li>Драма</li>
+        <li>Комедия</li>
+      </ul>
     </div>
+  </aside>
+
+  <!-- Основной блок справа -->
+  <section class="grid-main">
+    <h3>Новости сайта</h3>
+    <div class="news-cards">
+      <article class="news-card">
+        <h4>Обновление каталога</h4>
+        <p>Добавлены новые тайтлы весеннего сезона.</p>
+      </article>
+      <article class="news-card">
+        <h4>Фича недели</h4>
+        <p>Теперь можно сохранять любимые серии в закладки.</p>
+      </article>
+      <article class="news-card">
+        <h4>Сообщество</h4>
+        <p>Открылся форум для обсуждений.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Популярное ===== -->
+<section class="anime-section">
+  <div class="section-header">
+    <h2>Популярное прямо сейчас</h2>
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prev-btn" aria-label="предыдущие">◀️</button>
+      <button class="carousel-btn" id="next-btn" aria-label="следующие">▶️</button>
+    </div>
+  </div>
+</section>
+
 
     <div class="anime-carousel" id="anime-carousel">
       <!-- карточки -->
@@ -217,6 +215,7 @@
 
 </body>
 </html>
+
 
 
 
