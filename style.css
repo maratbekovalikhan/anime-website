@@ -530,6 +530,19 @@ a {
     height: 180px;
   }
 }
+/* Жанры на главном */
+.genre-dropdown {
+  display: none;
+  position: absolute;
+  background: white;
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+#genres:hover .genre-dropdown {
+  display: block;
+}
 
 
 
