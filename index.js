@@ -1,9 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const menuItem = document.getElementById("genres");
-  const title = menuItem.querySelector(".menu-title");
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.getElementById('genres-header');
+  const list = document.getElementById('genres-list');
+  const arrow = document.getElementById('arrow');
 
-  title.addEventListener("click", () => {
-    menuItem.classList.toggle("active");
+  header.addEventListener('click', () => {
+    const isHidden = list.classList.toggle('hidden');
+    header.setAttribute('aria-expanded', !isHidden);
+    arrow.textContent = isHidden ? '▼' : '▲';
   });
 });
-
