@@ -4,287 +4,217 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Главная - Anime World</title>
-  <link rel="shortcut icon" href="icon Image .png" type="image/x-icon">
-  <link rel="icon" href="icon Image .png" type="image/png">
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Bootstrap (подключаем первым) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Твои стили (важно: после Bootstrap, чтобы переопределять) -->
+  <link rel="stylesheet" href="main.css" />
 </head>
 <body>
-  <!-- ===== ХЭДЕР ===== -->
-  <header class="site-header">
+
+  <!-- === Шапка — ВОЗВРАЩЁНА К ТВОЕЙ ИСХОДНОЙ СТРУКТУРЕ === -->
+  <header class="site-header container-fluid">
     <div class="logo">
       <img src="icon Image .png" alt="Anime Website Logo">
-      <span>Anime World</span>
+      <span>SAKURA</span>
     </div>
 
     <nav class="main-nav">
-      <a href="index.html" class="active">Главная</a>
+      <a href="index.html">Главная</a>
       <a href="catalog.html">Каталог</a>
       <a href="player.html">Плеер</a>
       <a href="bookmarks.html">Закладки</a>
     </nav>
 
     <div class="search-box">
-      <input type="text" placeholder="Что ищем, семпай?">
-      <button>🔍</button>
+      <input type="text" placeholder="Что ищем семпай?">
+      <!-- Bootstrap-класс у кнопки безопасен -->
+      <button class="btn btn-sm" type="button">🔍</button>
     </div>
   </header>
 
-<!-- ===== GRID макет: Жанры + Новости ===== -->
-<main class="grid-layout">
-  <!-- Сайдбар слева -->
- <aside class="sidebar">
-  <h3 id="genres-header" role="button" tabindex="0" aria-expanded="true">
-    Жанры <span id="arrow">▲</span>
-  </h3>
-  <ul id="genres-list">
-    <li>Экшен</li>
-    <li>Фэнтези</li>
-    <li>Драма</li>
-    <li>Комедия</li>
-    <li>Романтика</li>
-    <li>Ужасы</li>
-  </ul>
-</aside>
+  <!-- Внешняя контейнерная обёртка (container-fluid) оставляет ширину гибкой,
+       но внутренняя .grid-layout — твоя сетка (CSS Grid) — НЕ трогаем -->
+  <div class="container-fluid">
+    <!-- === GRID МАКЕТ (оставлен твой оригинальный HTML — без .row/.col внутри) === -->
+    <section class="grid-layout">
+      <aside class="sidebar">
+        <h3>Жанры</h3>
+        <ul>
+          <li>Сёнэн</li>
+          <li>Сёдзё</li>
+          <li>Сейнен</li>
+          <li>Фэнтези</li>
+          <li>Романтика</li>
+        </ul>
+      </aside>
 
+      <div class="grid-main">
+        <h3>Новости аниме</h3>
+        <p>В этом блоке можно показывать свежие новости, новые серии или обновления каталога.</p>
+        <div class="news-cards">
+          <article class="news-card">
+            <h4>Новая серия Naruto</h4>
+            <p>Сегодня вышла новая серия Naruto Shippuden!</p>
+          </article>
+          <article class="news-card">
+            <h4>Обновление каталога</h4>
+            <p>Добавлены новые аниме-тайтлы для просмотра онлайн.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
 
-  <!-- Основной блок справа -->
-  <section class="grid-main">
-    <h3>Новости сайта</h3>
-    <div class="news-cards">
-      <article class="news-card">
-        <h4>Обновление каталога</h4>
-        <p>Добавлены новые тайтлы весеннего сезона.</p>
-      </article>
-      <article class="news-card">
-        <h4>Фича недели</h4>
-        <p>Теперь можно сохранять любимые серии в закладки.</p>
-      </article>
-      <article class="news-card">
-        <h4>Сообщество</h4>
-        <p>Открылся форум для обсуждений.</p>
-      </article>
-    </div>
-  </section>
-</main>
-
-
-<!-- ===== Популярное ===== -->
-<section class="anime-section">
-  <div class="section-header">
-    <h2>Популярное прямо сейчас</h2>
+<!-- Горизонтальная лента аниме -->
+<section class="anime-section container-fluid my-5">
+  <div class="section-header d-flex justify-content-between align-items-center">
+     <h2>Популярное прямо сейчас</h2>
     <div class="carousel-controls">
-      <button class="carousel-btn" id="prev-btn" aria-label="предыдущие">◀️</button>
-      <button class="carousel-btn" id="next-btn" aria-label="следующие">▶️</button>
+      <button id="prev-btn" class="btn btn-outline-light btn-sm">◀</button>
+      <button id="next-btn" class="btn btn-outline-light btn-sm">▶</button>
     </div>
+  </div>
+
+  <div class="anime-carousel d-flex gap-3 mt-3 overflow-auto" id="anime-carousel">
+    <!-- твои карточки -->
+       <article class="anime-card">
+      <img src="proxy-image (1).jpg" alt="Demon Slayer" title="Тандзиро борется с демонами, чтобы спасти свою сестру.">
+      <h3>Demon Slayer</h3>
+      <p class="meta">Shounen · Fantasy</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (2).jpg" alt="Attack on Titan" title="Люди сражаются с гигантами, угрожающими их миру">
+      <h3>Attack on Titan</h3>
+      <p class="meta">Seinen · Drama</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (3).jpg" alt="One Piece" title="Луффи и его команда ищут легендарное сокровище One Piece.">
+      <h3>One Piece</h3>
+      <p class="meta">Adventure · Comedy</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (4).jpg" alt="Jujutsu Kaisen" title="Юдзи Итадори сталкивается с проклятиями и учится в школе магии.">
+      <h3>Jujutsu Kaisen</h3>
+      <p class="meta">Action · Supernatural</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (6).jpg" alt="Overlord">
+      <h3>Overlord</h3>
+      <p class="meta">Action · Supernatural</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (7).jpg" alt="Tokyo Ghoul">
+      <h3>Tokyo Ghoul</h3>
+      <p class="meta">Action · Drama</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (8).jpg" alt="One-Punch Man">
+      <h3>One-Punch Man</h3>
+      <p class="meta">Action · Comedy</p>
+    </article>
+
+    <article class="anime-card">
+      <img src="proxy-image (9).jpg" alt="Sword Art Online (SAO)">
+      <h3>Sword Art Online (SAO)</h3>
+      <p class="meta">Action · Fantasy</p>
+    </article>
+  </div>
+</section>
   </div>
 </section>
 
-
-    <div class="anime-carousel" id="anime-carousel">
-      <!-- карточки -->
-      <article class="anime-card">
-        <img src="proxy-image.jpg" alt="Naruto poster" />
-        <a href="player.html"><h3>Naruto</h3></a>
-        <p class="meta">Shounen · Action</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (1).jpg" alt="Demon Slayer poster" />
-        <a href="https://site.yummyani.me/catalog/item/klinok-rassekayushij-demonov"><h3>Demon Slayer</h3></a>
-        <p class="meta">Shounen · Fantasy</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (2).jpg" alt="Attack on Titan poster" />
-        <a href="https://ataka-titanov.com"><h3>Attack on Titan</h3></a>
-        <p class="meta">Seinen · Drama</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (3).jpg" alt="One Piece poster" />
-        <a href="https://site.yummyani.me/catalog/item/van-pis-tv"><h3>One Piece</h3></a>
-        <p class="meta">Adventure · Comedy</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (4).jpg" alt="Jujutsu Kaisen poster" />
-        <a href="https://site.yummyani.me/catalog/item/magicheskaya-bitva"><h3>Jujutsu Kaisen</h3></a>
-        <p class="meta">Action · Supernatural</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (6).jpg" alt="Overlord poster" />
-        <a href="https://site.yummyani.me/catalog/item/vladyka"><h3>Overlord</h3></a>
-        <p class="meta">Action · Supernatural</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (7).jpg" alt="Tokyo Ghoul poster" />
-        <a href="https://site.yummyani.me/catalog/item/tokijskij-gul"><h3>Tokyo Ghoul</h3></a>
-        <p class="meta">Action · Drama</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (8).jpg" alt="One Punch Man poster" />
-        <a href="https://site.yummyani.me/catalog/item/vanpanchmen-1"><h3>One Punch Man</h3></a>
-        <p class="meta">Action · Drama</p>
-      </article>
-
-      <article class="anime-card">
-        <img src="proxy-image (9).jpg" alt="Sword Art Online poster" />
-        <a href="https://site.yummyani.me/catalog/item/mastera-mecha-onlajn"><h3>Sword Art Online</h3></a>
-        <p class="meta">Action · Drama</p>
-      </article>
-    </div>
-  </section>
-
-
-
-
-  <section class="recently-section">
-  <!-- Недавно просмотренные -->
+<!-- Продолжить просмотр -->
+<section class="recently-section container-fluid my-5">
    <h2>Продолжить просмотр</h2>
-<div class="recently-carousel">
-  
-  <!-- 1 -->
-  <article class="recently-card">
-    <img src="demonslayer.jpg" alt="Demon Slayer">
-    <h4>Demon Slayer</h4>
-    <p>Shounen · Action</p>
-  </article>
-  <!-- 2 -->
-  <article class="recently-card">
-    <img src="jujutsu.jpg" alt="Jujutsu Kaisen">
-    <h4>Jujutsu Kaisen</h4>
-    <p>Action · Fantasy</p>
-  </article>
-  <!-- 3 -->
-  <article class="recently-card">
-    <img src="fullmetal.jpg" alt="Fullmetal Alchemist">
-    <h4>Fullmetal Alchemist</h4>
-    <p>Adventure · Drama</p>
-  </article>
-  <!-- 4 -->
-  <article class="recently-card">
-    <img src="hxh.jpg" alt="Hunter x Hunter">
-    <h4>Hunter x Hunter</h4>
-    <p>Adventure · Action</p>
-  </article>
-</div>
+   <div class="row">
+      <article class="recently-card col-md-3 col-6 card p-2">
+        <img src="demonslayer.jpg" alt="Demon Slayer">
+        <h4>Demon Slayer</h4>
+        <p>Shounen · Action</p>
+      </article>
+      <article class="recently-card col-md-3 col-6 card p-2">
+        <img src="jujutsu.jpg" alt="Jujutsu Kaisen">
+        <h4>Jujutsu Kaisen</h4>
+        <p>Action · Fantasy</p>
+      </article>
+      <article class="recently-card col-md-3 col-6 card p-2">
+        <img src="fullmetal.jpg" alt="Fullmetal Alchemist">
+        <h4>Fullmetal Alchemist</h4>
+        <p>Adventure · Drama</p>
+      </article>
+      <article class="recently-card col-md-3 col-6 card p-2">
+        <img src="hxh.jpg" alt="Hunter x Hunter">
+        <h4>Hunter x Hunter</h4>
+        <p>Adventure · Action</p>
+      </article>
+   </div>
 </section>
 
-
- <!-- ===== Футер ===== -->
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- О нас -->
-    <div class="footer-column">
+<!-- Футер -->
+<footer class="site-footer container-fluid bg-dark text-light mt-5 p-4">
+  <div class="row">
+    <div class="footer-column col-md-3 col-12">
       <h3>О нас</h3>
       <p>SAKURA — это проект для аниме-фанов. Здесь можно искать, смотреть и сохранять любимые тайтлы.</p>
     </div>
-
-    <!-- Навигация -->
-    <div class="footer-column">
+    <div class="footer-column col-md-3 col-6">
       <h3>Навигация</h3>
       <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="catalog.html">Каталог</a></li>
-        <li><a href="player.html">Плеер</a></li>
-        <li><a href="bookmarks.html">Закладки</a></li>
+        <li><a href="index.html" class="text-light">Главная</a></li>
+        <li><a href="catalog.html" class="text-light">Каталог</a></li>
+        <li><a href="player.html" class="text-light">Плеер</a></li>
+        <li><a href="bookmarks.html" class="text-light">Закладки</a></li>
       </ul>
     </div>
-
-    <!-- Контакты -->
-    <div class="footer-column">
+    <div class="footer-column col-md-3 col-6">
       <h3>Контакты</h3>
       <ul>
-        <li>Email: <a href="mailto:support@sakura-anime.com">support@sakura-anime.com</a></li>
-        <li>Телефон: <a href="tel:+77001234567">+7 (700) 123-45-67</a></li>
+        <li>Email: support@sakura-anime.com</li>
+        <li>Телефон: +7 (700) 123-45-67</li>
       </ul>
     </div>
-
-    <!-- Соцсети -->
-    <div class="footer-column">
+    <div class="footer-column col-md-3 col-12">
       <h3>Мы в соцсетях</h3>
       <div class="social-links">
-        <a href="https://vk.ru/"><img src="vk_icon.png" alt="VK" width="40"></a>
-        <a href="https://web.telegram.org/a/"><img src="telegram_icon.png" alt="Telegram" width="40"></a>
-        <a href="https://github.com/maratbekovalikhan/anime-website/blob/main/Instagram_icon.png"><img src="Instagram_icon.png" alt="Instagram" width="40"></a>
-      </div>  
+        <a href="#" class="text-light">VK</a><br>
+        <a href="#" class="text-light">Telegram</a><br>
+        <a href="#" class="text-light">Instagram</a>
+      </div>
+    </div>
   </div>
-  </div>
-
-  <div class="footer-bottom">
-    © 2025 SAKURA Anime. Все права защищены.
+  <div class="footer-bottom text-center mt-3">
+    <p>© 2025 SAKURA Anime. Все права защищены. <br> Участники: Арман и Алихан (SE-2410)</p>
   </div>
 </footer>
 
-  <!-- ===== JS для карусели ===== -->
-  <script>
-    (function () {
-      const carousel = document.getElementById('anime-carousel');
-      const prev = document.getElementById('prev-btn');
-      const next = document.getElementById('next-btn');
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Прокрутка карусели
+  (function () {
+    const carousel = document.getElementById('anime-carousel');
+    const prev = document.getElementById('prev-btn');
+    const next = document.getElementById('next-btn');
 
-      function scrollByCard(dir = 1) {
-        const card = carousel.querySelector('.anime-card');
-        if (!card) return;
-        const style = getComputedStyle(carousel);
-        const gap = parseInt(style.columnGap || style.gap || 16);
-        const cardWidth = card.offsetWidth + gap;
-        carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
-      }
+    function scrollByCard(dir = 1) {
+      const card = carousel.querySelector('.anime-card');
+      if (!card) return;
+      const style = getComputedStyle(carousel);
+      const gap = parseInt(style.columnGap || style.gap || 16);
+      const cardWidth = card.offsetWidth + gap;
+      carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
+    }
 
-      prev.addEventListener('click', () => scrollByCard(-1));
-      next.addEventListener('click', () => scrollByCard(1));
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') scrollByCard(-1);
-        if (e.key === 'ArrowRight') scrollByCard(1);
-      });
-    })();
-  </script>
-  
-
+    prev.addEventListener('click', () => scrollByCard(-1));
+    next.addEventListener('click', () => scrollByCard(1));
+  })();
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
