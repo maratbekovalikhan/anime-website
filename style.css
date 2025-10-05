@@ -562,3 +562,10 @@ a {
   margin: 5px 0;
   padding: 5px;
 }
+
+.center-img {
+  max-width: 300px; /* фиксируем как было */
+  width: 100%;      /* но при этом адаптивная */
+  height: auto;
+  border-radius: 10px;
+}
