@@ -1,4 +1,4 @@
-/* ===== ОБЩИЕ СТИЛИ. =====  */
+/* ===== ОБЩИЕ СТИЛИ =====  */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -569,5 +569,6 @@ a {
   height: auto;
   border-radius: 10px;
 }
+
 
 
