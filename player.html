@@ -1,37 +1,90 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Плеер - Anime World</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Главная - Anime World</title>
 
-  <!-- Bootstrap. -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Твои стили -->
-  <link rel="stylesheet" href="global.css">
-  <link rel="stylesheet" href="main.css">
+  <!-- Стили -->
+  <link rel="stylesheet" href="main.css" />
 </head>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Устанавливаем сохранённую тему
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeBtn.textContent = '🌸';
+  }
+
+  // Обработчик переключения
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+
+    themeBtn.textContent = isLight ? '🌸' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+
+
+<script>
+  const accordionItems = document.querySelectorAll(".accordion-item");
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      item.classList.toggle("active");
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionItems = document.querySelectorAll(".accordion-item");
+
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      // закрыть другие
+      accordionItems.forEach(i => i !== item && i.classList.remove("active"));
+      // открыть текущий
+      item.classList.toggle("active");
+    });
+  });
+});
+</script>
 <body>
-<header class="site-header">
-  <div class="logo">
-    <img src="icon Image .png" alt="Anime Website Logo">
-    <span>SAKURA</span>
-  </div>
+ <!-- Шапка -->
+  <header class="site-header container-fluid">
+    <div class="logo">
+      <img src="icon Image .png" alt="Anime Website Logo">
+      <span>SAKURA</span>
+    </div>
 
-  <nav class="main-nav">
-    <a href="index.html">Главная</a>
-    <a href="catalog.html">Каталог</a>
-    <a href="player.html" class="active">Плеер</a>
-    <a href="bookmarks.html">Закладки</a>
-  </nav>
+    <nav class="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="player.html">Плеер</a>
+      <a href="bookmarks.html">Закладки</a>
+    </nav>
 
-  <div class="search-box">
-    <input type="text" placeholder="Поиск аниме...">
-    <button>🔍</button>
-  </div>
-</header>
+    <div class="search-box">
+      <input type="text" placeholder="Что ищем семпай?">
+      <button class="btn btn-sm" type="button">🔍</button>
+    </div>
 
+    <div class="theme-toggle">
+      <button id="themeBtn" aria-label="Switch theme">🌙</button>
+    </div>
+
+    <div id="current-datetime" aria-live="polite"></div>
+  </header>
 <main id="mainContent" class="d-flex flex-column justify-content-center align-items-center text-center my-5">
   <p class="center-text">Выберите аниме из каталога или главной страницы.</p>
   <img src="AnimeGirl.png" alt="Anime girl" class="center-img">
@@ -59,22 +112,55 @@
         <li>Телефон: +7 (700) 123-45-67</li>
       </ul>
     </div>
-    <div class="footer-column">
+    <div class="footer-column col-md-3 col-12">
       <h3>Мы в соцсетях</h3>
       <div class="social-links">
-        <a href="#">VK</a>
-        <a href="#">Telegram</a>
-        <a href="#">Instagram</a>
+        <a href="#" class="text-light">VK</a><br>
+        <a href="#" class="text-light">Telegram</a><br>
+        <a href="#" class="text-light">Instagram</a>
       </div>
     </div>
   </div>
+
+
+  <h2 class="faq-title">Часто задаваемые вопросы</h2>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-title">Как добавить аниме в закладки?</button>
+      <div class="accordion-content">
+        <p>Откройте страницу аниме и нажмите кнопку «Добавить в закладки». После этого тайтл появится на странице «Закладки».</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-title">Можно ли смотреть аниме без регистрации?</button>
+      <div class="accordion-content">
+        <p>Да, вы можете просматривать аниме и каталог без регистрации. Однако закладки сохраняются только при входе в аккаунт.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-title">Почему видео не воспроизводится?</button>
+      <div class="accordion-content">
+        <p>Попробуйте обновить страницу или проверить интернет-соединение. Если проблема сохраняется — обратитесь в поддержку.</p>
+      </div>
+    </div>
+  </div>
+
+
   <div class="footer-bottom">
     <p>© 2025 SAKURA Anime. Все права защищены.</p>
   </div>
+
+  
+  <!-- пример: кнопка подписки -->
+<button data-popup="subscribe" class="btn">Subscribe</button>
+<!-- или контакт -->
+<button data-popup="contact" class="btn">Contact us</button>
 </footer>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
