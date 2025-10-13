@@ -592,5 +592,314 @@ a {
   border-bottom: 2px solid #ffd700;
 }
 
+/* === 🌸 КНОПКА СМЕНЫ ТЕМЫ === */
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 999;
+}
+
+#themeBtn {
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #ff89b0;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#themeBtn:hover {
+  transform: scale(1.2) rotate(10deg);
+  color: #ffd1e0;
+}
+
+
+
+/* === ПЛАВНЫЙ ПЕРЕХОД === */
+body, .site-header, .site-footer,
+.sidebar, .grid-main, .news-card,
+.anime-card, .recently-card,
+.anime-section, .recently-section,
+.faq-section, .accordion-item {
+  transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* === 🌙 ТЁМНАЯ ТЕМА === */
+body {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
+}
+
+/* Шапка и футер */
+.site-header, .site-footer {
+  background: rgba(15, 15, 25, 0.9);
+  color: #fff;
+}
+
+/* Грид */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.sidebar {
+  background: rgba(40, 40, 50, 0.95);
+  color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.grid-main {
+  background: rgba(35, 35, 45, 0.95);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Карточки */
+.news-card, .anime-card, .recently-card, .accordion-item {
+  background: rgba(50, 50, 65, 0.95);
+  color: #fff;
+  border-radius: 10px;
+}
+
+/* Разделы */
+.anime-section, .recently-section, .faq-section {
+  background: rgba(25, 25, 40, 0.9);
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* Текст */
+.sidebar h3, .grid-main h3, .faq-title, .anime-section h2, .recently-section h2 {
+  color: #ffb6c1;
+}
+
+/* === 🌸 СВЕТЛАЯ ТЕМА === */
+body.light-theme {
+  background: linear-gradient(135deg, #fff0f6, #ffe6f2, #fff);
+  color: #222;
+}
+
+/* === 🌙 ТЁМНАЯ ТЕМА === */
+.site-footer, footer {
+  background: linear-gradient(135deg, #0d0d15, #1a1a2e);
+  color: #f8f8f8 !important;
+  border-top: 2px solid #ff4f87;
+  transition: all 0.5s ease;
+}
+
+/* чтобы всё внутри футера наследовало цвет */
+.site-footer *, footer * {
+  color: #f8f8f8 !important;
+}
+
+.site-footer a {
+  color: #ffb6d1 !important;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #ff4f87 !important;
+}
+
+/* === 🌸 СВЕТЛАЯ ТЕМА === */
+body.light-theme .site-footer,
+body.light-theme footer {
+  background: linear-gradient(135deg, #ffe6ef, #ffd6e5);
+  color: #222 !important;
+  border-top: 2px solid #ffb6c1;
+  transition: all 0.5s ease;
+}
+
+/* Принудительно красим всё содержимое футера */
+body.light-theme .site-footer *,
+body.light-theme footer * {
+  color: #222 !important;
+}
+
+/* Ссылки и ховеры в светлой теме */
+body.light-theme .site-footer a,
+body.light-theme footer a {
+  color: #b3005a !important;
+}
+
+body.light-theme .site-footer a:hover,
+body.light-theme footer a:hover {
+  color: #e6007e !important;
+}
+
+/* Грид и его элементы */
+body.light-theme .sidebar {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+}
+
+body.light-theme .grid-main {
+  background: rgba(255, 250, 252, 0.95);
+  color: #333;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+}
+
+/* Карточки */
+body.light-theme .news-card,
+body.light-theme .anime-card,
+body.light-theme .recently-card,
+body.light-theme .accordion-item {
+  background: #ffffff;
+  color: #333;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.15);
+}
+
+/* Разделы */
+body.light-theme .anime-section,
+body.light-theme .recently-section,
+body.light-theme .faq-section {
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.25);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* Цвет текста */
+body.light-theme .sidebar h3,
+body.light-theme .grid-main h3,
+body.light-theme .faq-title,
+body.light-theme .anime-section h2,
+body.light-theme .recently-section h2 {
+  color: #d63384;
+}
+
+body.light-theme a {
+  color: #d63384;
+}
+
+/* Анимации и hover */
+body.light-theme .accordion-title:hover {
+  background: rgba(255, 182, 193, 0.2);
+}
+
+/* === 🌸 FAQ СЕКЦИЯ (красивая Sakura-стилизация) === */
+.faq-section {
+  margin-top: 50px;
+  padding: 40px 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transition: all 0.5s ease;
+}
+
+.faq-title {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  color: #ff8ac5;
+  margin-bottom: 30px;
+  text-shadow: 0 0 8px rgba(255, 140, 200, 0.6);
+}
+
+/* Контейнер для аккордеона */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accordion-item {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Заголовок вопроса */
+.accordion-title {
+  width: 100%;
+  background: linear-gradient(135deg, #ff69b4, #b24ec9);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 15px 20px;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.accordion-title:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+}
+
+.accordion-title::after {
+  content: '▼';
+  position: absolute;
+  right: 20px;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+/* Контент */
+.accordion-content {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f1f1f1;
+  padding: 15px 20px;
+  display: none;
+  line-height: 1.6;
+}
+
+/* Активное состояние */
+.accordion-item.active .accordion-content {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+.accordion-item.active .accordion-title::after {
+  transform: rotate(180deg);
+}
+
+/* === 🌸 СВЕТЛАЯ ТЕМА === */
+body.light-theme .faq-section {
+  background: linear-gradient(135deg, #fff0f7, #ffe2f1);
+  box-shadow: 0 4px 20px rgba(255, 182, 193, 0.3);
+}
+
+body.light-theme .faq-title {
+  color: #d63384;
+  text-shadow: none;
+}
+
+body.light-theme .accordion-title {
+  background: linear-gradient(135deg, #ffb6c1, #ff8dc1);
+  color: #fff;
+}
+
+body.light-theme .accordion-content {
+  background: rgba(255, 255, 255, 0.85);
+  color: #222;
+}
+
+/* === Анимация === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 
 
