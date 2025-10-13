@@ -5,15 +5,64 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Главная - Anime World</title>
 
-  <!-- Bootstrap (подключаем первым) -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Твои стили (важно: после Bootstrap, чтобы переопределять) -->
+  <!-- Стили -->
   <link rel="stylesheet" href="main.css" />
 </head>
-<body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
 
-  <!-- === Шапка — ВОЗВРАЩЁНА К ТВОЕЙ ИСХОДНОЙ СТРУКТУРЕ === -->
+  // Устанавливаем сохранённую тему
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeBtn.textContent = '🌸';
+  }
+
+  // Обработчик переключения
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+
+    themeBtn.textContent = isLight ? '🌸' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+
+
+<script>
+  const accordionItems = document.querySelectorAll(".accordion-item");
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      item.classList.toggle("active");
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionItems = document.querySelectorAll(".accordion-item");
+
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      // закрыть другие
+      accordionItems.forEach(i => i !== item && i.classList.remove("active"));
+      // открыть текущий
+      item.classList.toggle("active");
+    });
+  });
+});
+</script>
+
+
+<body>
+  <!-- Шапка -->
   <header class="site-header container-fluid">
     <div class="logo">
       <img src="icon Image .png" alt="Anime Website Logo">
@@ -29,9 +78,14 @@
 
     <div class="search-box">
       <input type="text" placeholder="Что ищем семпай?">
-      <!-- Bootstrap-класс у кнопки безопасен -->
       <button class="btn btn-sm" type="button">🔍</button>
     </div>
+
+    <div class="theme-toggle">
+      <button id="themeBtn" aria-label="Switch theme">🌙</button>
+    </div>
+
+    <div id="current-datetime" aria-live="polite"></div>
   </header>
 
   <!-- Внешняя контейнерная обёртка (container-fluid) оставляет ширину гибкой,
@@ -158,6 +212,8 @@
    </div>
 </section>
 
+
+
 <!-- Футер -->
 <footer class="site-footer container-fluid bg-dark text-light mt-5 p-4">
   <div class="row">
@@ -190,10 +246,48 @@
       </div>
     </div>
   </div>
+
+  <section class="faq-section">
+  <h2 class="faq-title">Часто задаваемые вопросы</h2>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-title">Как добавить аниме в закладки?</button>
+      <div class="accordion-content">
+        <p>Откройте страницу аниме и нажмите кнопку «Добавить в закладки». После этого тайтл появится на странице «Закладки».</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-title">Можно ли смотреть аниме без регистрации?</button>
+      <div class="accordion-content">
+        <p>Да, вы можете просматривать аниме и каталог без регистрации. Однако закладки сохраняются только при входе в аккаунт.</p>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-title">Почему видео не воспроизводится?</button>
+      <div class="accordion-content">
+        <p>Попробуйте обновить страницу или проверить интернет-соединение. Если проблема сохраняется — обратитесь в поддержку.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   <div class="footer-bottom text-center mt-3">
     <p>© 2025 SAKURA Anime. Все права защищены. <br> Участники: Арман и Алихан (SE-2410)</p>
   </div>
+
+  
+
+  <!-- пример: кнопка подписки -->
+<button data-popup="subscribe" class="btn">Subscribe</button>
+<!-- или контакт -->
+<button data-popup="contact" class="btn">Contact us</button>
 </footer>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -217,4 +311,4 @@
   })();
 </script>
 </body>
-</html>
+</html>   
