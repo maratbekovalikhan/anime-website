@@ -39,28 +39,3 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const themeBtn = document.getElementById('themeBtn');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-
-  // Устанавливаем тему при загрузке страницы
-  if (savedTheme === 'light') {
-    document.body.classList.add('light-theme');
-    themeBtn.textContent = '☀️';
-  } else {
-    themeBtn.textContent = '🌙';
-  }
-
-  // Переключаем тему по клику
-  themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-
-    if (document.body.classList.contains('light-theme')) {
-      themeBtn.textContent = '☀️';
-      localStorage.setItem('theme', 'light');
-    } else {
-      themeBtn.textContent = '🌙';
-      localStorage.setItem('theme', 'dark');
-    }
-  });
-});
