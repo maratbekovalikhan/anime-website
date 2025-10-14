@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="register.css">
 </head>
 <body>
-  <!-- ✅ Хедер с кнопкой смены темы -->
+  <!-- ✅ Хедер с кнопкой темы -->
   <header class="site-header container-fluid">
     <div class="logo">
       <img src="icon Image .png" alt="Anime Website Logo">
@@ -68,9 +68,59 @@
     </div>
   </footer>
 
-  <!-- ✅ Скрипты внизу -->
-  <script src="register.js"></script>
-  <script src="theme.js"></script>
+  <!-- ✅ Скрипт для регистрации -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('register-form');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (!username || !email || !password || !confirmPassword) {
+        alert('❌ Заполните все поля');
+        return;
+      }
+      if (password.length < 6) {
+        alert('❌ Пароль должен содержать минимум 6 символов');
+        return;
+      }
+      if (password !== confirmPassword) {
+        alert('❌ Пароли не совпадают');
+        return;
+      }
+
+      alert('✅ Регистрация прошла успешно!');
+      form.reset();
+    });
+  });
+  </script>
+
+  <!-- ✅ Скрипт для темы -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeBtn = document.getElementById('themeBtn');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    // Восстановление темы
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-theme');
+      themeBtn.textContent = '🌸';
+    }
+
+    // Переключение
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      themeBtn.textContent = isLight ? '🌸' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  });
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
