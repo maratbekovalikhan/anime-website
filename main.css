@@ -39,8 +39,9 @@ a {
   border: 2px solid #ff477e;
 }
 
+/* убери старые отступы у ссылок */
 .main-nav a {
-  margin-left: 20px;
+  margin-left: 0;  /* 👈 убрали, чтобы не ломалась прокрутка */
   padding: 6px 12px;
   border-radius: 8px;
   font-weight: 500;
@@ -76,7 +77,6 @@ a {
   box-shadow: 0 4px 15px rgba(255, 71, 126, 0.5);
 }
 
-}
 
 .search-box {
   display: flex;
@@ -924,6 +924,7 @@ body.light-theme .accordion-content {
     transform: translateY(0);
   }
 }
+
 
 
 
