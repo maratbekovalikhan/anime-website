@@ -46,6 +46,32 @@ a {
   font-weight: 500;
 }
 
+.main-nav {
+  display: flex;
+  flex-wrap: wrap; /* позволяет кнопкам переноситься */
+  justify-content: center;
+  gap: 10px;
+}
+
+.main-nav a {
+  display: inline-block;
+  margin: 0; /* убираем лишние отступы */
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  white-space: nowrap; /* текст не переносится */
+}
+
+.main-nav a.active,
+.main-nav a:hover {
+  background: #ff477e;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 71, 126, 0.5);
+}
+
+
 .main-nav a.active,
 .main-nav a:hover {
   background: #ff477e;
@@ -899,6 +925,7 @@ body.light-theme .accordion-content {
     transform: translateY(0);
   }
 }
+
 
 
 
