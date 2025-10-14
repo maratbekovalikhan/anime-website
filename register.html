@@ -12,6 +12,54 @@
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="register.css">
 </head>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Устанавливаем сохранённую тему
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeBtn.textContent = '🌸';
+  }
+
+  // Обработчик переключения
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+
+    themeBtn.textContent = isLight ? '🌸' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+
+
+<script>
+  const accordionItems = document.querySelectorAll(".accordion-item");
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      item.classList.toggle("active");
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionItems = document.querySelectorAll(".accordion-item");
+
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      // закрыть другие
+      accordionItems.forEach(i => i !== item && i.classList.remove("active"));
+      // открыть текущий
+      item.classList.toggle("active");
+    });
+  });
+});
+</script>
 <body>
   <!-- ✅ Хедер с кнопкой темы -->
   <header class="site-header container-fluid">
@@ -27,15 +75,6 @@
       <a href="bookmarks.html">Закладки</a>
       <a href="register.html" class="active">Регистрация</a>
     </nav>
-
-        <div class="search-box">
-      <input type="text" placeholder="Что ищем семпай?">
-      <button class="btn btn-sm" type="button">🔍</button>
-    </div>
-
-    <div class="theme-toggle">
-      <button id="themeBtn" aria-label="Switch theme">🌙</button>
-    </div>
   </header>
 
   <!-- ✅ Контент — форма регистрации -->
