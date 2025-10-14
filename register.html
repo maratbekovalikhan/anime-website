@@ -13,54 +13,7 @@
   <!-- Стили формы -->
   <link rel="stylesheet" href="register.css">
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const themeBtn = document.getElementById('themeBtn');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-
-  // Устанавливаем сохранённую тему
-  if (savedTheme === 'light') {
-    document.body.classList.add('light-theme');
-    themeBtn.textContent = '🌸';
-  }
-
-  // Обработчик переключения
-  themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
-
-    themeBtn.textContent = isLight ? '🌸' : '🌙';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  });
-});
-</script>
-
-
-<script>
-  const accordionItems = document.querySelectorAll(".accordion-item");
-  accordionItems.forEach(item => {
-    const title = item.querySelector(".accordion-title");
-    title.addEventListener("click", () => {
-      item.classList.toggle("active");
-    });
-  });
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const accordionItems = document.querySelectorAll(".accordion-item");
-
-  accordionItems.forEach(item => {
-    const title = item.querySelector(".accordion-title");
-    title.addEventListener("click", () => {
-      // закрыть другие
-      accordionItems.forEach(i => i !== item && i.classList.remove("active"));
-      // открыть текущий
-      item.classList.toggle("active");
-    });
-  });
-});
-</script>
+  
 </head>
 <body>
 
