@@ -121,6 +121,13 @@
         alert('❌ Пароли не совпадают');
         return;
       }
+      const password = 123456789;
+      if (username === "admin" && email === "admin@gmail.com"){
+          const AdminPassword = prompt('Введите пороль для потверждение:');
+          if (AdminPassword === password){
+            alert('Вход через админку!');
+          }
+      }
 
       alert('✅ Регистрация прошла успешно!');
       form.reset();
