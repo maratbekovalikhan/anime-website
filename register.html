@@ -116,6 +116,16 @@
       const confirmPassword = document.getElementById('confirm-password').value;
       const toggleBtn = document.getElementById('toggle-password');
 
+          toggleBtn.addEventListener('click', () => {
+      if (password.type === 'password') {
+        password.type = 'text'; // показать
+        toggleBtn.textContent = '🙈';
+      } else {
+        password.type = 'password'; // скрыть обратно
+        toggleBtn.textContent = '👁';
+          
+        }
+
 
       if (!username || !email || !password || !confirmPassword) {
         alert('❌ Заполните все поля');
@@ -129,15 +139,7 @@
         alert('❌ Пароли не совпадают');
         return;
       }
-          toggleBtn.addEventListener('click', () => {
-      if (password.type === 'password') {
-        password.type = 'text'; // показать
-        toggleBtn.textContent = '🙈';
-      } else {
-        password.type = 'password'; // скрыть обратно
-        toggleBtn.textContent = '👁';
-          
-        }
+
 
       alert('✅ Регистрация прошла успешно!');
       form.reset();
