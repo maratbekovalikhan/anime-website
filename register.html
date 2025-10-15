@@ -117,11 +117,11 @@
       const toggleBtn = document.getElementById('toggle-password');
 
           toggleBtn.addEventListener('click', () => {
-      if (password.type === 'password') {
-        password.type = 'text'; // показать
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; // показать
         toggleBtn.textContent = '🙈';
       } else {
-        password.type = 'password'; // скрыть обратно
+        passwordInput.type = 'password'; // скрыть обратно
         toggleBtn.textContent = '👁';
           
         }
