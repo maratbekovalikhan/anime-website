@@ -107,6 +107,8 @@
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('register-form');
+    const passwordInput = document.getElementById('password'); 
+    const toggleBtn = document.getElementById('toggle-password');
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -114,7 +116,6 @@
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirm-password').value;
-      const toggleBtn = document.getElementById('toggle-password');
 
           toggleBtn.addEventListener('click', () => {
       if (passwordInput.type === 'password') {
