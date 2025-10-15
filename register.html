@@ -57,6 +57,7 @@
       <div class="mb-3">
         <label for="password" class="form-label">Пароль</label>
         <input type="password" id="password" class="form-control" placeholder="Минимум 6 символов">
+        <button type="button" id="toggle-password">👁</button>
       </div>
 
       <div class="mb-3">
@@ -113,6 +114,8 @@
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirm-password').value;
+      const toggleBtn = document.getElementById('toggle-password');
+
 
       if (!username || !email || !password || !confirmPassword) {
         alert('❌ Заполните все поля');
@@ -126,6 +129,15 @@
         alert('❌ Пароли не совпадают');
         return;
       }
+          toggleBtn.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; // показать
+        toggleBtn.textContent = '🙈';
+      } else {
+        passwordInput.type = 'password'; // скрыть обратно
+        toggleBtn.textContent = '👁';
+          
+        }
 
       alert('✅ Регистрация прошла успешно!');
       form.reset();
