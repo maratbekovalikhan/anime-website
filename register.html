@@ -108,7 +108,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('register-form');
     const passwordInput = document.getElementById('password'); 
-    const toggleBtn = document.getElementById('toggle-password');
+
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -131,7 +131,6 @@
         alert('❌ Пароли не совпадают');
         return;
       }
-
 
       alert('✅ Регистрация прошла успешно!');
       form.reset();
