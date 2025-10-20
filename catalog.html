@@ -59,6 +59,48 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Добавляем звёзды к каждой карточке
+  document.querySelectorAll(".anime-card").forEach(card => {
+    const title = card.querySelector("h3")?.textContent.trim();
+    if (!title) return;
+
+    const starsContainer = document.createElement("div");
+    starsContainer.className = "stars";
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.dataset.value = i;
+      star.textContent = "★";
+      starsContainer.appendChild(star);
+    }
+    card.appendChild(starsContainer);
+
+    const savedRating = localStorage.getItem(`rating_${title}`) || 0;
+    highlightStars(starsContainer, savedRating);
+
+    starsContainer.addEventListener("click", e => {
+      if (!e.target.classList.contains("star")) return;
+      const rating = e.target.dataset.value;
+      localStorage.setItem(`rating_${title}`, rating);
+      highlightStars(starsContainer, rating);
+    });
+
+    function highlightStars(container, rating) {
+      container.querySelectorAll(".star").forEach((s, i) => {
+        s.style.color = i < rating ? "#FFD700" : "#888";
+      });
+    }
+  });
+});
+</script>
+
+
+
 <body>
  <!-- Шапка -->
   <header class="site-header container-fluid">
