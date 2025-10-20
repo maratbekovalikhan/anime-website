@@ -7,6 +7,10 @@
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="app.js"></script>
+
+
   <!-- Стили -->
   <link rel="stylesheet" href="./global.css">
 <link rel="stylesheet" href="./main.css">
@@ -62,24 +66,65 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Добавляем звёзды к каждой карточке
+  document.querySelectorAll(".anime-card").forEach(card => {
+    const title = card.querySelector("h3")?.textContent.trim();
+    if (!title) return;
+
+    const starsContainer = document.createElement("div");
+    starsContainer.className = "stars";
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.dataset.value = i;
+      star.textContent = "★";
+      starsContainer.appendChild(star);
+    }
+    card.appendChild(starsContainer);
+
+    const savedRating = localStorage.getItem(`rating_${title}`) || 0;
+    highlightStars(starsContainer, savedRating);
+
+    starsContainer.addEventListener("click", e => {
+      if (!e.target.classList.contains("star")) return;
+      const rating = e.target.dataset.value;
+      localStorage.setItem(`rating_${title}`, rating);
+      highlightStars(starsContainer, rating);
+    });
+
+    function highlightStars(container, rating) {
+      container.querySelectorAll(".star").forEach((s, i) => {
+        s.style.color = i < rating ? "#FFD700" : "#888";
+      });
+    }
+  });
+});
+</script>
+
+
 <body>
-  <!-- Шапка -->
-  <header class="site-header container-fluid">
-    <div class="logo">
-      <img src="icon Image .png" alt="Anime Website Logo">
-      <span>SAKURA</span>
-    </div>
+<!-- Шапка -->
+<header class="site-header container-fluid">
+  <div class="logo">
+    <img src="icon Image .png" alt="Anime Website Logo">
+    <span>SAKURA</span>
+  </div>
 
-    <nav class="main-nav">
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="player.html">Плеер</a>
-      <a href="bookmarks.html">Закладки</a>
-      <a href="register.html">Регистрация</a>
-    </nav>
+  <nav class="main-nav">
+    <a href="index.html">Главная</a>
+    <a href="catalog.html">Каталог</a>
+    <a href="player.html">Плеер</a>
+    <a href="bookmarks.html">Закладки</a>
+    <a href="register.html">Регистрация</a>
+  </nav>
 
+  <!-- Правый блок -->
+  <div class="header-right">
     <div class="search-box">
-      <input type="text" placeholder="Что ищем семпай?">
+      <input type="text" placeholder="Что ищем, семпай?">
       <button class="btn btn-sm" type="button">🔍</button>
     </div>
 
@@ -87,8 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <button id="themeBtn" aria-label="Switch theme">🌙</button>
     </div>
 
-    <div id="current-datetime" aria-live="polite"></div>
-  </header>
+</header>
 
   <!-- Внешняя контейнерная обёртка (container-fluid) оставляет ширину гибкой,
        но внутренняя .grid-layout — твоя сетка (CSS Grid) — НЕ трогаем -->
@@ -191,6 +235,8 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </section>
 
+
+
 <!-- Продолжить просмотр -->
 <section class="recently-section container-fluid my-5">
    <h2>Продолжить просмотр</h2>
@@ -217,6 +263,44 @@ document.addEventListener("DOMContentLoaded", () => {
       </article>
    </div>
 </section>
+
+
+
+
+
+<section class="interactive-section container text-center my-5">
+  <h2 class="text-gradient mb-4">Интерактив Sakura</h2>
+
+  <!-- Greeting -->
+  <div class="greeting-box mb-4">
+    <p id="greetingText">Введите ваше имя:</p>
+    <input type="text" id="nameInput" placeholder="Ваше имя" class="form-control w-50 mx-auto">
+    <button id="greetBtn" class="btn btn-pink mt-3">Поздороваться 🌸</button>
+  </div>
+
+  <!-- Read More -->
+  <div class="read-more-box mt-5">
+    <p id="animeInfo">
+      Аниме — это искусство, объединяющее глубокие истории, визуальную красоту и эмоции.
+    </p>
+    <button id="readMoreBtn" class="btn btn-outline-light">Читать дальше</button>
+    <div id="extraContent" class="extra-content">
+      <p>На сайте SAKURA вы можете открыть для себя целый мир любимых тайтлов, добавлять их в закладки и делиться впечатлениями с друзьями!</p>
+    </div>
+  </div>
+
+  <!-- Time Display -->
+  <div class="time-section mt-5">
+    <button id="timeBtn" class="btn btn-pink">Показать текущее время ⏰</button>
+    <p id="timeDisplay" class="mt-3"></p>
+  </div>
+</section>
+
+<!-- Scroll To Top -->
+<button id="scrollTopBtn" class="scroll-top">⬆</button>
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+
 
 
 
