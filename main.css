@@ -1003,6 +1003,31 @@ body.light-theme .accordion-content {
   transform: scale(1.2);
 }
 
+/* === Соцсети в футере === */
+.social-links {
+  display: flex;
+  gap: 12px;                /* расстояние между иконками */
+  align-items: center;      /* выравнивание по центру */
+  flex-wrap: wrap;          /* перенос на новую строку, если не помещаются */
+  margin-top: 10px;
+}
+
+.social-links img {
+  width: 30px;              /* оптимальный размер */
+  height: 30px;
+  object-fit: contain;      /* сохраняет пропорции */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.9;
+  border-radius: 8px;       /* чуть округлые углы */
+}
+
+.social-links img:hover {
+  transform: scale(1.1);    /* лёгкое увеличение при наведении */
+  opacity: 1;               /* делает ярче при наведении */
+}
+
+
+
 
 
 
