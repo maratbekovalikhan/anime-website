@@ -1027,40 +1027,57 @@ body.light-theme .accordion-content {
 }
 /* пойсковик */
 /* === Подсказки поиска === */
+/* === Подсказки поиска (тёмная тема по умолчанию) === */
 .suggestions {
   position: absolute;
   top: 42px;
   left: 0;
   right: 0;
-  background: #222;            /* тёмный фон, сочетается с тёмной темой */
-  border: 1px solid #555;
+  background: #222;            /* фон — тёмный */
+  border: 1px solid #444;
   border-radius: 6px;
-  max-height: 200px;
+  max-height: 220px;
   overflow-y: auto;
   display: none;
   list-style: none;
   padding: 0;
   margin: 4px 0 0;
   z-index: 2000;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .suggestions li {
   padding: 8px 12px;
   cursor: pointer;
   color: #f5f5f5;             /* светлый текст */
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
 .suggestions li:hover {
-  background: #ff69b4;        /* розовый hover (можно заменить) */
+  background: #ff69b4;        /* розовый hover */
   color: #fff;
 }
 
-/* Подсветка совпадений в тексте */
+/* Подсветка совпадений */
 .highlight {
-  background: #ffe44d;        /* мягко-жёлтая подсветка */
+  background: #ffe44d;
   color: #000;
   padding: 1px 3px;
   border-radius: 3px;
+}
+
+/* === Светлая тема (при body.light-theme) === */
+body.light-theme .suggestions {
+  background: #fff;            /* белый фон */
+  border-color: #ccc;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .suggestions li {
+  color: #222;
+}
+
+body.light-theme .suggestions li:hover {
+  background: #ffe6f2;         /* светло-розовый hover */
+  color: #000;
 }
