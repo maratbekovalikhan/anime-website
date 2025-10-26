@@ -508,3 +508,57 @@ $(document).ready(function () {
   });
 });
 
+// --- ВАЖНО: этот код должен подключаться после jQuery ---
+
+$(function () {
+  // Сохраняем оригинальные заголовки (чтобы можно было восстановить)
+  $(".anime-card h3").each(function () {
+    const $t = $(this);
+    $t.attr("data-original", $t.text());
+  });
+
+  // Функция для безопасного экранирования текста в RegExp
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function highlightTitles(term) {
+    $(".anime-card h3").each(function () {
+      const $h = $(this);
+      const original = $h.attr("data-original") || $h.text();
+
+      if (!term) {
+        $h.html(original); // восстановить исходный текст
+        return;
+      }
+
+      const escaped = escapeRegExp(term);
+      const regex = new RegExp("(" + escaped + ")", "gi");
+      const replaced = original.replace(regex, "<span class='highlight'>$1</span>");
+      $h.html(replaced);
+    });
+  }
+
+  // Live фильтр + подсветка
+  $("#searchInput").on("input", function () {
+    const value = $(this).val().trim();
+    const low = value.toLowerCase();
+
+    // Показываем/скрываем карточки
+    $(".anime-card").each(function () {
+      const text = $(this).text().toLowerCase();
+      $(this).toggle(text.indexOf(low) > -1);
+    });
+
+    // Подсветка в заголовках
+    highlightTitles(value);
+  });
+
+  // По кнопке (если нужно)
+  $("#searchBtn").on("click", function () {
+    const value = $("#searchInput").val().trim();
+    highlightTitles(value);
+    // можно также прокинуть фокус и т.д.
+  });
+});
+
