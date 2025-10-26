@@ -7,6 +7,8 @@
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script src="app.js"></script>
 
@@ -123,10 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <!-- Правый блок -->
   <div class="header-right">
-    <div class="search-box">
-      <input type="text" placeholder="Что ищем, семпай?">
-      <button class="btn btn-sm" type="button">🔍</button>
-    </div>
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Что ищем, семпай?">
+  <button id="searchBtn" class="btn btn-sm" type="button">🔍</button>
+</div>
 
     <div class="theme-toggle">
       <button id="themeBtn" aria-label="Switch theme">🌙</button>
@@ -424,6 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
 </body>
 </html>   
+
 
 
 
