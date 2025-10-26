@@ -1026,43 +1026,33 @@ body.light-theme .accordion-content {
   opacity: 1;               /* делает ярче при наведении */
 }
 /* пойсковик */
-.highlight {
-  background-color: yellow;
-  color: black;
-  padding: 2px 4px;
-  border-radius: 3px;
-}
 .suggestions {
   position: absolute;
-  top: 38px; /* немного ниже поля ввода */
+  top: 42px;           /* отрегулируй по высоте поля */
   left: 0;
-  width: 100%;
+  right: 0;
   background: #fff;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  max-height: 180px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  max-height: 220px;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 2000;
   list-style: none;
   padding: 0;
-  margin: 0;
-  display: none; /* скрыто по умолчанию */
+  margin: 6px 0 0 0;
+  display: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
-
 .suggestions li {
   padding: 8px 12px;
   cursor: pointer;
-  color: #333;
 }
-
-.suggestions li:hover {
-  background: #f2f2f2;
+.suggestions li:hover, .suggestions li.active {
+  background: #f3f3f3;
 }
-
-
-
-
-
-
-
-
+.highlight {
+  background-color: yellow;
+  color: black;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
