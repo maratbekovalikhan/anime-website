@@ -470,151 +470,107 @@ document.addEventListener('DOMContentLoaded', () => {
 }); // DOMContentLoaded end
 
 
-// jQuery
-$(document).ready(function () {
-  // Когда пользователь вводит текст
-  $("#searchInput").on("keyup", function () {
-    let value = $(this).val().toLowerCase();
-
-    // Перебираем все карточки аниме
-    $(".anime-card").filter(function () {
-      // Показываем только те, что содержат введённый текст
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-    });
-  });
-
-  // Альтернатива — по кнопке 🔍
-  $("#searchBtn").on("click", function () {
-    let value = $("#searchInput").val().toLowerCase();
-
-    $(".anime-card").filter(function () {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-    });
-  });
-});
-
-$(document).ready(function () {
-  $("#searchInput").on("keyup", function () {
-    let term = $(this).val().trim();
-    $(".anime-card h3").each(function () {
-      let text = $(this).text();
-      if (term === "") {
-        $(this).html(text);
-      } else {
-        let regex = new RegExp("(" + term + ")", "gi");
-        $(this).html(text.replace(regex, "<span class='highlight'>$1</span>"));
-      }
-    });
-  });
-});
-
-// --- ВАЖНО: этот код должен подключаться после jQuery ---
-
+// === ЕДИНЫЙ СКРИПТ ПОИСКА, ПОДСВЕТКИ И ПОДСКАЗОК ===
 $(function () {
-  // Сохраняем оригинальные заголовки (чтобы можно было восстановить)
+  // 1. Сохраняем оригинальные заголовки (чтобы потом восстанавливать)
   $(".anime-card h3").each(function () {
     const $t = $(this);
-    $t.attr("data-original", $t.text());
+    $t.attr("data-original", $t.text().trim());
   });
 
-  // Функция для безопасного экранирования текста в RegExp
+  // 2. Собираем список всех названий аниме
+  const animeTitles = $(".anime-card h3")
+    .map(function () {
+      return $(this).text().trim();
+    })
+    .get();
+
+  const $input = $("#searchInput");
+  const $list = $("#suggestionList");
+  const $cards = $(".anime-card");
+
+  // === Функции ===
+
+  // Безопасное экранирование для RegExp
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
+  // Подсветка совпадений в названиях
   function highlightTitles(term) {
     $(".anime-card h3").each(function () {
       const $h = $(this);
-      const original = $h.attr("data-original") || $h.text();
-
+      const original = $h.attr("data-original");
       if (!term) {
-        $h.html(original); // восстановить исходный текст
+        $h.html(original);
         return;
       }
-
-      const escaped = escapeRegExp(term);
-      const regex = new RegExp("(" + escaped + ")", "gi");
+      const regex = new RegExp("(" + escapeRegExp(term) + ")", "gi");
       const replaced = original.replace(regex, "<span class='highlight'>$1</span>");
       $h.html(replaced);
     });
   }
 
-  // Live фильтр + подсветка
-  $("#searchInput").on("input", function () {
-    const value = $(this).val().trim();
-    const low = value.toLowerCase();
-
-    // Показываем/скрываем карточки
-    $(".anime-card").each(function () {
+  // Фильтр карточек по тексту
+  function filterCards(term) {
+    const low = term.toLowerCase();
+    $cards.each(function () {
       const text = $(this).text().toLowerCase();
-      $(this).toggle(text.indexOf(low) > -1);
+      $(this).toggle(text.includes(low));
     });
+  }
 
-    // Подсветка в заголовках
-    highlightTitles(value);
-  });
-
-  // По кнопке (если нужно)
-  $("#searchBtn").on("click", function () {
-    const value = $("#searchInput").val().trim();
-    highlightTitles(value);
-    // можно также прокинуть фокус и т.д.
-  });
-});
-$(function () {
-  // Список всех названий аниме — можно добавить свои
-  const animeTitles = [
-    "Demon Slayer",
-    "Attack on Titan",
-    "One Piece",
-    "Jujutsu Kaisen",
-    "Overlord",
-    "Tokyo Ghoul",
-    "One-Punch Man",
-    "Sword Art Online (SAO)",
-    "Fullmetal Alchemist",
-    "Hunter x Hunter"
-  ];
-
-  const $input = $("#searchInput");
-  const $list = $("#suggestionList");
-
-  // Когда пользователь вводит текст
-  $input.on("input", function () {
-    const value = $(this).val().trim().toLowerCase();
-    $list.empty(); // очищаем предыдущие подсказки
-
-    if (value === "") {
+  // Показываем подсказки
+  function showSuggestions(term) {
+    $list.empty();
+    if (!term) {
       $list.hide();
       return;
     }
 
-    // Фильтруем подходящие названия
-    const matches = animeTitles.filter(title =>
-      title.toLowerCase().includes(value)
-    );
-
+    const low = term.toLowerCase();
+    const matches = animeTitles.filter(t => t.toLowerCase().includes(low));
     if (matches.length === 0) {
       $list.hide();
       return;
     }
 
-    // Добавляем подсказки в список
     matches.forEach(title => {
-      $list.append(`<li>${title}</li>`);
+      const regex = new RegExp("(" + escapeRegExp(term) + ")", "gi");
+      const html = title.replace(regex, "<span class='highlight'>$1</span>");
+      $list.append(`<li data-value="${title}">${html}</li>`);
     });
-
     $list.show();
+  }
+
+  // === События ===
+
+  // При вводе текста — подсказки, фильтр и подсветка
+  $input.on("input", function () {
+    const value = $(this).val().trim();
+    showSuggestions(value);
+    filterCards(value);
+    highlightTitles(value);
   });
 
-  // Клик по подсказке — вставляем её в поле ввода
+  // Клик по подсказке — вставляем значение и фильтруем
   $list.on("click", "li", function () {
-    const selected = $(this).text();
-    $input.val(selected);
+    const val = $(this).data("value");
+    $input.val(val);
+    $list.hide();
+    filterCards(val);
+    highlightTitles(val);
+  });
+
+  // По кнопке 🔍
+  $("#searchBtn").on("click", function () {
+    const value = $input.val().trim();
+    filterCards(value);
+    highlightTitles(value);
     $list.hide();
   });
 
-  // Скрыть подсказки, если кликнули вне поля
+  // Клик вне поля — скрываем подсказки
   $(document).on("click", function (e) {
     if (!$(e.target).closest(".search-box").length) {
       $list.hide();
