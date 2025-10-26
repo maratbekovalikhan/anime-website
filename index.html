@@ -125,9 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <!-- Правый блок -->
   <div class="header-right">
-<div class="search-box">
-  <input type="text" id="searchInput" placeholder="Что ищем, семпай?">
+<div class="search-box" style="position: relative;">
+  <input type="text" id="searchInput" placeholder="Что ищем, семпай?" autocomplete="off">
   <button id="searchBtn" class="btn btn-sm" type="button">🔍</button>
+  <ul id="suggestionList" class="suggestions"></ul>
 </div>
 
     <div class="theme-toggle">
@@ -426,6 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
 </body>
 </html>   
+
 
 
 
