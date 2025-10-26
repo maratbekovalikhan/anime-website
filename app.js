@@ -493,3 +493,18 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  $("#searchInput").on("keyup", function () {
+    let term = $(this).val().trim();
+    $(".anime-card h3").each(function () {
+      let text = $(this).text();
+      if (term === "") {
+        $(this).html(text);
+      } else {
+        let regex = new RegExp("(" + term + ")", "gi");
+        $(this).html(text.replace(regex, "<span class='highlight'>$1</span>"));
+      }
+    });
+  });
+});
+
