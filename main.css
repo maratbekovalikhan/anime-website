@@ -1025,6 +1025,13 @@ body.light-theme .accordion-content {
   transform: scale(1.1);    /* лёгкое увеличение при наведении */
   opacity: 1;               /* делает ярче при наведении */
 }
+/* пойсковик */
+.highlight {
+  background-color: yellow;
+  color: black;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
 
 
 
