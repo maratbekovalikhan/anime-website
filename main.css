@@ -1032,6 +1032,33 @@ body.light-theme .accordion-content {
   padding: 2px 4px;
   border-radius: 3px;
 }
+.suggestions {
+  position: absolute;
+  top: 38px; /* немного ниже поля ввода */
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none; /* скрыто по умолчанию */
+}
+
+.suggestions li {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #333;
+}
+
+.suggestions li:hover {
+  background: #f2f2f2;
+}
+
 
 
 
