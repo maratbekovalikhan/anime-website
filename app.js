@@ -561,4 +561,65 @@ $(function () {
     // можно также прокинуть фокус и т.д.
   });
 });
+$(function () {
+  // Список всех названий аниме — можно добавить свои
+  const animeTitles = [
+    "Demon Slayer",
+    "Attack on Titan",
+    "One Piece",
+    "Jujutsu Kaisen",
+    "Overlord",
+    "Tokyo Ghoul",
+    "One-Punch Man",
+    "Sword Art Online (SAO)",
+    "Fullmetal Alchemist",
+    "Hunter x Hunter"
+  ];
+
+  const $input = $("#searchInput");
+  const $list = $("#suggestionList");
+
+  // Когда пользователь вводит текст
+  $input.on("input", function () {
+    const value = $(this).val().trim().toLowerCase();
+    $list.empty(); // очищаем предыдущие подсказки
+
+    if (value === "") {
+      $list.hide();
+      return;
+    }
+
+    // Фильтруем подходящие названия
+    const matches = animeTitles.filter(title =>
+      title.toLowerCase().includes(value)
+    );
+
+    if (matches.length === 0) {
+      $list.hide();
+      return;
+    }
+
+    // Добавляем подсказки в список
+    matches.forEach(title => {
+      $list.append(`<li>${title}</li>`);
+    });
+
+    $list.show();
+  });
+
+  // Клик по подсказке — вставляем её в поле ввода
+  $list.on("click", "li", function () {
+    const selected = $(this).text();
+    $input.val(selected);
+    $list.hide();
+  });
+
+  // Скрыть подсказки, если кликнули вне поля
+  $(document).on("click", function (e) {
+    if (!$(e.target).closest(".search-box").length) {
+      $list.hide();
+    }
+  });
+});
+
 
