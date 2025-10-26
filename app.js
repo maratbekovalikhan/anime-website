@@ -468,3 +468,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && typeof window.closePopup === 'function') window.closePopup(); });
 
 }); // DOMContentLoaded end
+
+
+// jQuery
+$(document).ready(function () {
+  // Когда пользователь вводит текст
+  $("#searchInput").on("keyup", function () {
+    let value = $(this).val().toLowerCase();
+
+    // Перебираем все карточки аниме
+    $(".anime-card").filter(function () {
+      // Показываем только те, что содержат введённый текст
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+  });
+
+  // Альтернатива — по кнопке 🔍
+  $("#searchBtn").on("click", function () {
+    let value = $("#searchInput").val().toLowerCase();
+
+    $(".anime-card").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+  });
+});
+
