@@ -748,7 +748,25 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function(){
+  $('.genre-btn').on('click', function(){
+    var selectedGenre = $(this).data('genre');
 
+    $('.anime-card').each(function(){
+      var genres = $(this).data('genre').split(',');
+
+      if(selectedGenre === 'all' || genres.includes(selectedGenre)){
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+
+    // Опционально: выделяем активную кнопку
+    $('.genre-btn').removeClass('active');
+    $(this).addClass('active');
+  });
+});
 
 
 
