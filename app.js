@@ -578,4 +578,31 @@ $(function () {
   });
 });
 
+// app.js
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector("#searchInput");
+  const genreInput = document.querySelector(".catalog-filters select");
+  const cards = document.querySelectorAll(".anime-card");
+
+  function filterCards() {
+    const titleVal = searchInput.value.toLowerCase();
+    const genreVal = genreInput.value.toLowerCase();
+
+    cards.forEach(card => {
+      const title = card.querySelector("h3").textContent.toLowerCase();
+      const genres = card.querySelector("p").textContent.toLowerCase();
+
+      const matchesTitle = title.includes(titleVal);
+      const matchesGenre = genreVal === "" || genres.includes(genreVal);
+
+      card.style.display = matchesTitle && matchesGenre ? "block" : "none";
+    });
+  }
+
+  searchInput.addEventListener("input", filterCards);
+  genreInput.addEventListener("change", filterCards);
+});
+
+
+
 
