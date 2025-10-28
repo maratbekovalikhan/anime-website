@@ -178,18 +178,15 @@ document.addEventListener("DOMContentLoaded", () => {
     <h2 class="mb-4">Каталог аниме</h2>
 
     <!-- Фильтры -->
-    <div class="catalog-filters d-flex gap-2 mb-4">
-      <input type="text" class="form-control" placeholder="Поиск по названию...">
-      <select class="form-select" style="max-width:200px;">
-        <option value="">Все жанры</option>
-        <option>Action</option>
-        <option>Fantasy</option>
-        <option>Drama</option>
-        <option>Comedy</option>
-        <option>Sci-Fi</option>
-        <option>Romance</option>
-      </select>
-    </div>
+  <div id="genre-buttons">
+  <button class="genre-btn" data-genre="all">All Genres</button>
+  <button class="genre-btn" data-genre="Action">Action</button>
+  <button class="genre-btn" data-genre="Fantasy">Fantasy</button>
+  <button class="genre-btn" data-genre="Drama">Drama</button>
+  <button class="genre-btn" data-genre="Comedy">Comedy</button>
+  <button class="genre-btn" data-genre="Sci-Fi">Sci-Fi</button>
+  <button class="genre-btn" data-genre="Romance">Romance</button>
+</div>
 
     <!-- Сетка карточек -->
 <div class="anime-grid">
