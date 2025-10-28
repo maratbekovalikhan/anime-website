@@ -19,6 +19,74 @@
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="register.css">
 </head>
+
+<!-- ✅ Контейнер для уведомлений -->
+<div id="toast-container"></div>
+
+<!-- ✅ Скрипты jQuery для Part 2 и 3 -->
+<script>
+$(document).ready(function () {
+
+  // ✅ 1. Спиннер при отправке формы
+  $('#register-form').on('submit', function (e) {
+    e.preventDefault();
+
+    var $btn = $(this).find('button[type="submit"]');
+    var originalText = $btn.text();
+
+    // Показываем спиннер и текст
+    $btn.prop('disabled', true).html('<span class="spinner"></span> Пожалуйста, подождите…');
+
+    // Симулируем задержку (ответ сервера)
+    setTimeout(function () {
+      $btn.prop('disabled', false).text(originalText);
+      showToast('✅ Форма успешно отправлена!');
+    }, 2000);
+  });
+
+  // ✅ 2. Уведомления (toast)
+  function showToast(message) {
+    var $toast = $('<div class="toast-message">' + message + '</div>');
+    $('#toast-container').append($toast);
+    $toast.fadeIn(400).delay(2000).fadeOut(400, function () {
+      $(this).remove();
+    });
+  }
+
+  // ✅ 3. Копирование текста
+  $('.copy-btn').on('click', function () {
+    var text = $('#copy-text').text();
+    navigator.clipboard.writeText(text).then(function () {
+      showToast('📋 Текст скопирован!');
+    });
+  });
+
+});
+</script>
+
+
+<script>
+$(document).ready(function () {
+
+  // ✅ Универсальная функция показа уведомлений
+  function showToast(message) {
+    var $toast = $('<div class="toast-message">' + message + '</div>');
+    $('#toast-container').append($toast);
+    $toast.fadeIn(400).delay(2000).fadeOut(400, function () {
+      $(this).remove();
+    });
+  }
+
+  // ✅ Автоматическое уведомление при копировании (Ctrl+C / Cmd+C / меню)
+  $(document).on('copy', function (e) {
+    showToast('📋 Текст скопирован!');
+  });
+
+});
+</script>
+
+
+
 <body>
   <!-- ✅ Хедер с кнопкой темы -->
   <header class="site-header container-fluid">
