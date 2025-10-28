@@ -144,6 +144,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+  <script>
+  const searchInput = document.getElementById("search-input");
+  const genreSelect = document.getElementById("genre-filter");
+  const animeCards = document.querySelectorAll(".anime-card");
+
+  // Функция фильтрации
+  function filterAnime() {
+    const searchText = searchInput.value.toLowerCase();
+    const selectedGenre = genreSelect.value.toLowerCase();
+
+    animeCards.forEach(card => {
+      const title = card.dataset.title.toLowerCase();
+      const genres = card.querySelector("p").textContent.toLowerCase();
+
+      const matchesTitle = title.includes(searchText);
+      const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
+
+      // Если совпадает и по жанру, и по названию — показываем
+      card.style.display = (matchesTitle && matchesGenre) ? "block" : "none";
+    });
+  }
+
+  // Слушатели событий
+  searchInput.addEventListener("input", filterAnime);
+  genreSelect.addEventListener("change", filterAnime);
+</script>
+
+
+
 <body>
  <!-- Шапка -->
   <header class="site-header container-fluid">
@@ -178,18 +208,22 @@ document.addEventListener("DOMContentLoaded", () => {
     <h2 class="mb-4">Каталог аниме</h2>
 
     <!-- Фильтры -->
-   <div class="catalog-filters d-flex gap-2 mb-4">
-      <input type="text" class="form-control" placeholder="Поиск по названию...">
-      <select class="form-select" style="max-width:200px;">
-        <option value="">Все жанры</option>
-        <option>Action</option>
-        <option>Fantasy</option>
-        <option>Drama</option>
-        <option>Comedy</option>
-        <option>Sci-Fi</option>
-        <option>Romance</option>
-      </select>
-    </div>
+<div class="catalog-filters d-flex gap-2 mb-4">
+  <input type="text" id="search-input" class="form-control" placeholder="Поиск по названию...">
+  <select id="genre-filter" class="form-select" style="max-width:200px;">
+    <option value="">Все жанры</option>
+    <option>Action</option>
+    <option>Fantasy</option>
+    <option>Drama</option>
+    <option>Comedy</option>
+    <option>Sci-Fi</option>
+    <option>Romance</option>
+    <option>Horror</option>
+    <option>Adventure</option>
+    <option>Supernatural</option>
+    <option>Thriller</option>
+  </select>
+</div>
 
     <!-- Сетка карточек -->
 <div class="anime-grid">
