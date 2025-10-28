@@ -619,4 +619,136 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Проверка готовности jQuery
+$(document).ready(function () {
+  console.log("jQuery is ready!");
+
+  // ===== Прогресс-бар при прокрутке =====
+  $("body").prepend('<div id="scrollProgress"></div>');
+  $("#scrollProgress").css({
+    position: "fixed",
+    top: 0,
+    left: 0,
+    height: "5px",
+    background: "linear-gradient(90deg, #ff007f, #ffb6c1)",
+    width: "0%",
+    zIndex: 9999,
+    transition: "width 0.2s ease"
+  });
+
+  $(window).on("scroll", function () {
+    let scrollTop = $(this).scrollTop();
+    let docHeight = $(document).height() - $(window).height();
+    let scrollPercent = (scrollTop / docHeight) * 100;
+    $("#scrollProgress").css("width", scrollPercent + "%");
+  });
+
+  // ===== Анимированный счётчик =====
+  $(".count").each(function () {
+    let $this = $(this);
+    let target = +$this.data("target");
+    $({ countNum: 0 }).animate(
+      { countNum: target },
+      {
+        duration: 2000,
+        easing: "swing",
+        step: function () {
+          $this.text(Math.floor(this.countNum));
+        },
+        complete: function () {
+          $this.text(this.countNum + "+");
+        }
+      }
+    );
+  });
+
+  // ===== Спиннер при отправке формы =====
+  $("form").on("submit", function (e) {
+    e.preventDefault();
+    let $btn = $(this).find("button[type='submit']");
+    let originalText = $btn.text();
+
+    $btn.prop("disabled", true);
+    $btn.html('<span class="spinner-border spinner-border-sm"></span> Пожалуйста, подождите…');
+
+    setTimeout(() => {
+      $btn.prop("disabled", false);
+      $btn.text(originalText);
+      showToast("Форма успешно отправлена!");
+    }, 2000);
+  });
+
+  // ===== Всплывающее уведомление (toast) =====
+  function showToast(message) {
+    let $toast = $('<div class="toast-message">' + message + "</div>");
+    $("body").append($toast);
+
+    $toast.css({
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      background: "#ff69b4",
+      color: "#fff",
+      padding: "10px 20px",
+      borderRadius: "8px",
+      fontSize: "14px",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+      opacity: 0,
+      zIndex: 9999
+    });
+
+    $toast.animate({ opacity: 1 }, 300);
+
+    setTimeout(() => {
+      $toast.animate({ opacity: 0 }, 500, function () {
+        $(this).remove();
+      });
+    }, 3000);
+  }
+
+  // ===== Кнопка "Скопировать" =====
+  $(".copyBtn").on("click", function () {
+    let textToCopy = $(this).siblings("p").text();
+    navigator.clipboard.writeText(textToCopy);
+
+    $(this).text("✅ Скопировано!");
+    showToast("Текст скопирован!");
+    setTimeout(() => {
+      $(this).text("📋 Копировать");
+    }, 2000);
+  });
+
+  // ===== Lazy loading изображений =====
+  function lazyLoad() {
+    $(".lazy").each(function () {
+      let $img = $(this);
+      if (
+        $img.offset().top < $(window).scrollTop() + $(window).height() &&
+        !$img.attr("src")
+      ) {
+        $img.attr("src", $img.data("src"));
+      }
+    });
+  }
+
+  $(window).on("scroll", lazyLoad);
+  $(window).on("load", lazyLoad);
+
+  // ===== Подсветка найденных слов (поиск) =====
+  $("#searchInput").on("keyup", function () {
+    let keyword = $(this).val().trim();
+    let content = $("#contentArea").html();
+    if (keyword.length > 0) {
+      let regex = new RegExp("(" + keyword + ")", "gi");
+      content = content.replace(regex, "<span class='highlight'>$1</span>");
+    } else {
+      $(".highlight").contents().unwrap();
+    }
+    $("#contentArea").html(content);
+  });
+});
+
+
+
+
 
