@@ -578,31 +578,45 @@ $(function () {
   });
 });
 
-// app.js
+
 document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.querySelector("#searchInput");
-  const genreInput = document.querySelector(".catalog-filters select");
+  const searchInput = document.getElementById("searchInput");
+  const suggestionList = document.getElementById("suggestionList");
   const cards = document.querySelectorAll(".anime-card");
 
-  function filterCards() {
-    const titleVal = searchInput.value.toLowerCase();
-    const genreVal = genreInput.value.toLowerCase();
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    suggestionList.innerHTML = "";
 
+    if (!query) {
+      cards.forEach(card => card.style.display = "");
+      return;
+    }
+
+    const suggestions = [];
     cards.forEach(card => {
       const title = card.querySelector("h3").textContent.toLowerCase();
-      const genres = card.querySelector("p").textContent.toLowerCase();
+      const genre = card.querySelector("p").textContent.toLowerCase();
 
-      const matchesTitle = title.includes(titleVal);
-      const matchesGenre = genreVal === "" || genres.includes(genreVal);
-
-      card.style.display = matchesTitle && matchesGenre ? "block" : "none";
+      if (title.includes(query) || genre.includes(query)) {
+        card.style.display = "";
+        suggestions.push(title);
+      } else {
+        card.style.display = "none";
+      }
     });
-  }
 
-  searchInput.addEventListener("input", filterCards);
-  genreInput.addEventListener("change", filterCards);
+    suggestions.forEach(s => {
+      const li = document.createElement("li");
+      li.textContent = s;
+      li.addEventListener("click", () => {
+        searchInput.value = s;
+        suggestionList.innerHTML = "";
+      });
+      suggestionList.appendChild(li);
+    });
+  });
 });
-
 
 
 
