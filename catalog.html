@@ -69,6 +69,41 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+<script>
+$(document).ready(function() {
+  // Функция для проверки, виден ли элемент в области окна
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 200 && // немного заранее
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  // Основная функция ленивой загрузки
+  function lazyLoadImages() {
+    $('.lazy').each(function() {
+      if (isInViewport(this) && $(this).attr('data-src')) {
+        $(this).attr('src', $(this).data('src'));
+        $(this).removeAttr('data-src'); // чтобы не загружалось повторно
+        $(this).hide().fadeIn(600); // плавное появление
+      }
+    });
+  }
+
+  // События скролла и загрузки
+  $(window).on('scroll resize load', function() {
+    lazyLoadImages();
+  });
+
+  // Первоначальная загрузка
+  lazyLoadImages();
+});
+</script>
+
+
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -125,12 +160,12 @@ document.addEventListener("DOMContentLoaded", () => {
       <a href="register.html">Регистрация</a>
     </nav>
 
-<div class="search-box" style="position: relative; max-width: 320px;">
-  <input type="text" id="searchInput" placeholder="Что ищем, семпай?" autocomplete="off" class="form-control">
-  <button id="searchBtn" class="btn btn-sm" type="button">🔍</button>
-  <ul id="suggestionList" class="suggestions"></ul>
-</div>
-
+    <div class="search-box" style="position: relative; max-width: 320px;">
+      <input type="text" id="searchInput" placeholder="Что ищем, семпай?" autocomplete="off" class="form-control">
+      <button id="searchBtn" class="btn btn-sm" type="button">🔍</button>
+      <ul id="suggestionList" class="suggestions"></ul>
+    </div>
+    
 
     <div class="theme-toggle">
       <button id="themeBtn" aria-label="Switch theme">🌙</button>
@@ -157,247 +192,219 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
     <!-- Сетка карточек -->
-    <div class="anime-grid">
-     <article class="anime-card" data-title="Naruto">
-        <img src="naruto.jpg" alt="Naruto">
-        <h3>Naruto</h3>
-        <p>Shounen · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+<div class="anime-grid">
 
-      <!-- 2 -->
-      <article class="anime-card" data-title="Bleach">
-        <img src="bleach.jpg" alt="Bleach">
-        <h3>Bleach</h3>
-        <p>Shounen · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Naruto">
+    <img data-src="naruto.jpg" src="placeholder.jpg" alt="Naruto" class="lazy">
+    <h3>Naruto</h3>
+    <p>Shounen · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 3 -->
-      <article class="anime-card" data-title="One Piece">
-        <img src="onepiece.jpg" alt="One Piece">
-        <h3>One Piece</h3>
-        <p>Adventure · Shounen</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Bleach">
+    <img data-src="bleach.jpg" src="placeholder.jpg" alt="Bleach" class="lazy">
+    <h3>Bleach</h3>
+    <p>Shounen · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 4 -->
-      <article class="anime-card" data-title="Attack on Titan">
-        <img src="attakontitan.jpg" alt="Attack on Titan">
-        <h3>Attack on Titan</h3>
-        <p>Action · Drama</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="One Piece">
+    <img data-src="onepiece.jpg" src="placeholder.jpg" alt="One Piece" class="lazy">
+    <h3>One Piece</h3>
+    <p>Adventure · Shounen</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 5 -->
-      <article class="anime-card" data-title="Death Note">
-        <img src="deathnote.jpg" alt="Death Note">
-        <h3>Death Note</h3>
-        <p>Thriller · Supernatural</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Attack on Titan">
+    <img data-src="attakontitan.jpg" src="placeholder.jpg" alt="Attack on Titan" class="lazy">
+    <h3>Attack on Titan</h3>
+    <p>Action · Drama</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 6 -->
-      <article class="anime-card" data-title="Demon Slayer">
-        <img src="demonslayer.jpg" alt="Demon Slayer">
-        <h3>Demon Slayer</h3>
-        <p>Shounen · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Death Note">
+    <img data-src="deathnote.jpg" src="placeholder.jpg" alt="Death Note" class="lazy">
+    <h3>Death Note</h3>
+    <p>Thriller · Supernatural</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 7 -->
-      <article class="anime-card" data-title="Jujutsu Kaisen">
-        <img src="jujutsu.jpg" alt="Jujutsu Kaisen">
-        <h3>Jujutsu Kaisen</h3>
-        <p>Action · Fantasy</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Demon Slayer">
+    <img data-src="demonslayer.jpg" src="placeholder.jpg" alt="Demon Slayer" class="lazy">
+    <h3>Demon Slayer</h3>
+    <p>Shounen · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 8 -->
-      <article class="anime-card" data-title="Fullmetal Alchemist">
-        <img src="fullmetal.jpg" alt="Fullmetal Alchemist">
-        <h3>Fullmetal Alchemist</h3>
-        <p>Adventure · Drama</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Jujutsu Kaisen">
+    <img data-src="jujutsu.jpg" src="placeholder.jpg" alt="Jujutsu Kaisen" class="lazy">
+    <h3>Jujutsu Kaisen</h3>
+    <p>Action · Fantasy</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 9 -->
-      <article class="anime-card" data-title="Hunter x Hunter">
-        <img src="hxh.jpg" alt="Hunter x Hunter">
-        <h3>Hunter x Hunter</h3>
-        <p>Adventure · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Fullmetal Alchemist">
+    <img data-src="fullmetal.jpg" src="placeholder.jpg" alt="Fullmetal Alchemist" class="lazy">
+    <h3>Fullmetal Alchemist</h3>
+    <p>Adventure · Drama</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 10 -->
-      <article class="anime-card" data-title="My Hero Academia">
-        <img src="myhero.jpg" alt="My Hero Academia">
-        <h3>My Hero Academia</h3>
-        <p>Action · Superpowers</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Hunter x Hunter">
+    <img data-src="hxh.jpg" src="placeholder.jpg" alt="Hunter x Hunter" class="lazy">
+    <h3>Hunter x Hunter</h3>
+    <p>Adventure · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 11 -->
-      <article class="anime-card" data-title="Boruto">
-        <img src="boruto.jpg" alt="Boruto">
-        <h3>Boruto</h3>
-        <p>Shounen · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="My Hero Academia">
+    <img data-src="myhero.jpg" src="placeholder.jpg" alt="My Hero Academia" class="lazy">
+    <h3>My Hero Academia</h3>
+    <p>Action · Superpowers</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 12 -->
-      <article class="anime-card" data-title="Tokyo Ghoul">
-        <img src="tokyoghoul.jpg" alt="Tokyo Ghoul">
-        <h3>Tokyo Ghoul</h3>
-        <p>Dark Fantasy · Horror</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Boruto">
+    <img data-src="boruto.jpg" src="placeholder.jpg" alt="Boruto" class="lazy">
+    <h3>Boruto</h3>
+    <p>Shounen · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 13 -->
-      <article class="anime-card" data-title="Fairy Tail">
-        <img src="fairytail.jpg" alt="Fairy Tail">
-        <h3>Fairy Tail</h3>
-        <p>Fantasy · Adventure</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Tokyo Ghoul">
+    <img data-src="tokyoghoul.jpg" src="placeholder.jpg" alt="Tokyo Ghoul" class="lazy">
+    <h3>Tokyo Ghoul</h3>
+    <p>Dark Fantasy · Horror</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 14 -->
-      <article class="anime-card" data-title="Sword Art Online">
-        <img src="sao.jpg" alt="Sword Art Online">
-        <h3>Sword Art Online</h3>
-        <p>Fantasy · Sci-Fi</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Fairy Tail">
+    <img data-src="fairytail.jpg" src="placeholder.jpg" alt="Fairy Tail" class="lazy">
+    <h3>Fairy Tail</h3>
+    <p>Fantasy · Adventure</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 15 -->
-      <article class="anime-card" data-title="Code Geass">
-        <img src="codegeass.jpg" alt="Code Geass">
-        <h3>Code Geass</h3>
-        <p>Sci-Fi · Mecha</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Sword Art Online">
+    <img data-src="sao.jpg" src="placeholder.jpg" alt="Sword Art Online" class="lazy">
+    <h3>Sword Art Online</h3>
+    <p>Fantasy · Sci-Fi</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 16 -->
-      <article class="anime-card" data-title="Neon Genesis Evangelion">
-        <img src="evangelion.jpg" alt="Neon Genesis Evangelion">
-        <h3>Neon Genesis Evangelion</h3>
-        <p>Psychological · Mecha</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Code Geass">
+    <img data-src="codegeass.jpg" src="placeholder.jpg" alt="Code Geass" class="lazy">
+    <h3>Code Geass</h3>
+    <p>Sci-Fi · Mecha</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 17 -->
-      <article class="anime-card" data-title="Re:Zero">
-        <img src="rezero.jpg" alt="Re:Zero">
-        <h3>Re:Zero</h3>
-        <p>Fantasy · Drama</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Neon Genesis Evangelion">
+    <img data-src="evangelion.jpg" src="placeholder.jpg" alt="Neon Genesis Evangelion" class="lazy">
+    <h3>Neon Genesis Evangelion</h3>
+    <p>Psychological · Mecha</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 18 -->
-      <article class="anime-card" data-title="Monthly Girls' Nozaki-kun">
-        <img src="nozaki.jpg.webp" alt="Monthly Girls' Nozaki-kun">
-        <h3>Monthly Girls' Nozaki-kun</h3>
-        <p>Comedy · Romance</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Re:Zero">
+    <img data-src="rezero.jpg" src="placeholder.jpg" alt="Re:Zero" class="lazy">
+    <h3>Re:Zero</h3>
+    <p>Fantasy · Drama</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 19 -->
-      <article class="anime-card" data-title="Erased">
-        <img src="erased.jpg" alt="Erased">
-        <h3>Erased</h3>
-        <p>Thriller · Mystery</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Monthly Girls' Nozaki-kun">
+    <img data-src="nozaki.jpg.webp" src="placeholder.jpg" alt="Monthly Girls' Nozaki-kun" class="lazy">
+    <h3>Monthly Girls' Nozaki-kun</h3>
+    <p>Comedy · Romance</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 20 -->
-      <article class="anime-card" data-title="Steins;Gate">
-        <img src="steinsgate.jpg" alt="Steins;Gate">
-        <h3>Steins;Gate</h3>
-        <p>Sci-Fi · Thriller</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Erased">
+    <img data-src="erased.jpg" src="placeholder.jpg" alt="Erased" class="lazy">
+    <h3>Erased</h3>
+    <p>Thriller · Mystery</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 21 -->
-      <article class="anime-card" data-title="Clannad">
-        <img src="clannad.jpg" alt="Clannad">
-        <h3>Clannad</h3>
-        <p>Drama · Romance</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Steins;Gate">
+    <img data-src="steinsgate.jpg" src="placeholder.jpg" alt="Steins;Gate" class="lazy">
+    <h3>Steins;Gate</h3>
+    <p>Sci-Fi · Thriller</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 22 -->
-      <article class="anime-card" data-title="Angel Beats!">
-        <img src="angelbeats.jpg" alt="Angel Beats!">
-        <h3>Angel Beats!</h3>
-        <p>Drama · Fantasy</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Clannad">
+    <img data-src="clannad.jpg" src="placeholder.jpg" alt="Clannad" class="lazy">
+    <h3>Clannad</h3>
+    <p>Drama · Romance</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 23 -->
-      <article class="anime-card" data-title="Parasyte">
-        <img src="parasyte.jpg" alt="Parasyte">
-        <h3>Parasyte</h3>
-        <p>Horror · Sci-Fi</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Angel Beats!">
+    <img data-src="angelbeats.jpg" src="placeholder.jpg" alt="Angel Beats!" class="lazy">
+    <h3>Angel Beats!</h3>
+    <p>Drama · Fantasy</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 24 -->
-      <article class="anime-card" data-title="Dr. Stone">
-        <img src="drstone.jpg" alt="Dr. Stone">
-        <h3>Dr. Stone</h3>
-        <p>Sci-Fi · Adventure</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Parasyte">
+    <img data-src="parasyte.jpg" src="placeholder.jpg" alt="Parasyte" class="lazy">
+    <h3>Parasyte</h3>
+    <p>Horror · Sci-Fi</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 25 -->
-      <article class="anime-card" data-title="Black Clover">
-        <img src="blackclover.jpeg" alt="Black Clover">
-        <h3>Black Clover</h3>
-        <p>Fantasy · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Dr. Stone">
+    <img data-src="drstone.jpg" src="placeholder.jpg" alt="Dr. Stone" class="lazy">
+    <h3>Dr. Stone</h3>
+    <p>Sci-Fi · Adventure</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 26 -->
-      <article class="anime-card" data-title="Fire Force">
-        <img src="fireforce.jpg" alt="Fire Force">
-        <h3>Fire Force</h3>
-        <p>Action · Supernatural</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Black Clover">
+    <img data-src="blackclover.jpeg" src="placeholder.jpg" alt="Black Clover" class="lazy">
+    <h3>Black Clover</h3>
+    <p>Fantasy · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 27 -->
-      <article class="anime-card" data-title="Blue Period">
-        <img src="blueperiod.jpg" alt="Blue Period">
-        <h3>Blue Period</h3>
-        <p>Drama · Slice of Life</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Fire Force">
+    <img data-src="fireforce.jpg" src="placeholder.jpg" alt="Fire Force" class="lazy">
+    <h3>Fire Force</h3>
+    <p>Action · Supernatural</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 28 -->
-      <article class="anime-card" data-title="Vivy: Fluorite Eye's Song">
-        <img src="vivy.jpeg" alt="Vivy: Fluorite Eye's Song">
-        <h3>Vivy: Fluorite Eye's Song</h3>
-        <p>Sci-Fi · Drama</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Blue Period">
+    <img data-src="blueperiod.jpg" src="placeholder.jpg" alt="Blue Period" class="lazy">
+    <h3>Blue Period</h3>
+    <p>Drama · Slice of Life</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 29 -->
-      <article class="anime-card" data-title="Spy x Family">
-        <img src="spyxfamily.jpg" alt="Spy x Family">
-        <h3>Spy x Family</h3>
-        <p>Comedy · Action</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
+  <article class="anime-card" data-title="Vivy: Fluorite Eye's Song">
+    <img data-src="vivy.jpeg" src="placeholder.jpg" alt="Vivy: Fluorite Eye's Song" class="lazy">
+    <h3>Vivy: Fluorite Eye's Song</h3>
+    <p>Sci-Fi · Drama</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
 
-      <!-- 30 -->
-      <article class="anime-card" data-title="Chainsaw Man">
-        <img src="chainsaw.jpg" alt="Chainsaw Man">
-        <h3>Chainsaw Man</h3>
-        <p>Action · Horror</p>
-        <button class="bookmark-btn">Добавить в закладки</button>
-      </article>
-    </div>
-  </main>
+  <article class="anime-card" data-title="Spy x Family">
+    <img data-src="spyxfamily.jpg" src="placeholder.jpg" alt="Spy x Family" class="lazy">
+    <h3>Spy x Family</h3>
+    <p>Comedy · Action</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
+
+  <article class="anime-card" data-title="Chainsaw Man">
+    <img data-src="chainsaw.jpg" src="placeholder.jpg" alt="Chainsaw Man" class="lazy">
+    <h3>Chainsaw Man</h3>
+    <p>Action · Horror</p>
+    <button class="bookmark-btn">Добавить в закладки</button>
+  </article>
+
+</div>
 
   <!-- Футер -->
   <footer class="site-footer container-fluid bg-dark text-light mt-5 p-4">
