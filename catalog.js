@@ -20,13 +20,7 @@ document.querySelectorAll(".bookmark-btn").forEach(btn => {
   });
 });
 
-// Фильтр по жанру
-document.getElementById("genre-filter").addEventListener("change", function () {
-  const genre = this.value.toLowerCase();
-  document.querySelectorAll(".anime-card").forEach(card => {
-    card.style.display = (!genre || card.dataset.genre.toLowerCase() === genre) ? "block" : "none";
-  });
-});
+
 
 // Поиск по названию
 document.getElementById("search").addEventListener("input", function () {
