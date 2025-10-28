@@ -107,6 +107,40 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
+$(document).ready(function() {
+  // Функция для проверки, виден ли элемент в области окна
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 200 && // немного заранее
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  // Основная функция ленивой загрузки
+  function lazyLoadImages() {
+    $('.lazy').each(function() {
+      if (isInViewport(this) && $(this).attr('data-src')) {
+        $(this).attr('src', $(this).data('src'));
+        $(this).removeAttr('data-src'); // чтобы не загружалось повторно
+        $(this).hide().fadeIn(600); // плавное появление
+      }
+    });
+  }
+
+  // События скролла и загрузки
+  $(window).on('scroll resize load', function() {
+    lazyLoadImages();
+  });
+
+  // Первоначальная загрузка
+  lazyLoadImages();
+});
+</script>
+
 
 <body>
 <!-- Шапка -->
@@ -135,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="theme-toggle">
       <button id="themeBtn" aria-label="Switch theme">🌙</button>
     </div>
+    
 
 </header>
 
@@ -178,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Горизонтальная лента аниме -->
 <section class="anime-section container-fluid my-5">
   <div class="section-header d-flex justify-content-between align-items-center">
-     <h2>Популярное прямо сейчас</h2>
+    <h2>Популярное прямо сейчас</h2>
     <div class="carousel-controls">
       <button id="prev-btn" class="btn btn-outline-light btn-sm">◀</button>
       <button id="next-btn" class="btn btn-outline-light btn-sm">▶</button>
@@ -186,86 +221,83 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 
   <div class="anime-carousel d-flex gap-3 mt-3 overflow-auto" id="anime-carousel">
-    <!-- твои карточки -->
-       <article class="anime-card">
-      <img src="proxy-image (1).jpg" alt="Demon Slayer" title="Тандзиро борется с демонами, чтобы спасти свою сестру.">
+
+    <article class="anime-card">
+      <img data-src="proxy-image (1).jpg" src="placeholder.jpg" alt="Demon Slayer" class="lazy" title="Тандзиро борется с демонами, чтобы спасти свою сестру.">
       <h3>Demon Slayer</h3>
       <p class="meta">Shounen · Fantasy</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (2).jpg" alt="Attack on Titan" title="Люди сражаются с гигантами, угрожающими их миру">
+      <img data-src="proxy-image (2).jpg" src="placeholder.jpg" alt="Attack on Titan" class="lazy" title="Люди сражаются с гигантами, угрожающими их миру">
       <h3>Attack on Titan</h3>
       <p class="meta">Seinen · Drama</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (3).jpg" alt="One Piece" title="Луффи и его команда ищут легендарное сокровище One Piece.">
+      <img data-src="proxy-image (3).jpg" src="placeholder.jpg" alt="One Piece" class="lazy" title="Луффи и его команда ищут легендарное сокровище One Piece.">
       <h3>One Piece</h3>
       <p class="meta">Adventure · Comedy</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (4).jpg" alt="Jujutsu Kaisen" title="Юдзи Итадори сталкивается с проклятиями и учится в школе магии.">
+      <img data-src="proxy-image (4).jpg" src="placeholder.jpg" alt="Jujutsu Kaisen" class="lazy" title="Юдзи Итадори сталкивается с проклятиями и учится в школе магии.">
       <h3>Jujutsu Kaisen</h3>
       <p class="meta">Action · Supernatural</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (6).jpg" alt="Overlord">
+      <img data-src="proxy-image (6).jpg" src="placeholder.jpg" alt="Overlord" class="lazy">
       <h3>Overlord</h3>
       <p class="meta">Action · Supernatural</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (7).jpg" alt="Tokyo Ghoul">
+      <img data-src="proxy-image (7).jpg" src="placeholder.jpg" alt="Tokyo Ghoul" class="lazy">
       <h3>Tokyo Ghoul</h3>
       <p class="meta">Action · Drama</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (8).jpg" alt="One-Punch Man">
+      <img data-src="proxy-image (8).jpg" src="placeholder.jpg" alt="One-Punch Man" class="lazy">
       <h3>One-Punch Man</h3>
       <p class="meta">Action · Comedy</p>
     </article>
 
     <article class="anime-card">
-      <img src="proxy-image (9).jpg" alt="Sword Art Online (SAO)">
+      <img data-src="proxy-image (9).jpg" src="placeholder.jpg" alt="Sword Art Online (SAO)" class="lazy">
       <h3>Sword Art Online (SAO)</h3>
       <p class="meta">Action · Fantasy</p>
     </article>
+
   </div>
 </section>
-  </div>
-</section>
-
-
 
 <!-- Продолжить просмотр -->
 <section class="recently-section container-fluid my-5">
-   <h2>Продолжить просмотр</h2>
-   <div class="row">
-      <article class="recently-card col-md-3 col-6 card p-2">
-        <img src="demonslayer.jpg" alt="Demon Slayer">
-        <h4>Demon Slayer</h4>
-        <p>Shounen · Action</p>
-      </article>
-      <article class="recently-card col-md-3 col-6 card p-2">
-        <img src="jujutsu.jpg" alt="Jujutsu Kaisen">
-        <h4>Jujutsu Kaisen</h4>
-        <p>Action · Fantasy</p>
-      </article>
-      <article class="recently-card col-md-3 col-6 card p-2">
-        <img src="fullmetal.jpg" alt="Fullmetal Alchemist">
-        <h4>Fullmetal Alchemist</h4>
-        <p>Adventure · Drama</p>
-      </article>
-      <article class="recently-card col-md-3 col-6 card p-2">
-        <img src="hxh.jpg" alt="Hunter x Hunter">
-        <h4>Hunter x Hunter</h4>
-        <p>Adventure · Action</p>
-      </article>
-   </div>
+  <h2>Продолжить просмотр</h2>
+  <div class="row">
+    <article class="recently-card col-md-3 col-6 card p-2">
+      <img data-src="demonslayer.jpg" src="placeholder.jpg" alt="Demon Slayer" class="lazy">
+      <h4>Demon Slayer</h4>
+      <p>Shounen · Action</p>
+    </article>
+    <article class="recently-card col-md-3 col-6 card p-2">
+      <img data-src="jujutsu.jpg" src="placeholder.jpg" alt="Jujutsu Kaisen" class="lazy">
+      <h4>Jujutsu Kaisen</h4>
+      <p>Action · Fantasy</p>
+    </article>
+    <article class="recently-card col-md-3 col-6 card p-2">
+      <img data-src="fullmetal.jpg" src="placeholder.jpg" alt="Fullmetal Alchemist" class="lazy">
+      <h4>Fullmetal Alchemist</h4>
+      <p>Adventure · Drama</p>
+    </article>
+    <article class="recently-card col-md-3 col-6 card p-2">
+      <img data-src="hxh.jpg" src="placeholder.jpg" alt="Hunter x Hunter" class="lazy">
+      <h4>Hunter x Hunter</h4>
+      <p>Adventure · Action</p>
+    </article>
+  </div>
 </section>
 
 
@@ -375,12 +407,35 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 
   
+  
 
   <!-- пример: кнопка подписки -->
 <button data-popup="subscribe" class="btn">Subscribe</button>
 <!-- или контакт -->
 <button data-popup="contact" class="btn">Contact us</button>
 </footer>
+
+<!-- Раздел статистики -->
+<section class="site-stats">
+  <h2>Наша статистика</h2>
+
+  <div class="stats-container">
+    <div class="stat">
+      <div class="count" data-target="1250">0</div>
+      <p>Пользователей</p>
+    </div>
+
+    <div class="stat">
+      <div class="count" data-target="560">0</div>
+      <p>Аниме добавлено</p>
+    </div>
+
+    <div class="stat">
+      <div class="count" data-target="98">0</div>
+      <p>Рецензий</p>
+    </div>
+  </div>
+</section>
 
 
 
