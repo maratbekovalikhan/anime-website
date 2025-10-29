@@ -510,22 +510,25 @@ $(function () {
   }
 
 // Фильтр карточек по названию и жанру — исправлён (устойчив к null, 'all', пробелам и регистру)
-function filterCards(term, selectedGenre = "") {
-  const low = (term || "").toLowerCase().trim();
-  const genre = (selectedGenre || "").toLowerCase().trim();
+function filterAnime() {
+  const searchText = searchInput.value.toLowerCase();
+  const selectedGenre = genreSelect.value.toLowerCase();
 
-  $cards.each(function () {
-    const $card = $(this);
-    const text = $card.text().toLowerCase();
-    // берём data-genre как строку, убираем пробелы вокруг и приводим к нижнему регистру
-    const genresStr = (($card.data("genre") || "") + "").toLowerCase();
-    // удобный массив жанров (удаляем пробелы вокруг каждого)
-    const genresArr = genresStr.split(",").map(s => s.trim()).filter(Boolean);
+  cards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    const genres = card.querySelector("p").textContent
+      .toLowerCase()
+      .replace(/[·.,]/g, "") // убираем разделители
+      .trim();
 
-    const matchesText = text.includes(low);
-    const matchesGenre = genre === "" || genre === "all" || genresArr.includes(genre);
+    const matchesSearch = title.includes(searchText);
+    const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
 
-    $card.toggle(matchesText && matchesGenre);
+    if (matchesSearch && matchesGenre) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
   });
 }
 
