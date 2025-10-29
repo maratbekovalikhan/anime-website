@@ -693,7 +693,7 @@ $(document).ready(function () {
 
 // === ФИЛЬТР АНИМЕ ПО НАЗВАНИЮ И ЖАНРУ ===
 document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.querySelector("#searchInput"); // если у тебя id="catalogSearch" — поменяй тут
+  const searchInput = document.querySelector("#searchInput"); 
   const genreSelect = document.querySelector(".catalog-filters select");
   const cards = document.querySelectorAll(".anime-card");
 
