@@ -510,27 +510,34 @@ $(function () {
   }
 
 // Фильтр карточек по названию и жанру — исправлён (устойчив к null, 'all', пробелам и регистру)
-function filterAnime() {
-  const searchText = searchInput.value.toLowerCase();
-  const selectedGenre = genreSelect.value.toLowerCase();
 
-  cards.forEach(card => {
-    const title = card.dataset.title.toLowerCase();
-    const genres = card.querySelector("p").textContent
-      .toLowerCase()
-      .replace(/[·.,]/g, "") // убираем разделители
-      .trim();
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector("#catalogSearch"); // исправлено: теперь фильтр берёт правильное поле
+  const genreSelect = document.querySelector(".catalog-filters select");
+  const cards = document.querySelectorAll(".anime-card");
 
-    const matchesSearch = title.includes(searchText);
-    const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
+  function filterAnime() {
+    const searchText = searchInput.value.toLowerCase();
+    const selectedGenre = genreSelect.value.toLowerCase();
 
-    if (matchesSearch && matchesGenre) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
+    cards.forEach(card => {
+      const title = card.dataset.title.toLowerCase();
+      const genres = card.querySelector("p").textContent
+        .toLowerCase()
+        .replace(/[·.,]/g, "") // убираем точки и разделители
+        .trim();
+
+      const matchesSearch = title.includes(searchText);
+      const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
+
+      card.style.display = matchesSearch && matchesGenre ? "block" : "none";
+    });
+  }
+
+  searchInput.addEventListener("input", filterAnime);
+  genreSelect.addEventListener("change", filterAnime);
+});
+
 
   // Подсказки при вводе
   function showSuggestions(term) {
