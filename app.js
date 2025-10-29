@@ -769,81 +769,31 @@ $(document).ready(function(){
 });
 
 $(document).ready(function () {
-  const searchInput = $("#searchInput");
-  const suggestionList = $("#suggestionList");
-  let activeGenre = "all";
+  const searchInput = $(".catalog-filters input[type='text']");
+  const genreSelect = $(".catalog-filters select");
+  const cards = $(".anime-card");
 
-  // --- Поиск по названию и жанрам ---
+  // --- Функция фильтрации ---
   function filterCards() {
     const query = searchInput.val().toLowerCase();
+    const selectedGenre = genreSelect.val().toLowerCase();
 
-    $(".anime-card").each(function () {
+    cards.each(function () {
       const title = $(this).find("h3").text().toLowerCase();
       const genres = $(this).data("genre").toLowerCase();
 
-      const matchesTitleOrGenre =
-        title.includes(query) || genres.includes(query);
-      const matchesActiveGenre =
-        activeGenre === "all" || genres.includes(activeGenre);
+      const matchesTitle = title.includes(query);
+      const matchesGenre = selectedGenre === "" || genres.includes(selectedGenre);
 
-      if (matchesTitleOrGenre && matchesActiveGenre) {
-        $(this).show();
+      if (matchesTitle && matchesGenre) {
+        $(this).fadeIn(150);
       } else {
-        $(this).hide();
+        $(this).fadeOut(150);
       }
     });
   }
 
-  // --- Подсказки ---
-  searchInput.on("input", function () {
-    const query = $(this).val().toLowerCase();
-    suggestionList.empty();
-
-    if (!query) {
-      $(".anime-card").show();
-      return;
-    }
-
-    const suggestions = [];
-    $(".anime-card").each(function () {
-      const title = $(this).find("h3").text();
-      const genres = $(this).data("genre").toLowerCase();
-
-      if (
-        title.toLowerCase().includes(query) ||
-        genres.includes(query)
-      ) {
-        suggestions.push(title);
-      }
-    });
-
-    // Уникальные подсказки
-    [...new Set(suggestions)].forEach((s) => {
-      const li = $("<li>").text(s);
-      li.on("click", function () {
-        searchInput.val(s);
-        suggestionList.empty();
-        filterCards();
-      });
-      suggestionList.append(li);
-    });
-
-    filterCards();
-  });
-
-  // --- Фильтр по жанрам ---
-  $(".genre-btn").on("click", function () {
-    activeGenre = $(this).data("genre").toLowerCase();
-    $(".genre-btn").removeClass("active");
-    $(this).addClass("active");
-    filterCards();
-  });
-
-  // --- Поиск по клику на кнопку 🔍 ---
-  $("#searchBtn").on("click", function () {
-    filterCards();
-  });
+  // --- Обработчики ввода и выбора жанра ---
+  searchInput.on("input", filterCards);
+  genreSelect.on("change", filterCards);
 });
-
-
-
