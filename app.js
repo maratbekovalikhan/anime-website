@@ -509,21 +509,25 @@ $(function () {
     });
   }
 
-  // Фильтр карточек по названию и жанру
-  function filterCards(term, selectedGenre = "") {
-    const low = term.toLowerCase();
-    const genre = selectedGenre.toLowerCase();
+// Фильтр карточек по названию и жанру — исправлён (устойчив к null, 'all', пробелам и регистру)
+function filterCards(term, selectedGenre = "") {
+  const low = (term || "").toLowerCase().trim();
+  const genre = (selectedGenre || "").toLowerCase().trim();
 
-    $cards.each(function () {
-      const text = $(this).text().toLowerCase();
-      const genres = ($(this).data("genre") || "").toLowerCase();
+  $cards.each(function () {
+    const $card = $(this);
+    const text = $card.text().toLowerCase();
+    // берём data-genre как строку, убираем пробелы вокруг и приводим к нижнему регистру
+    const genresStr = (($card.data("genre") || "") + "").toLowerCase();
+    // удобный массив жанров (удаляем пробелы вокруг каждого)
+    const genresArr = genresStr.split(",").map(s => s.trim()).filter(Boolean);
 
-      const matchesText = text.includes(low);
-      const matchesGenre = genre === "" || genres.includes(genre);
+    const matchesText = text.includes(low);
+    const matchesGenre = genre === "" || genre === "all" || genresArr.includes(genre);
 
-      $(this).toggle(matchesText && matchesGenre);
-    });
-  }
+    $card.toggle(matchesText && matchesGenre);
+  });
+}
 
   // Подсказки при вводе
   function showSuggestions(term) {
@@ -551,33 +555,41 @@ $(function () {
   }
 
   // === События ===
-  $input.on("input", function () {
-    const value = $(this).val().trim();
-    showSuggestions(value);
-    filterCards(value, $(".catalog-filters select").val());
-    highlightTitles(value);
-  });
+ // при вводе
+$input.on("input", function () {
+  const value = $(this).val().trim();
+  const selGenre = $(".catalog-filters select").val() || "";
+  showSuggestions(value);
+  filterCards(value, selGenre);
+  highlightTitles(value);
+});
 
-  $list.on("click", "li", function () {
-    const val = $(this).data("value");
-    $input.val(val);
-    $list.hide();
-    filterCards(val, $(".catalog-filters select").val());
-    highlightTitles(val);
-  });
+// при клике на подсказку
+$list.on("click", "li", function () {
+  const val = $(this).data("value");
+  const selGenre = $(".catalog-filters select").val() || "";
+  $input.val(val);
+  $list.hide();
+  filterCards(val, selGenre);
+  highlightTitles(val);
+});
 
-  $("#searchBtn").on("click", function () {
-    const value = $input.val().trim();
-    filterCards(value, $(".catalog-filters select").val());
-    highlightTitles(value);
-    $list.hide();
-  });
+// при кнопке поиска
+$("#searchBtn").on("click", function () {
+  const value = $input.val().trim();
+  const selGenre = $(".catalog-filters select").val() || "";
+  filterCards(value, selGenre);
+  highlightTitles(value);
+  $list.hide();
+});
 
-  $(".catalog-filters select").on("change", function () {
-    const genre = $(this).val();
-    const value = $input.val().trim();
-    filterCards(value, genre);
-  });
+// при смене жанра
+$(".catalog-filters select").on("change", function () {
+  const genre = $(this).val() || "";
+  const value = $input.val().trim();
+  filterCards(value, genre);
+});
+
 
   $(document).on("click", function (e) {
     if (!$(e.target).closest(".search-box").length) {
