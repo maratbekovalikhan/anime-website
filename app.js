@@ -509,35 +509,6 @@ $(function () {
     });
   }
 
-// Фильтр карточек по названию и жанру — исправлён (устойчив к null, 'all', пробелам и регистру)
-
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.querySelector("#catalogSearch"); // исправлено: теперь фильтр берёт правильное поле
-  const genreSelect = document.querySelector(".catalog-filters select");
-  const cards = document.querySelectorAll(".anime-card");
-
-  function filterAnime() {
-    const searchText = searchInput.value.toLowerCase();
-    const selectedGenre = genreSelect.value.toLowerCase();
-
-    cards.forEach(card => {
-      const title = card.dataset.title.toLowerCase();
-      const genres = card.querySelector("p").textContent
-        .toLowerCase()
-        .replace(/[·.,]/g, "") // убираем точки и разделители
-        .trim();
-
-      const matchesSearch = title.includes(searchText);
-      const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
-
-      card.style.display = matchesSearch && matchesGenre ? "block" : "none";
-    });
-  }
-
-  searchInput.addEventListener("input", filterAnime);
-  genreSelect.addEventListener("change", filterAnime);
-});
-
 
   // Подсказки при вводе
   function showSuggestions(term) {
@@ -718,4 +689,33 @@ $(document).ready(function () {
   }
   $(window).on("scroll", lazyLoad);
   $(window).on("load", lazyLoad);
+});
+
+// === ФИЛЬТР АНИМЕ ПО НАЗВАНИЮ И ЖАНРУ ===
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector("#searchInput"); // если у тебя id="catalogSearch" — поменяй тут
+  const genreSelect = document.querySelector(".catalog-filters select");
+  const cards = document.querySelectorAll(".anime-card");
+
+  function filterAnime() {
+    const searchText = searchInput.value.trim().toLowerCase();
+    const selectedGenre = genreSelect.value.trim().toLowerCase();
+
+    cards.forEach(card => {
+      const title = card.dataset.title?.toLowerCase() || "";
+      const genres = card.querySelector("p")?.textContent.toLowerCase() || "";
+
+      const matchesSearch = !searchText || title.includes(searchText);
+      const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
+
+      // Показываем только те, что подходят под оба фильтра
+      card.style.display = (matchesSearch && matchesGenre) ? "" : "none";
+    });
+  }
+
+  searchInput.addEventListener("input", filterAnime);
+  genreSelect.addEventListener("change", filterAnime);
+
+  // Запускаем фильтр при загрузке страницы
+  filterAnime();
 });
