@@ -490,8 +490,6 @@ $(function () {
   const $cards = $(".anime-card");
 
   // === Функции ===
-
-  // Безопасное экранирование для RegExp
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
@@ -511,16 +509,23 @@ $(function () {
     });
   }
 
-  // Фильтр карточек по тексту
-  function filterCards(term) {
+  // Фильтр карточек по названию и жанру
+  function filterCards(term, selectedGenre = "") {
     const low = term.toLowerCase();
+    const genre = selectedGenre.toLowerCase();
+
     $cards.each(function () {
       const text = $(this).text().toLowerCase();
-      $(this).toggle(text.includes(low));
+      const genres = ($(this).data("genre") || "").toLowerCase();
+
+      const matchesText = text.includes(low);
+      const matchesGenre = genre === "" || genres.includes(genre);
+
+      $(this).toggle(matchesText && matchesGenre);
     });
   }
 
-  // Показываем подсказки
+  // Подсказки при вводе
   function showSuggestions(term) {
     $list.empty();
     if (!term) {
@@ -530,6 +535,7 @@ $(function () {
 
     const low = term.toLowerCase();
     const matches = animeTitles.filter(t => t.toLowerCase().includes(low));
+
     if (matches.length === 0) {
       $list.hide();
       return;
@@ -540,37 +546,39 @@ $(function () {
       const html = title.replace(regex, "<span class='highlight'>$1</span>");
       $list.append(`<li data-value="${title}">${html}</li>`);
     });
+
     $list.show();
   }
 
   // === События ===
-
-  // При вводе текста — подсказки, фильтр и подсветка
   $input.on("input", function () {
     const value = $(this).val().trim();
     showSuggestions(value);
-    filterCards(value);
+    filterCards(value, $(".catalog-filters select").val());
     highlightTitles(value);
   });
 
-  // Клик по подсказке — вставляем значение и фильтруем
   $list.on("click", "li", function () {
     const val = $(this).data("value");
     $input.val(val);
     $list.hide();
-    filterCards(val);
+    filterCards(val, $(".catalog-filters select").val());
     highlightTitles(val);
   });
 
-  // По кнопке 🔍
   $("#searchBtn").on("click", function () {
     const value = $input.val().trim();
-    filterCards(value);
+    filterCards(value, $(".catalog-filters select").val());
     highlightTitles(value);
     $list.hide();
   });
 
-  // Клик вне поля — скрываем подсказки
+  $(".catalog-filters select").on("change", function () {
+    const genre = $(this).val();
+    const value = $input.val().trim();
+    filterCards(value, genre);
+  });
+
   $(document).on("click", function (e) {
     if (!$(e.target).closest(".search-box").length) {
       $list.hide();
@@ -579,49 +587,9 @@ $(function () {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("searchInput");
-  const suggestionList = document.getElementById("suggestionList");
-  const cards = document.querySelectorAll(".anime-card");
-
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
-    suggestionList.innerHTML = "";
-
-    if (!query) {
-      cards.forEach(card => card.style.display = "");
-      return;
-    }
-
-    const suggestions = [];
-    cards.forEach(card => {
-      const title = card.querySelector("h3").textContent.toLowerCase();
-      const genre = card.querySelector("p").textContent.toLowerCase();
-
-      if (title.includes(query) || genre.includes(query)) {
-        card.style.display = "";
-        suggestions.push(title);
-      } else {
-        card.style.display = "none";
-      }
-    });
-
-    suggestions.forEach(s => {
-      const li = document.createElement("li");
-      li.textContent = s;
-      li.addEventListener("click", () => {
-        searchInput.value = s;
-        suggestionList.innerHTML = "";
-      });
-      suggestionList.appendChild(li);
-    });
-  });
-});
-
-
-// Проверка готовности jQuery
+// === ПРОЧИЕ ЭФФЕКТЫ И UI ===
 $(document).ready(function () {
-  console.log("jQuery is ready!");
+  console.log("jQuery ready ✅");
 
   // ===== Прогресс-бар при прокрутке =====
   $("body").prepend('<div id="scrollProgress"></div>');
@@ -662,6 +630,31 @@ $(document).ready(function () {
     );
   });
 
+  // ===== Всплывающее уведомление (toast) =====
+  function showToast(message) {
+    let $toast = $('<div class="toast-message">' + message + "</div>");
+    $("body").append($toast);
+    $toast.css({
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      background: "#ff69b4",
+      color: "#fff",
+      padding: "10px 20px",
+      borderRadius: "8px",
+      fontSize: "14px",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+      opacity: 0,
+      zIndex: 9999
+    });
+    $toast.animate({ opacity: 1 }, 300);
+    setTimeout(() => {
+      $toast.animate({ opacity: 0 }, 500, function () {
+        $(this).remove();
+      });
+    }, 3000);
+  }
+
   // ===== Спиннер при отправке формы =====
   $("form").on("submit", function (e) {
     e.preventDefault();
@@ -678,39 +671,10 @@ $(document).ready(function () {
     }, 2000);
   });
 
-  // ===== Всплывающее уведомление (toast) =====
-  function showToast(message) {
-    let $toast = $('<div class="toast-message">' + message + "</div>");
-    $("body").append($toast);
-
-    $toast.css({
-      position: "fixed",
-      bottom: "20px",
-      right: "20px",
-      background: "#ff69b4",
-      color: "#fff",
-      padding: "10px 20px",
-      borderRadius: "8px",
-      fontSize: "14px",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-      opacity: 0,
-      zIndex: 9999
-    });
-
-    $toast.animate({ opacity: 1 }, 300);
-
-    setTimeout(() => {
-      $toast.animate({ opacity: 0 }, 500, function () {
-        $(this).remove();
-      });
-    }, 3000);
-  }
-
   // ===== Кнопка "Скопировать" =====
   $(".copyBtn").on("click", function () {
     let textToCopy = $(this).siblings("p").text();
     navigator.clipboard.writeText(textToCopy);
-
     $(this).text("✅ Скопировано!");
     showToast("Текст скопирован!");
     setTimeout(() => {
@@ -730,70 +694,6 @@ $(document).ready(function () {
       }
     });
   }
-
   $(window).on("scroll", lazyLoad);
   $(window).on("load", lazyLoad);
-
-  // ===== Подсветка найденных слов (поиск) =====
-  $("#searchInput").on("keyup", function () {
-    let keyword = $(this).val().trim();
-    let content = $("#contentArea").html();
-    if (keyword.length > 0) {
-      let regex = new RegExp("(" + keyword + ")", "gi");
-      content = content.replace(regex, "<span class='highlight'>$1</span>");
-    } else {
-      $(".highlight").contents().unwrap();
-    }
-    $("#contentArea").html(content);
-  });
-});
-
-$(document).ready(function(){
-  $('.genre-btn').on('click', function(){
-    var selectedGenre = $(this).data('genre');
-
-    $('.anime-card').each(function(){
-      var genres = $(this).data('genre').split(',');
-
-      if(selectedGenre === 'all' || genres.includes(selectedGenre)){
-        $(this).show();
-      } else {
-        $(this).hide();
-      }
-    });
-
-    // Опционально: выделяем активную кнопку
-    $('.genre-btn').removeClass('active');
-    $(this).addClass('active');
-  });
-});
-
-$(document).ready(function () {
-  const searchInput = $(".catalog-filters input[type='text']");
-  const genreSelect = $(".catalog-filters select");
-  const cards = $(".anime-card");
-
-  // --- Функция фильтрации ---
-  function filterCards() {
-    const query = searchInput.val().toLowerCase();
-    const selectedGenre = genreSelect.val().toLowerCase();
-
-    cards.each(function () {
-      const title = $(this).find("h3").text().toLowerCase();
-      const genres = $(this).data("genre").toLowerCase();
-
-      const matchesTitle = title.includes(query);
-      const matchesGenre = selectedGenre === "" || genres.includes(selectedGenre);
-
-      if (matchesTitle && matchesGenre) {
-        $(this).fadeIn(150);
-      } else {
-        $(this).fadeOut(150);
-      }
-    });
-  }
-
-  // --- Обработчики ввода и выбора жанра ---
-  searchInput.on("input", filterCards);
-  genreSelect.on("change", filterCards);
 });
