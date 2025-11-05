@@ -373,6 +373,8 @@ a {
 @media(max-width: 768px) {
   .site-footer{
     margin-top: auto;
+    padding: 15px 0;
+    flex-shrink: 0;
   }
   .site-header {
     flex-direction: column;
@@ -1198,6 +1200,7 @@ body.light-theme .suggestions li:hover {
 .scroll-top:hover {
   opacity: 0.8;
 }
+
 
 
 
