@@ -1182,17 +1182,16 @@ body.light-theme .suggestions li:hover {
 }
 
 .scroll-top {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 9999; /* чтобы было поверх футера */
-  display: none;
+  position: fixed !important; /* фиксируем кнопку на экране */
+  bottom: 25px;              /* отступ снизу */
+  right: 25px;               /* отступ справа */
+  z-index: 999999 !important; /* поверх ВСЕГО, даже футера */
   background: #ff4da6;
   color: white;
   border: none;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
@@ -1200,6 +1199,7 @@ body.light-theme .suggestions li:hover {
 .scroll-top:hover {
   opacity: 0.8;
 }
+
 
 
 
