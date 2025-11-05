@@ -371,6 +371,9 @@ a {
 
 /* ===== АДАПТИВ ===== */
 @media(max-width: 768px) {
+  .site-footer{
+    margin-top: auto;
+  }
   .site-header {
     flex-direction: column;
     gap: 10px;
@@ -1195,5 +1198,6 @@ body.light-theme .suggestions li:hover {
 .scroll-top:hover {
   opacity: 0.8;
 }
+
 
 
