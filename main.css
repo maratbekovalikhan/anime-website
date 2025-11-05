@@ -333,6 +333,7 @@ a {
   backdrop-filter: blur(10px);
   padding: 40px 20px 20px;
   color: #ccc;
+  flex-shrink: 0;
 }
 
 .footer-container {
@@ -1198,6 +1199,7 @@ body.light-theme .suggestions li:hover {
 .scroll-top:hover {
   opacity: 0.8;
 }
+
 
 
 
