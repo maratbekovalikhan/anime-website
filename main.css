@@ -1176,3 +1176,24 @@ body.light-theme .suggestions li:hover {
   background-color: #d14791;
 }
 
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999; /* чтобы было поверх футера */
+  display: none;
+  background: #ff4da6;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-top:hover {
+  opacity: 0.8;
+}
+
+
