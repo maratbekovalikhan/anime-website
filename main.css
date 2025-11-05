@@ -331,7 +331,7 @@ a {
 .site-footer {
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(10px);
-  padding: 40px 20px 20px;
+  padding: 15px 0;
   color: #ccc;
   flex-shrink: 0;
 }
@@ -1199,6 +1199,7 @@ body.light-theme .suggestions li:hover {
 .scroll-top:hover {
   opacity: 0.8;
 }
+
 
 
 
