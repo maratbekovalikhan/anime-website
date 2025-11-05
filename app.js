@@ -523,3 +523,28 @@ document.addEventListener("DOMContentLoaded", () => {
   // Запускаем фильтр при загрузке страницы
   filterAnime();
 });
+
+
+
+const searchInput = document.getElementById("filterSearch");
+const genreSelect = document.querySelector(".catalog-filters select");
+const cards = document.querySelectorAll(".anime-card");
+
+function filterAnime() {
+  const searchText = searchInput.value.toLowerCase();
+  const selectedGenre = genreSelect.value.toLowerCase();
+
+  cards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    const genres = card.querySelector("p").textContent.toLowerCase();
+
+    const matchesSearch = title.includes(searchText);
+    const matchesGenre = !selectedGenre || genres.includes(selectedGenre);
+
+    card.style.display = (matchesSearch && matchesGenre) ? "block" : "none";
+  });
+}
+
+searchInput.addEventListener("input", filterAnime);
+genreSelect.addEventListener("change", filterAnime);
+
