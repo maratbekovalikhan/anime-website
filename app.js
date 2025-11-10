@@ -526,3 +526,400 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+// === Sakura Catalog Logic ===
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("filterSearch");
+  const applyBtn = document.getElementById("applyFilters");
+  const resetBtn = document.getElementById("resetFilters");
+  const randomBtn = document.getElementById("randomAnime");
+  const cards = document.querySelectorAll(".anime-card");
+
+  // --- Применение фильтров ---
+  function applyFilters() {
+    const searchText = searchInput.value.toLowerCase();
+    const selectedGenres = [...document.querySelectorAll(".genre-checkbox:checked")].map(c => c.value.toLowerCase());
+    const selectedTypes = [...document.querySelectorAll(".type-checkbox:checked")].map(c => c.value.toLowerCase());
+    const selectedAge = document.querySelector("input[name='age']:checked")?.value || "";
+
+    cards.forEach(card => {
+      const title = card.dataset.title.toLowerCase();
+      const info = card.querySelector("p").textContent.toLowerCase();
+      let visible = true;
+
+      // Поиск
+      if (searchText && !title.includes(searchText)) visible = false;
+
+      // Жанр
+      if (selectedGenres.length && !selectedGenres.some(g => info.includes(g))) visible = false;
+
+      // Тип
+      if (selectedTypes.length && !selectedTypes.some(t => info.includes(t))) visible = false;
+
+      // Возраст (для примера — по жанрам / ключевым словам)
+      if (selectedAge && !info.includes(selectedAge)) visible = false;
+
+      card.style.display = visible ? "block" : "none";
+    });
+  }
+
+  // --- Сброс ---
+  function resetFilters() {
+    searchInput.value = "";
+    document.querySelectorAll("input[type='checkbox'], input[type='radio']").forEach(el => el.checked = false);
+    cards.forEach(card => (card.style.display = "block"));
+    localStorage.removeItem("sakuraFilters");
+  }
+
+  // --- Случайный тайтл ---
+  function randomAnime() {
+    const visibleCards = [...cards].filter(c => c.style.display !== "none");
+    if (!visibleCards.length) return alert("Нет подходящих тайтлов 🌸");
+    const random = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+    random.scrollIntoView({ behavior: "smooth", block: "center" });
+    random.classList.add("highlight");
+    setTimeout(() => random.classList.remove("highlight"), 1000);
+  }
+
+  // --- Сохранение фильтров ---
+  function saveFilters() {
+    const state = {
+      search: searchInput.value,
+      genres: [...document.querySelectorAll(".genre-checkbox:checked")].map(c => c.value),
+      types: [...document.querySelectorAll(".type-checkbox:checked")].map(c => c.value),
+      age: document.querySelector("input[name='age']:checked")?.value || ""
+    };
+    localStorage.setItem("sakuraFilters", JSON.stringify(state));
+  }
+
+  // --- Восстановление фильтров ---
+  function loadFilters() {
+    const state = JSON.parse(localStorage.getItem("sakuraFilters") || "{}");
+    if (state.search) searchInput.value = state.search;
+    if (state.genres) state.genres.forEach(v => document.querySelector(`.genre-checkbox[value="${v}"]`)?.setAttribute("checked", true));
+    if (state.types) state.types.forEach(v => document.querySelector(`.type-checkbox[value="${v}"]`)?.setAttribute("checked", true));
+    if (state.age) document.querySelector(`input[name='age'][value="${state.age}"]`)?.setAttribute("checked", true);
+  }
+
+  loadFilters();
+
+  // --- Обработчики ---
+  applyBtn.addEventListener("click", () => {
+    applyFilters();
+    saveFilters();
+  });
+  resetBtn.addEventListener("click", resetFilters);
+  randomBtn.addEventListener("click", randomAnime);
+});
+
+// === Главный поиск над карточками ===
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("mainSearchInput");
+  const searchBtn = document.getElementById("mainSearchBtn");
+  const cards = document.querySelectorAll(".anime-card");
+
+  function searchAnime() {
+    const query = searchInput.value.toLowerCase().trim();
+    cards.forEach(card => {
+      const title = card.dataset.title.toLowerCase();
+      if (title.includes(query)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  searchBtn.addEventListener("click", searchAnime);
+  searchInput.addEventListener("keyup", e => {
+    if (e.key === "Enter") searchAnime();
+  });
+});
+
+
+// === Переключение темы ===
+document.addEventListener("DOMContentLoaded", () => {
+  const themeBtn = document.getElementById("themeBtn");
+  const body = document.body;
+
+  // Проверка сохраненной темы
+  if (localStorage.getItem("theme") === "light") {
+    body.classList.add("light-mode");
+  } else {
+    body.classList.add("dark-mode");
+  }
+
+  themeBtn.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    body.classList.toggle("light-mode");
+
+    // Сохраняем выбор пользователя
+    const currentTheme = body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("theme", currentTheme);
+  });
+});
+
+// Открытие / закрытие глобального поиска
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("globalSearchModal");
+  const toggleBtn = document.getElementById("toggleSearch");
+  const closeBtn = document.getElementById("closeGlobalSearch");
+  const input = document.getElementById("globalSearchInput");
+
+  toggleBtn.addEventListener("click", () => {
+    modal.classList.add("active");
+    input.focus();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+  });
+ыы
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") modal.classList.remove("active");
+  });
+
+  modal.addEventListener("click", e => {
+    if (e.target === modal) modal.classList.remove("active");
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("globalSearchModal");
+  const toggleBtn = document.getElementById("toggleSearch");
+  const closeBtn = document.getElementById("closeGlobalSearch");
+  const input = document.getElementById("globalSearchInput");
+  const results = document.getElementById("searchResults");
+  const cards = document.querySelectorAll(".anime-card");
+
+  // --- Открыть / закрыть модалку ---
+  toggleBtn.addEventListener("click", () => {
+    modal.classList.add("active");
+    input.focus();
+  });
+  closeBtn.addEventListener("click", () => modal.classList.remove("active"));
+  modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("active"); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") modal.classList.remove("active"); });
+
+  // --- Реальный поиск по карточкам ---
+  input.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    results.innerHTML = "";
+
+    if (query === "") {
+      results.innerHTML = `<p class="placeholder-text">Начните вводить название тайтла 🌸</p>`;
+      return;
+    }
+
+    const matches = Array.from(cards).filter(card => {
+      const title = card.querySelector("h3")?.textContent.toLowerCase();
+      return title.includes(query);
+    });
+
+    if (matches.length === 0) {
+      results.innerHTML = `<p class="placeholder-text">Ничего не найдено 😢</p>`;
+      return;
+    }
+
+    matches.forEach(card => {
+      const img = card.querySelector("img")?.getAttribute("src");
+      const title = card.querySelector("h3")?.textContent;
+      const genre = card.querySelector("p")?.textContent;
+
+      const item = document.createElement("div");
+      item.className = "result-item";
+      item.innerHTML = `
+        <img src="${img}" alt="${title}">
+        <div>
+          <h4>${title}</h4>
+          <p>${genre}</p>
+        </div>
+      `;
+
+      // При клике — прокручивает к карточке на странице
+      item.addEventListener("click", () => {
+        modal.classList.remove("active");
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        card.style.outline = "2px solid var(--accent-color, #ff4db8)";
+        setTimeout(() => card.style.outline = "none", 1500);
+      });
+
+      results.appendChild(item);
+    });
+  });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('mainSearchInput');
+  const searchBtn = document.getElementById('mainSearchBtn');
+  const animeCards = document.querySelectorAll('.anime-card');
+
+  const genreCheckboxes = document.querySelectorAll('.filter-group input[type="checkbox"][value]');
+  const typeCheckboxes = document.querySelectorAll('.filter-group:nth-of-type(2) input[type="checkbox"]');
+  const ageRadios = document.querySelectorAll('.filter-group:nth-of-type(3) input[type="radio"]');
+
+  const applyFiltersBtn = document.getElementById('applyFilters');
+  const resetFiltersBtn = document.getElementById('resetFilters');
+  const randomAnimeBtn = document.getElementById('randomAnime');
+
+  // Функция фильтрации
+  function filterAnime() {
+    const searchValue = searchInput.value.toLowerCase();
+
+    const selectedGenres = Array.from(genreCheckboxes)
+      .filter(ch => ch.checked)
+      .map(ch => ch.value.toLowerCase());
+
+    const selectedTypes = Array.from(typeCheckboxes)
+      .filter(ch => ch.checked)
+      .map(ch => ch.value.toLowerCase());
+
+    const selectedAge = Array.from(ageRadios)
+      .find(r => r.checked)?.value;
+
+    animeCards.forEach(card => {
+      const title = card.dataset.title.toLowerCase();
+      const genres = card.querySelector('p').textContent.toLowerCase();
+      
+      let matchesSearch = title.includes(searchValue);
+      let matchesGenre = selectedGenres.length ? selectedGenres.some(g => genres.includes(g)) : true;
+      let matchesType = true; // Пока у нас нет типа в разметке, можно добавить data-type
+      let matchesAge = true; // Пока у нас нет возраста в разметке, можно добавить data-age
+
+      if (matchesSearch && matchesGenre && matchesType && matchesAge) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Поиск по кнопке
+  searchBtn.addEventListener('click', filterAnime);
+
+  // Фильтры по кнопке
+  applyFiltersBtn.addEventListener('click', filterAnime);
+
+  // Сброс фильтров
+  resetFiltersBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    genreCheckboxes.forEach(ch => ch.checked = false);
+    typeCheckboxes.forEach(ch => ch.checked = false);
+    ageRadios.forEach(r => r.checked = false);
+    animeCards.forEach(card => card.style.display = '');
+  });
+
+  // Случайный тайтл
+  randomAnimeBtn.addEventListener('click', () => {
+    const visibleCards = Array.from(animeCards).filter(c => c.style.display !== 'none');
+    if (visibleCards.length) {
+      const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+      randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      randomCard.style.animation = 'highlight 1s';
+      setTimeout(() => randomCard.style.animation = '', 1000);
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const page = document.body.dataset.page; // data-page="planned", "watched", "dropped", "favorites"
+  
+  // Получаем соответствующий контейнер и список из localStorage
+  const containers = {
+    planned: document.getElementById("plannedGrid"),
+    watched: document.getElementById("watchedGrid"),
+    dropped: document.getElementById("droppedGrid"),
+    favorites: document.getElementById("favoritesGrid")
+  };
+
+  const lists = {
+    planned: JSON.parse(localStorage.getItem("planned")) || [],
+    watched: JSON.parse(localStorage.getItem("watched")) || [],
+    dropped: JSON.parse(localStorage.getItem("dropped")) || [],
+    favorites: JSON.parse(localStorage.getItem("favorites")) || []
+  };
+
+  function render() {
+    const grid = containers[page];
+    const list = lists[page];
+
+    grid.innerHTML = "";
+    if (!list.length) {
+      grid.innerHTML = `<p>Список пуст.</p>`;
+      return;
+    }
+
+    list.forEach(anime => {
+      const card = document.createElement("div");
+      card.className = "anime-card";
+      card.innerHTML = `
+        <img src="${anime.img}" alt="${anime.title}">
+        <h3>${anime.title}</h3>
+        <p>${anime.genre}</p>
+        ${getButtonHTML(page)}
+      `;
+      grid.appendChild(card);
+
+      const btn = card.querySelector(".move-btn");
+      if (btn) {
+        btn.addEventListener("click", () => moveAnime(anime));
+      }
+    });
+  }
+
+  function getButtonHTML(currentPage) {
+    switch(currentPage) {
+      case "planned":
+        return `<button class="move-btn btn btn-sm btn-primary">Переместить в Просмотрено</button>`;
+      case "watched":
+        return `<button class="move-btn btn btn-sm btn-primary">Добавить в Любимые</button>`;
+      case "dropped":
+      case "favorites":
+        return ""; // нет кнопок для этих страниц
+      default:
+        return "";
+    }
+  }
+
+  function moveAnime(anime) {
+    if(page === "planned") {
+      // Переместить в просмотрено
+      lists["watched"].push(anime);
+      lists["planned"] = lists["planned"].filter(a => a.title !== anime.title);
+    } else if(page === "watched") {
+      // Переместить в любимые
+      lists["favorites"].push(anime);
+      lists["watched"] = lists["watched"].filter(a => a.title !== anime.title);
+    }
+
+    // Обновляем localStorage
+    Object.keys(lists).forEach(key => localStorage.setItem(key, JSON.stringify(lists[key])));
+    render();
+  }
+
+  render();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".bookmark-tab");
+  const currentPage = window.location.pathname.split("/").pop(); // получает название файла
+
+  tabs.forEach(tab => {
+    const href = tab.getAttribute("href");
+    if (href === currentPage) {
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
+  });
+});
+
+
+
+
+
+
