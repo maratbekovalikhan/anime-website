@@ -1201,9 +1201,1516 @@ body.light-theme .suggestions li:hover {
 }
 
 
+/* === HEADER (AnimeLib x Sakura Style) === */
+.sakura-header {
+  background-color: #0f0f0f;
+  border-bottom: 1px solid rgba(255, 192, 203, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.sakura-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 2rem;
+  gap: 1rem;
+}
+
+/* ==== ЛОГО ==== */
+.sakura-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.sakura-logo img {
+  height: 38px;
+}
+.sakura-logo span {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff99cc;
+  letter-spacing: 1px;
+}
+
+/* ==== НАВИГАЦИЯ ==== */
+.sakura-center {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.sakura-center .nav-link {
+  color: #eee;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+.sakura-center .nav-link:hover,
+.sakura-center .nav-link.active {
+  color: #ffb6c1;
+  border-bottom: 2px solid #ffb6c1;
+}
+
+/* ==== ПРАВАЯ ЧАСТЬ ==== */
+.sakura-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.sakura-right .search-box {
+  position: relative;
+}
+.sakura-right input {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #eee;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+.sakura-right input:focus {
+  outline: none;
+  border-color: #ff99cc;
+}
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: #ffb6c1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+}
+.btn-icon:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+.btn-primary {
+  background: #ff69b4;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-primary:hover {
+  background: #ff85c1;
+  transform: translateY(-2px);
+}
+
+/* ==== АДАПТИВНОСТЬ ==== */
+@media (max-width: 992px) {
+  .sakura-center {
+    display: none; /* можно заменить на бургер меню */
+  }
+}
+
+
+
+/* === ВАРИАНТ 1: ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ === */
+.search-bar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.95);
+  border-top: 1px solid rgba(255, 192, 203, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 1500;
+}
+
+.search-bar.active {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-bar input {
+  width: 40%;
+  background: #1a1a1a;
+  border: 1px solid #ffb6c1;
+  border-radius: 6px;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  transition: box-shadow 0.3s;
+}
+.search-bar input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #ffb6c1;
+}
+
+/* === DROPDOWN КАТАЛОГ === */
+.sakura-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: transparent;
+  border: none;
+  color: #eee;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0.7rem;
+  transition: color 0.3s ease;
+}
+.dropdown-btn:hover {
+  color: #ffb6c1;
+}
+
+/* === МЕНЮ === */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #181818;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  display: none;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  min-width: 550px;
+  z-index: 999;
+}
+
+.sakura-dropdown:hover .dropdown-menu {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === КОЛОНКИ === */
+.dropdown-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+.dropdown-subtitle {
+  font-weight: 600;
+  color: #ffb6c1;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+  padding-bottom: 0.3rem;
+}
+
+/* === ЭЛЕМЕНТЫ === */
+.dropdown-item {
+  text-decoration: none;
+  color: #ddd;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+.dropdown-item:hover {
+  background: rgba(255, 182, 193, 0.1);
+  color: #ffb6c1;
+}
+
+/* === СПЕЦИАЛЬНЫЙ БЛОК === */
+.dropdown-column.special {
+  align-self: flex-end;
+}
+.random-btn {
+  background: #ff69b4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.random-btn:hover {
+  background: #ff85c1;
+  transform: scale(1.05);
+}
+
+
+/* === Sakura Catalog — стили фильтров и сетки === */
+
+.catalog-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Левая часть — карточки */
+.anime-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  transition: 0.3s ease;
+}
+
+/* Правая часть — фильтры */
+.filter-panel {
+  width: 270px;
+  background: var(--panel-bg, #1e1e2a);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+  position: sticky;
+  top: 100px;
+  transition: 0.3s ease;
+}
+
+.filter-panel h3 {
+  color: #ffb6c1;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ddd;
+  font-size: 15px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.filter-group input[type="checkbox"],
+.filter-group input[type="radio"] {
+  accent-color: #ffb6c1;
+  transform: scale(1.1);
+  margin-right: 6px;
+}
+
+/* Кнопки */
+.filter-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-btn {
+  background: linear-gradient(135deg, #ff8fab, #ffb6c1);
+  border: none;
+  color: #222;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.filter-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(135deg, #ffc0cb, #ffb6c1);
+}
+
+.filter-reset {
+  background: #2c2c3a;
+  color: #ddd;
+}
+
+.filter-reset:hover {
+  background: #3b3b4a;
+}
+
+/* Карточки */
+.anime-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 10px;
+  transition: 0.3s ease;
+  animation: fadeIn 0.5s ease;
+}
+
+.anime-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
+}
+
+.anime-card img {
+  width: 100%;
+  border-bottom: 2px solid rgba(255, 182, 193, 0.3);
+  border-radius: 10px 10px 0 0;
+}
+
+.anime-card h3 {
+  margin: 10px 0 5px;
+  color: #fff;
+}
+
+.anime-card p {
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Светлая тема */
+body.light-theme .filter-panel {
+  background: #fff0f4;
+  box-shadow: 0 0 10px rgba(255, 192, 203, 0.4);
+}
+
+body.light-theme .filter-group label {
+  color: #333;
+}
+
+body.light-theme .anime-card {
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 192, 203, 0.2);
+}
+
+
+/* === Раскладка: карточки слева, фильтр справа === */
+.catalog-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* Левая часть (карточки) */
+.catalog-left {
+  flex: 1;
+}
+
+/* Правая часть (фильтр) */
+.filter-panel {
+  width: 270px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+}
+
+/* На телефоне — фильтр под карточками */
+@media (max-width: 992px) {
+  .catalog-container {
+    flex-direction: column-reverse;
+  }
+
+  .filter-panel {
+    width: 100%;
+    position: relative;
+    top: auto;
+  }
+}
+
+
+/* === Каталог: карточки слева, фильтр справа === */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  align-items: start;
+}
+
+.catalog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-filter {
+  background: rgba(255, 182, 193, 0.08);
+  border: 1px solid rgba(255, 182, 193, 0.25);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.1);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.catalog-filter h3, .catalog-filter h4 {
+  color: #ffb7d5;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 15px;
+  color: #ddd;
+  margin: 6px 0;
+}
+
+.filter-group input[type="checkbox"],
+.filter-group input[type="radio"] {
+  accent-color: #ff8cc6;
+  margin-right: 6px;
+}
+
+.filter-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.filter-btn {
+  background: linear-gradient(135deg, #ffb7d5, #ff6fa5);
+  border: none;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.filter-btn:hover {
+  transform: scale(1.04);
+  background: linear-gradient(135deg, #ff9fc5, #ff4e9d);
+}
+
+.filter-reset {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffb7d5;
+  border: 1px solid #ffb7d5;
+}
+
+.filter-reset:hover {
+  background: rgba(255, 182, 193, 0.2);
+}
+
+/* Адаптив */
+@media (max-width: 992px) {
+  .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+  .catalog-filter {
+    position: relative;
+    top: auto;
+    max-height: none;
+  }
+}
+
+/* === Поисковая панель над карточками === */
+.catalog-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.sakura-search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 182, 193, 0.4);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.sakura-search-input::placeholder {
+  color: #aaa;
+}
+
+.sakura-search-input:focus {
+  outline: none;
+  border-color: #ff8cc6;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sakura-search-btn {
+  background: linear-gradient(135deg, #ffb7d5, #ff6fa5);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sakura-search-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff9fc5, #ff4e9d);
+}
+
+/* === Поисковая панель над карточками === */
+.catalog-search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding: 10px 15px;
+  background: rgba(255, 182, 193, 0.05);
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.1);
+}
+
+.sakura-search-input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}ы
+
+.sakura-search-input::placeholder {
+  color: #aaa;
+}
+
+.sakura-search-input:focus {
+  outline: none;
+  border-color: #ff8cc6;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sakura-search-btn {
+  background: linear-gradient(135deg, #ffb7d5, #ff6fa5);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sakura-search-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff9fc5, #ff4e9d);
+}
+
+
+/* === Темная тема === */
+body.dark-mode .sakura-search-input {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 182, 193, 0.4);
+}
+
+body.dark-mode .sakura-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* === Светлая тема === */
+body.light-mode .sakura-search-input {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border: 1px solid rgba(255, 105, 180, 0.3);
+}
+
+body.light-mode .sakura-search-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* Глобальный поиск */
+.global-search {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8vh;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+}
+
+.global-search.active {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.global-search-content {
+  background: var(--bg-color, #1e1e1e);
+  color: var(--text-color, #fff);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 750px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+
+.search-header input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  outline: none;
+  padding: 8px 10px;
+}
+
+.search-header input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.search-results {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.result-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.result-item img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.result-item h4 {
+  font-size: 1rem;
+  margin: 0;
+  color: #fff;
+}
+
+.result-item p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Поддержка светлой темы */
+body.light-theme .global-search-content {
+  background: #fff;
+  color: #222;
+}
+
+body.light-theme .search-header {
+  background: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+body.light-theme .result-item:hover {
+  background: #f9f9f9;
+}
+
+body.light-theme .search-header input::placeholder {
+  color: #777;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === Глобальный поиск === */
+.global-search {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+}
+.global-search.active { display: flex; animation: fadeIn 0.3s ease; }
+
+.global-search-content {
+  background: var(--bg-color, #1e1e1e);
+  color: var(--text-color, #fff);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+.search-header input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  outline: none;
+  padding: 8px 10px;
+}
+.search-header input::placeholder { color: rgba(255,255,255,0.5); }
+.close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.search-results {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.result-item:hover { background: rgba(255,255,255,0.08); }
+.result-item img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.result-item h4 { font-size: 1rem; margin: 0; color: #fff; }
+.result-item p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.7; }
+
+.placeholder-text {
+  text-align: center;
+  opacity: 0.7;
+  padding: 30px;
+}
+
+/* Светлая тема */
+body.light-theme .global-search-content { background: #fff; color: #222; }
+body.light-theme .search-header { background: #f0f0f0; border-bottom: 1px solid #ddd; }
+body.light-theme .result-item:hover { background: #f9f9f9; }
+body.light-theme .search-header input::placeholder { color: #777; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+/* 🌸 Кнопка профиля (улучшенная версия) */
+.profile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255,182,193,0.15), rgba(255,105,180,0.1));
+  border: 1px solid rgba(255,182,193,0.3);
+  box-shadow: 0 0 6px rgba(255,182,193,0.3);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-left: 12px;
+}
+
+.profile-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0.9);
+}
+
+.profile-btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(145deg, rgba(255,192,203,0.3), rgba(255,105,180,0.25));
+  border-color: rgba(255,182,193,0.6);
+  box-shadow: 0 0 12px rgba(255,192,203,0.5);
+}
+
+.profile-btn:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+/* 🌞 Светлая тема */
+body.light-theme .profile-btn {
+  background: linear-gradient(145deg, rgba(255,182,193,0.25), rgba(255,105,180,0.15));
+  border: 1px solid rgba(255,182,193,0.4);
+  box-shadow: 0 0 6px rgba(255,192,203,0.4);
+}
+
+body.light-theme .profile-btn:hover {
+  background: linear-gradient(145deg, rgba(255,182,193,0.4), rgba(255,105,180,0.25));
+  box-shadow: 0 0 12px rgba(255,192,203,0.6);
+}
+
+
+
+    /* Панель категорий */
+    .bookmark-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 30px auto 25px;
+    }
+    .bookmark-tab {
+      background: var(--card-bg, #1f1f2e);
+      color: var(--text-color, #fff);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 500;
+      transition: all .3s ease;
+      cursor: pointer;
+    }
+    .bookmark-tab.active,
+    .bookmark-tab:hover {
+      background: var(--accent-color, #ff6fb3);
+      color: #fff;
+      border-color: var(--accent-color, #ff6fb3);
+      box-shadow: 0 0 10px var(--accent-color, #ff6fb3);
+    }
+
+    /* Сетка карточек */
+    .anime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 0 20px 50px;
+    }
+
+    .anime-card {
+      background: var(--card-bg, #2a2a3d);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .anime-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+    .anime-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+    .anime-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 10px 12px 0;
+    }
+    .anime-card p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      padding: 0 12px;
+    }
+    .progress-info {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      padding: 0 12px;
+    }
+    .remove-btn {
+      width: calc(100% - 24px);
+      margin: 10px 12px 14px;
+      background: var(--accent-color, #ff6fb3);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      padding: 8px 0;
+      cursor: pointer;
+      transition: background .25s;
+    }
+    .remove-btn:hover {
+      background: #ff86c1;
+    }
+    .empty-msg {
+      text-align: center;
+      font-size: 1.1rem;
+      opacity: 0.7;
+      margin-top: 30px;
+    }
+
+    body.light-theme .anime-card {
+      background: #fff;
+      color: #222;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    body.light-theme .bookmark-tab {
+      background: #f4f4f4;
+      color: #222;
+      border-color: #ccc;
+    }
+
+    /* 🌸 Общая сетка карточек */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+  margin-top: 20px;
+}
+
+/* 🌸 Стиль карточки */
+.anime-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 💫 Hover эффект */
+.anime-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(255, 182, 193, 0.4);
+  border-color: rgba(255, 182, 193, 0.6);
+}
+
+/* 📷 Обложка */
+.anime-card img {
+  width: 100%;
+  height: 310px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.4s ease;
+}
+
+.anime-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ✨ Название */
+.anime-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 12px 0 4px;
+  padding: 0 12px;
+  text-align: center;
+}
+
+/* 🎭 Жанры */
+.anime-card p {
+  color: #ddd;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 8px;
+  padding: 0 10px;
+}
+
+/* 🌸 Контейнер кнопок */
+.bookmark-actions {
+  margin: 10px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 🌸 Селектор статуса */
+.status-select {
+  background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+  border: 1px solid #ff85a2;
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  color: #4a0038;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.status-select:hover {
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+  transform: scale(1.03);
+}
+
+/* 🌸 Кнопка закладок */
+.bookmark-btn {
+  background: linear-gradient(135deg, #ff85a2, #ff4d79);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover {
+  background: linear-gradient(135deg, #ff99b8, #ff6699);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+}
+
+.bookmark-btn:active {
+  transform: scale(0.97);
+}
+
+/* 🌙 Светлая тема */
+body.light-theme .anime-card {
+  background: #fff;
+  border: 1px solid #f0bcd2;
+  box-shadow: 0 5px 10px rgba(255, 182, 193, 0.3);
+}
+
+body.light-theme .anime-card h3 {
+  color: #222;
+}
+
+body.light-theme .anime-card p {
+  color: #555;
+}
+
+body.light-theme .status-select {
+  background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+  color: #8b0068;
+  border-color: #ff85a2;
+}
+
+body.light-theme .bookmark-btn {
+  background: linear-gradient(135deg, #ff7ba9, #ff4d79);
+}
+
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* ровно 4 карточки */
+  gap: 24px;
+  justify-content: center;
+  align-items: start;
+  margin-top: 25px;
+}
+
+/* Адаптация под планшеты и телефоны */
+@media (max-width: 1200px) {
+  .anime-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 карточки */
+  }
+}
+
+@media (max-width: 768px) {
+  .anime-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 карточки */
+  }
+}
+
+@media (max-width: 500px) {
+  .anime-grid {
+    grid-template-columns: 1fr; /* 1 карточка */
+  }
+}
 
 
 
 
 
+
+/* ======= БАЗОВЫЙ СЕТ ДЛЯ СТРАНИЦЫ ЗАКЛАДОК ======= */
+
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+@media (max-width: 1200px) {
+  .anime-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .anime-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .anime-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======= ДИЗАЙН КАРТОЧКИ ======= */
+
+.anime-card {
+  position: relative;
+  background: linear-gradient(160deg, #2b2d42, #1a1b2e);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
+  color: #fff;
+}
+
+.anime-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* ======= КАРТИНКА ======= */
+.anime-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ======= ТЕКСТ ======= */
+.anime-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 10px 8px 4px;
+  color: #ffd9ec;
+  text-shadow: 0 0 4px rgba(255, 192, 203, 0.4);
+}
+
+.anime-card p {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+/* ======= КНОПКА УДАЛЕНИЯ ======= */
+.anime-card .remove-btn {
+  background: linear-gradient(90deg, #ff7ba9, #ff85a2);
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.3s ease;
+}
+
+.anime-card .remove-btn:hover {
+  background: linear-gradient(90deg, #ff7b7b, #ff3131);
+}
+
+/* ======= ПУСТОЙ СПИСОК ======= */
+.empty-msg {
+  text-align: center;
+  color: #bbb;
+  font-size: 1.1rem;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+/* ======= СВЕТЛАЯ ТЕМА ======= */
+.light-theme .anime-card {
+  background: linear-gradient(160deg, #fefefe, #e9e9ef);
+  color: #333;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .anime-card h3 {
+  color: #d63384;
+}
+
+.light-theme .anime-card .remove-btn {
+  background: linear-gradient(90deg, #ff7676, #e63946);
+}
+
+.light-theme .anime-card .remove-btn:hover {
+  background: linear-gradient(90deg, #ff9999, #fa5252);
+}
+
+
+
+    .about-hero {
+      background: linear-gradient(135deg, #ff8fab, #ffc2d1);
+      color: #fff;
+      padding: 80px 20px;
+      text-align: center;
+      border-radius: 0 0 40px 40px;
+    }
+    .about-hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .about-hero p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+
+    .about-section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 15px;
+    }
+    .about-section h2 {
+      font-size: 1.8rem;
+      color: var(--text-color, #fff);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .about-section p {
+      color: var(--text-color, #ccc);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+    }
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 50px;
+    }
+    .team-member {
+      background: var(--card-bg, #222);
+      border-radius: 15px;
+      padding: 20px;
+      width: 260px;
+      text-align: center;
+      transition: transform .3s;
+    }
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+    .team-member h4 {
+      color: var(--text-color, #fff);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    .team-member p {
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+
+    .contact-block {
+      text-align: center;
+      margin: 70px 0 100px;
+    }
+    .contact-block a {
+      color: #ff9ebb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .contact-block a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-column a:hover {
+  color: #ff9ebb;
+  transition: color 0.3s ease;
+}
+
+
+/* 🌙 Тёмная тема (по умолчанию) */
+body {
+  background-color: #0d0d0d;
+  color: #ffffff;
+}
+
+/* 🌸 Светлая тема */
+body.light-theme {
+  background-color: #fff6f9; /* нежно-розовый фон */
+  color: #222; /* тёмный текст */
+}
+
+/* Для заголовков и параграфов */
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme p,
+body.light-theme a {
+  color: #222 !important;
+}
+
+/* Чтобы ссылки оставались видимыми */
+body.light-theme a:hover {
+  color: #ff609e !important;
+}
+
+/* Для футера (если он общий) */
+body.light-theme footer {
+  background-color: #ffe6ef;
+  color: #222;
+}
+
+/* 🌸 Светлая тема — текст в карточках */
+body.light-theme .anime-card,
+body.light-theme .team-card,
+body.light-theme .card {
+  background-color: #fffafa;       /* мягкий розоватый фон */
+  color: #222 !important;          /* тёмный читаемый текст */
+  border: 1px solid #ffd6e2;       /* лёгкая рамка */
+}
+
+/* Заголовки и описания в карточках */
+body.light-theme .anime-card h3,
+body.light-theme .anime-card p,
+body.light-theme .team-card h3,
+body.light-theme .team-card p,
+body.light-theme .card h3,
+body.light-theme .card p {
+  color: #222 !important;
+}
+
+/* Кнопки внутри карточек */
+body.light-theme .anime-card button,
+body.light-theme .team-card button,
+body.light-theme .card button {
+  background-color: #ffb6c1;
+  color: #222;
+  border: none;
+}
+
+body.light-theme .anime-card button:hover,
+body.light-theme .team-card button:hover,
+body.light-theme .card button:hover {
+  background-color: #ff8cb4;
+  color: #fff;
+}
+
+/* ===== СЕКЦИЯ НАША КОМАНДА ===== */
+.about-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: #1c1c1c;
+  color: #f8f8f8;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.light-theme .about-section {
+  background: #fff5f8; /* мягкий розоватый фон */
+  color: #222;
+}
+
+/* Контейнер команды */
+.team {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+/* Карточка участника */
+.team-member {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, background 0.3s, color 0.3s;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+/* Фото участника */
+.team-member img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border: 3px solid #ff80ab;
+}
+
+/* Имя */
+.team-member h4 {
+  margin: 10px 0 5px;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+/* Описание */
+.team-member p {
+  font-size: 0.95rem;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+/* Светлая тема */
+body.light-theme .team-member {
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .team-member h4 {
+  color: #e75480;
+}
+
+body.light-theme .team-member p {
+  color: #333;
+}
 
