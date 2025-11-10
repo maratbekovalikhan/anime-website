@@ -178,275 +178,704 @@ genreSelect.addEventListener("change", filterAnime);
 
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleSearch");
+  const closeBtn = document.getElementById("closeSearch");
+  const bar = document.getElementById("searchBar");
+
+  toggleBtn.addEventListener("click", () => {
+    bar.classList.toggle("active");
+    document.getElementById("searchInput").focus();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    bar.classList.remove("active");ы
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") bar.classList.remove("active");
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".nav-link");
+  const current = window.location.pathname.split("/").pop(); // берём имя файла (index.html и т.п.)
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href === current || (current === "" && href === "index.html")) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdown = document.querySelector(".sakura-dropdown");
+  const btn = dropdown.querySelector(".dropdown-btn");
+  const menu = dropdown.querySelector(".dropdown-menu");
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("open");
+  });
+
+  document.addEventListener("click", () => {
+    menu.classList.remove("open");
+  });
+});
+</script>
+
+
+
+<!-- Модальное окно поиска -->
+<div id="globalSearchModal" class="global-search">
+  <div class="global-search-content">
+    <div class="search-header">
+      <input type="text" id="globalSearchInput" placeholder="Поиск аниме..." autocomplete="off">
+      <button id="closeGlobalSearch" class="close-btn">✖</button>
+    </div>
+
+    <div id="searchResults" class="search-results">
+      <p class="placeholder-text">Начните вводить название тайтла 🌸</p>
+    </div>
+  </div>
+</div>
+
 <body>
- <!-- Шапка -->
-  <header class="site-header container-fluid">
-    <div class="logo">
-      <img src="icon Image .png" alt="Anime Website Logo">
-      <span>SAKURA</span>
+<!-- Шапка -->
+<header class="sakura-header">
+  <div class="container sakura-nav">
+    <!-- Левая часть -->
+    <div class="sakura-left">
+      <a href="index.html" class="sakura-logo">
+        <img src="icon Image .png" alt="Sakura Logo">
+        <span>SAKURA</span>
+      </a>
     </div>
 
-    <nav class="main-nav">
-      <a href="index.html">Главная</a>
-      <a href="catalog.html">Каталог</a>
-      <a href="player.html">Плеер</a>
-      <a href="bookmarks.html">Закладки</a>
-      <a href="register.html">Регистрация</a>
-    </nav>
-
-    <div class="search-box" style="position: relative; max-width: 320px;">
-      <input type="text" id="searchInput" placeholder="Что ищем, семпай?" autocomplete="off" class="form-control">
-      <button id="searchBtn" class="btn btn-sm" type="button">🔍</button>
-      <ul id="suggestionList" class="suggestions"></ul>
+    <!-- Центр навигации -->
+   <nav class="sakura-center">
+  <a href="index.html" class="nav-link">Главная</a>
+<!-- Кнопка Каталог с выпадающим меню -->
+<div class="dropdown sakura-dropdown">
+  <button class="dropdown-btn">
+    <span>📚 Каталог ▾</span>
+  </button>
+  <div class="dropdown-menu">
+    <div class="dropdown-column">
+      <a href="#" class="dropdown-item">🔥 Сейчас смотрят</a>
+      <a href="#" class="dropdown-item">⭐ Коллекции</a>
+      <a href="#" class="dropdown-item">💬 Отзывы и рецензии</a>
+      <a href="#" class="dropdown-item">👥 Команды</a>
+      <a href="#" class="dropdown-item">🎭 Персонажи</a>
+      <a href="#" class="dropdown-item">🌸 Пользователи</a>
     </div>
-    
 
-    <div class="theme-toggle">
-      <button id="themeBtn" aria-label="Switch theme">🌙</button>
+    <div class="dropdown-column">
+      <span class="dropdown-subtitle">🎞 Тайтлы</span>
+      <a href="catalog.htmlS" class="dropdown-item">TV Сериал</a>
+      <a href="#" class="dropdown-item">Фильм</a>
+      <a href="#" class="dropdown-item">OVA</a>
+      <a href="#" class="dropdown-item">ONA</a>
+      <a href="#" class="dropdown-item">Клип</a>
+      <a href="#" class="dropdown-item">Спешл</a>
     </div>
 
-  </header>
+    <div class="dropdown-column special">
+      <button class="random-btn">🎲 Случайный тайтл</button>
+    </div>
+  </div>
+</div>
 
+
+  <button id="toggleSearch" class="btn-icon">🔍 Поиск</button>
+
+</nav>
+
+
+    <!-- Правая часть -->
+<div class="sakura-right">
+  <button id="themeBtn" class="btn-icon">🌙</button>
+
+  <!-- Кнопка профиля -->
+  <a href="bookmarks.html" class="profile-btn" title="Мои закладки">
+    <img src="profile-icon.png" alt="👤">
+  </a>
+
+  <a href="register.html" class="btn-primary">Войти</a>
+</div>
+
+
+
+
+
+</header>
   <!-- Контент -->
   <main class="catalog container my-5">
     <h2 class="mb-4">Каталог аниме</h2>
 
 
-    
-  <!-- Фильтры -->
-  <div class="catalog-filters d-flex gap-2 mb-4">
-  <input id="filterSearch" type="text" class="form-control" placeholder="Поиск по названию...">
-    <select class="form-select" style="max-width:200px;">
-      <option value="">Все жанры</option>
-      <option value="action">Action</option>
-      <option value="fantasy">Fantasy</option>
-      <option value="drama">Drama</option>
-      <option value="comedy">Comedy</option>
-      <option value="sci-fi">Sci-Fi</option>
-      <option value="romance">Romance</option>
-    </select>
-  </div>
-
 
     <button id="scrollTopBtn" class="scroll-top">⬆</button>
 
 
+    <main class="catalog container my-5">
+  <div class="catalog-layout">
+    
+    <!-- Левая часть (карточки) -->
+    <section class="catalog-content">
 
-    <!-- Сетка карточек -->
-<div class="anime-grid">
 
-  <article class="anime-card" data-title="Naruto">
-    <img data-src="naruto.jpg" src="placeholder.jpg" alt="Naruto" class="lazy">
-    <h3>Naruto</h3>
-    <p>Shounen · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+        <div class="catalog-search mb-4">
+    <input 
+      type="text" 
+      id="mainSearchInput" 
+      class="form-control sakura-search-input" 
+      placeholder="🔍 Найдите своё аниме..." 
+      autocomplete="off"
+    >
+    <button id="mainSearchBtn" class="btn sakura-search-btn">Искать</button>
+  </div>
+      <div class="anime-grid">
+          <!-- Поисковая панель -->
 
-  <article class="anime-card" data-title="Bleach">
-    <img data-src="bleach.jpg" src="placeholder.jpg" alt="Bleach" class="lazy">
-    <h3>Bleach</h3>
-    <p>Shounen · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
 
-  <article class="anime-card" data-title="One Piece">
-    <img data-src="onepiece.jpg" src="placeholder.jpg" alt="One Piece" class="lazy">
-    <h3>One Piece</h3>
-    <p>Adventure · Shounen</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+        <article class="anime-card" data-title="Naruto" data-type="TV" data-age="12+">
+          <img data-src="naruto.jpg" src="placeholder.jpg" alt="Naruto" class="lazy">
+          <h3>Naruto</h3>
+          <p>Shounen · Action</p>
+          <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+          </div>
+        </article>
 
-  <article class="anime-card" data-title="Attack on Titan">
+        <!-- Другие карточки аналогично -->
+        <article class="anime-card" data-title="Bleach" data-type="TV" data-age="12+">
+          <img data-src="bleach.jpg" src="placeholder.jpg" alt="Bleach" class="lazy">
+          <h3>Bleach</h3>
+          <p>Shounen · Action</p>
+          <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+          </div>
+        </article>
+
+        <article class="anime-card" data-title="One Piece" data-type="TV" data-age="12+">
+          <img data-src="onepiece.jpg" src="placeholder.jpg" alt="One Piece" class="lazy">
+          <h3>One Piece</h3>
+          <p>Adventure · Shounen</p>
+          <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+          </div>
+        </article>
+
+<article class="anime-card" data-title="Attack on Titan" data-type="TV" data-age="16+">
     <img data-src="attakontitan.jpg" src="placeholder.jpg" alt="Attack on Titan" class="lazy">
     <h3>Attack on Titan</h3>
     <p>Action · Drama</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Death Note">
+<article class="anime-card" data-title="Death Note" data-type="TV" data-age="16+">
     <img data-src="deathnote.jpg" src="placeholder.jpg" alt="Death Note" class="lazy">
     <h3>Death Note</h3>
     <p>Thriller · Supernatural</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>ы
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+    
+</article>
 
-  <article class="anime-card" data-title="Demon Slayer">
+<article class="anime-card" data-title="Demon Slayer" data-type="TV" data-age="16+">
     <img data-src="demonslayer.jpg" src="placeholder.jpg" alt="Demon Slayer" class="lazy">
     <h3>Demon Slayer</h3>
     <p>Shounen · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+ 
+</article>
 
-  <article class="anime-card" data-title="Jujutsu Kaisen">
+<article class="anime-card" data-title="Jujutsu Kaisen" data-type="TV" data-age="16+">
     <img data-src="jujutsu.jpg" src="placeholder.jpg" alt="Jujutsu Kaisen" class="lazy">
     <h3>Jujutsu Kaisen</h3>
     <p>Action · Fantasy</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Fullmetal Alchemist">
+<article class="anime-card" data-title="Fullmetal Alchemist" data-type="TV" data-age="12+">
     <img data-src="fullmetal.jpg" src="placeholder.jpg" alt="Fullmetal Alchemist" class="lazy">
     <h3>Fullmetal Alchemist</h3>
     <p>Adventure · Drama</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+ 
+</article>
 
-  <article class="anime-card" data-title="Hunter x Hunter">
+<article class="anime-card" data-title="Hunter x Hunter" data-type="TV" data-age="12+">
     <img data-src="hxh.jpg" src="placeholder.jpg" alt="Hunter x Hunter" class="lazy">
     <h3>Hunter x Hunter</h3>
     <p>Adventure · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+  
+</article>
 
-  <article class="anime-card" data-title="My Hero Academia">
+<article class="anime-card" data-title="My Hero Academia" data-type="TV" data-age="12+">
     <img data-src="myhero.jpg" src="placeholder.jpg" alt="My Hero Academia" class="lazy">
     <h3>My Hero Academia</h3>
     <p>Action · Superpowers</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Boruto">
+<article class="anime-card" data-title="Boruto" data-type="TV" data-age="12+">
     <img data-src="boruto.jpg" src="placeholder.jpg" alt="Boruto" class="lazy">
     <h3>Boruto</h3>
     <p>Shounen · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Tokyo Ghoul">
+<article class="anime-card" data-title="Tokyo Ghoul" data-type="TV" data-age="18+">
     <img data-src="tokyoghoul.jpg" src="placeholder.jpg" alt="Tokyo Ghoul" class="lazy">
     <h3>Tokyo Ghoul</h3>
     <p>Dark Fantasy · Horror</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+    
+</article>
 
-  <article class="anime-card" data-title="Fairy Tail">
+<article class="anime-card" data-title="Fairy Tail" data-type="TV" data-age="12+">
     <img data-src="fairytail.jpg" src="placeholder.jpg" alt="Fairy Tail" class="lazy">
     <h3>Fairy Tail</h3>
     <p>Fantasy · Adventure</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+  
+</article>
 
-  <article class="anime-card" data-title="Sword Art Online">
+<article class="anime-card" data-title="Sword Art Online" data-type="TV" data-age="12+">
     <img data-src="sao.jpg" src="placeholder.jpg" alt="Sword Art Online" class="lazy">
     <h3>Sword Art Online</h3>
     <p>Fantasy · Sci-Fi</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Code Geass">
+<article class="anime-card" data-title="Code Geass" data-type="TV" data-age="12+">
     <img data-src="codegeass.jpg" src="placeholder.jpg" alt="Code Geass" class="lazy">
     <h3>Code Geass</h3>
     <p>Sci-Fi · Mecha</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+  
+</article>
 
-  <article class="anime-card" data-title="Neon Genesis Evangelion">
+<article class="anime-card" data-title="Neon Genesis Evangelion" data-type="TV" data-age="16+">
     <img data-src="evangelion.jpg" src="placeholder.jpg" alt="Neon Genesis Evangelion" class="lazy">
     <h3>Neon Genesis Evangelion</h3>
     <p>Psychological · Mecha</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Re:Zero">
+<article class="anime-card" data-title="Re:Zero" data-type="TV" data-age="16+">
     <img data-src="rezero.jpg" src="placeholder.jpg" alt="Re:Zero" class="lazy">
     <h3>Re:Zero</h3>
     <p>Fantasy · Drama</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Monthly Girls' Nozaki-kun">
+<article class="anime-card" data-title="Monthly Girls' Nozaki-kun" data-type="TV" data-age="12+">
     <img data-src="nozaki.jpg.webp" src="placeholder.jpg" alt="Monthly Girls' Nozaki-kun" class="lazy">
     <h3>Monthly Girls' Nozaki-kun</h3>
     <p>Comedy · Romance</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+    
+</article>
 
-  <article class="anime-card" data-title="Erased">
+<article class="anime-card" data-title="Erased" data-type="TV" data-age="12+">
     <img data-src="erased.jpg" src="placeholder.jpg" alt="Erased" class="lazy">
     <h3>Erased</h3>
     <p>Thriller · Mystery</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+  
+</article>
 
-  <article class="anime-card" data-title="Steins;Gate">
+<article class="anime-card" data-title="Steins;Gate" data-type="TV" data-age="12+">
     <img data-src="steinsgate.jpg" src="placeholder.jpg" alt="Steins;Gate" class="lazy">
     <h3>Steins;Gate</h3>
     <p>Sci-Fi · Thriller</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
 
-  <article class="anime-card" data-title="Clannad">
+</article>
+
+<article class="anime-card" data-title="Clannad" data-type="TV" data-age="6+">
     <img data-src="clannad.jpg" src="placeholder.jpg" alt="Clannad" class="lazy">
     <h3>Clannad</h3>
     <p>Drama · Romance</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
 
-  <article class="anime-card" data-title="Angel Beats!">
+</article>
+
+<article class="anime-card" data-title="Angel Beats!" data-type="TV" data-age="12+">
     <img data-src="angelbeats.jpg" src="placeholder.jpg" alt="Angel Beats!" class="lazy">
     <h3>Angel Beats!</h3>
     <p>Drama · Fantasy</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+   
+</article>
 
-  <article class="anime-card" data-title="Parasyte">
+<article class="anime-card" data-title="Parasyte" data-type="TV" data-age="16+">
     <img data-src="parasyte.jpg" src="placeholder.jpg" alt="Parasyte" class="lazy">
     <h3>Parasyte</h3>
     <p>Horror · Sci-Fi</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
 
-  <article class="anime-card" data-title="Dr. Stone">
+</article>
+
+<article class="anime-card" data-title="Dr. Stone" data-type="TV" data-age="12+">
     <img data-src="drstone.jpg" src="placeholder.jpg" alt="Dr. Stone" class="lazy">
     <h3>Dr. Stone</h3>
     <p>Sci-Fi · Adventure</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+    
+</article>
 
-  <article class="anime-card" data-title="Black Clover">
+<article class="anime-card" data-title="Black Clover" data-type="TV" data-age="12+">
     <img data-src="blackclover.jpeg" src="placeholder.jpg" alt="Black Clover" class="lazy">
     <h3>Black Clover</h3>
     <p>Fantasy · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+  
+</article>
 
-  <article class="anime-card" data-title="Fire Force">
+<article class="anime-card" data-title="Fire Force" data-type="TV" data-age="16+">
     <img data-src="fireforce.jpg" src="placeholder.jpg" alt="Fire Force" class="lazy">
     <h3>Fire Force</h3>
     <p>Action · Supernatural</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
 
-  <article class="anime-card" data-title="Blue Period">
+</article>
+
+<article class="anime-card" data-title="Blue Period" data-type="TV" data-age="12+">
     <img data-src="blueperiod.jpg" src="placeholder.jpg" alt="Blue Period" class="lazy">
     <h3>Blue Period</h3>
     <p>Drama · Slice of Life</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+    
+</article>
 
-  <article class="anime-card" data-title="Vivy: Fluorite Eye's Song">
+<article class="anime-card" data-title="Vivy: Fluorite Eye's Song" data-type="TV" data-age="12+">
     <img data-src="vivy.jpeg" src="placeholder.jpg" alt="Vivy: Fluorite Eye's Song" class="lazy">
     <h3>Vivy: Fluorite Eye's Song</h3>
     <p>Sci-Fi · Drama</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+  
+</article>
 
-  <article class="anime-card" data-title="Spy x Family">
+<article class="anime-card" data-title="Spy x Family" data-type="TV" data-age="12+">
     <img data-src="spyxfamily.jpg" src="placeholder.jpg" alt="Spy x Family" class="lazy">
     <h3>Spy x Family</h3>
     <p>Comedy · Action</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+</article>
 
-  <article class="anime-card" data-title="Chainsaw Man">
+<article class="anime-card" data-title="Chainsaw Man" data-type="TV" data-age="18+">
     <img data-src="chainsaw.jpg" src="placeholder.jpg" alt="Chainsaw Man" class="lazy">
     <h3>Chainsaw Man</h3>
     <p>Action · Horror</p>
-    <button class="bookmark-btn">Добавить в закладки</button>
-  </article>
+    <div class="bookmark-actions mt-2">
+            <select class="status-select form-select form-select-sm mb-1">
+              <option value="watching">Смотрю</option>
+              <option value="planned">Запланировано</option>
+              <option value="watched">Просмотрено</option>
+              <option value="dropped">Брошено</option>
+              <option value="favorites">Любимые</option>
+            </select>
+            <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+</article>
 
-</div>
-  </main>
+
+      </div>
+    </section>
+
+    <!-- Правая часть (фильтр) -->
+       <aside class="catalog-filter">
+      <h3 class="filter-title">🔍 Фильтры</h3>
+
+     
+
+      <div class="filter-group">
+        <h4>🎭 Жанры</h4>
+        <label><input type="checkbox" value="Action"> Action</label>
+        <label><input type="checkbox" value="Fantasy"> Fantasy</label>
+        <label><input type="checkbox" value="Drama"> Drama</label>
+        <label><input type="checkbox" value="Comedy"> Comedy</label>
+        <label><input type="checkbox" value="Romance"> Romance</label>
+        <label><input type="checkbox" value="Sci-Fi"> Sci-Fi</label>
+        <label><input type="checkbox" value="Horror"> Horror</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>📺 Тип</h4>
+        <label><input type="checkbox" value="TV"> TV</label>
+        <label><input type="checkbox" value="Film"> Film</label>
+        <label><input type="checkbox" value="OVA"> OVA</label>
+        <label><input type="checkbox" value="ONA"> ONA</label>
+        <label><input type="checkbox" value="Special"> Special</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>🔞 Возраст</h4>
+        <label><input type="radio" name="age" value="6+"> 6+</label>
+        <label><input type="radio" name="age" value="12+"> 12+</label>
+        <label><input type="radio" name="age" value="16+"> 16+</label>
+        <label><input type="radio" name="age" value="18+"> 18+</label>
+      </div>
+
+      <div class="filter-actions">
+        <button id="applyFilters" class="filter-btn">Применить</button>
+        <button id="resetFilters" class="filter-btn filter-reset">Сбросить</button>
+        <button id="randomAnime" class="filter-btn">🎲 Случайный тайтл</button>
+      </div>
+    </aside>
+  </div>
+</main>
+
+
+
 
   <!-- Футер -->
 <footer class="site-footer bg-dark text-light mt-5 p-4">
@@ -475,7 +904,7 @@ genreSelect.addEventListener("change", filterAnime);
         <h3>Мы в соцсетях</h3>
       <div class="social-links">
         <a href="#"><img src="telegram_icon.png" alt="telegram"></a><br>
-        <a href="#"><img src="vk_icon.png" alt=""VK"></a> <br>
+        <a href="#"><img src="vk_icon.png" alt="VK"></a> <br>
         <a href="#"><img src="Instagram_icon.png" alt="instagram"></a>
       </div>
       </div>
@@ -544,3 +973,6 @@ genreSelect.addEventListener("change", filterAnime);
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+
