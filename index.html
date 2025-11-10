@@ -141,37 +141,148 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleSearch");
+  const closeBtn = document.getElementById("closeSearch");
+  const bar = document.getElementById("searchBar");
+
+  toggleBtn.addEventListener("click", () => {
+    bar.classList.toggle("active");
+    document.getElementById("searchInput").focus();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    bar.classList.remove("active");ы
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") bar.classList.remove("active");
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".nav-link");
+  const current = window.location.pathname.split("/").pop(); // берём имя файла (index.html и т.п.)
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href === current || (current === "" && href === "index.html")) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdown = document.querySelector(".sakura-dropdown");
+  const btn = dropdown.querySelector(".dropdown-btn");
+  const menu = dropdown.querySelector(".dropdown-menu");
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("open");
+  });
+
+  document.addEventListener("click", () => {
+    menu.classList.remove("open");
+  });
+});
+</script>
+
+
+
+<!-- Модальное окно поиска -->
+<div id="globalSearchModal" class="global-search">
+  <div class="global-search-content">
+    <div class="search-header">
+      <input type="text" id="globalSearchInput" placeholder="Поиск аниме..." autocomplete="off">
+      <button id="closeGlobalSearch" class="close-btn">✖</button>
+    </div>
+
+    <div id="searchResults" class="search-results">
+      <p class="placeholder-text">Начните вводить название тайтла 🌸</p>
+    </div>
+  </div>
+</div>
+
+
+
 
 <body>
 <!-- Шапка -->
-<header class="site-header container-fluid">
-  <div class="logo">
-    <img src="icon Image .png" alt="Anime Website Logo">
-    <span>SAKURA</span>
+<header class="sakura-header">
+  <div class="container sakura-nav">
+    <!-- Левая часть -->
+    <div class="sakura-left">
+      <a href="index.html" class="sakura-logo">
+        <img src="icon Image .png" alt="Sakura Logo">
+        <span>SAKURA</span>
+      </a>
+    </div>
+
+    <!-- Центр навигации -->
+    <nav class="sakura-center">
+  <a href="index.html" class="nav-link">Главная</a>
+ <!-- Кнопка Каталог с выпадающим меню -->
+<div class="dropdown sakura-dropdown">
+  <button class="dropdown-btn">
+    <span>📚 Каталог ▾</span>
+  </button>
+  <div class="dropdown-menu">
+    <div class="dropdown-column">
+      <a href="#" class="dropdown-item">🔥 Сейчас смотрят</a>
+      <a href="#" class="dropdown-item">⭐ Коллекции</a>
+      <a href="#" class="dropdown-item">💬 Отзывы и рецензии</a>
+      <a href="#" class="dropdown-item">👥 Команды</a>
+      <a href="#" class="dropdown-item">🎭 Персонажи</a>
+      <a href="#" class="dropdown-item">🌸 Пользователи</a>
+    </div>
+
+    <div class="dropdown-column">
+      <span class="dropdown-subtitle">🎞 Тайтлы</span>
+      <a href="catalog.html" class="dropdown-item">TV Сериал</a>
+      <a href="#" class="dropdown-item">Фильм</a>
+      <a href="#" class="dropdown-item">OVA</a>
+      <a href="#" class="dropdown-item">ONA</a>
+      <a href="#" class="dropdown-item">Клип</a>
+      <a href="#" class="dropdown-item">Спешл</a>
+    </div>
+
+    <div class="dropdown-column special">
+      <button class="random-btn">🎲 Случайный тайтл</button>
+    </div>
   </div>
-
-  <nav class="main-nav">
-    <a href="index.html">Главная</a>
-    <a href="catalog.html">Каталог</a>
-    <a href="player.html">Плеер</a>
-    <a href="bookmarks.html">Закладки</a>
-    <a href="register.html">Регистрация</a>
-  </nav>
-
-  <!-- Правый блок -->
-  <div class="header-right">
-<div class="search-box" style="position: relative;">
-  <input type="text" id="searchInput" placeholder="Что ищем, семпай?" autocomplete="off">
-  <button id="searchBtn" class="btn btn-sm" type="button">🔍</button>
-  <ul id="suggestionList" class="suggestions"></ul>
 </div>
 
-    <div class="theme-toggle">
-      <button id="themeBtn" aria-label="Switch theme">🌙</button>
-    </div>
-    
+  <button id="toggleSearch" class="btn-icon">🔍 Поиск</button>
+
+</nav>
+
+
+    <!-- Правая часть -->
+<div class="sakura-right">
+  <button id="themeBtn" class="btn-icon">🌙</button>
+
+  <!-- Кнопка профиля -->
+  <a href="bookmarks.html" class="profile-btn" title="Мои закладки">
+    <img src="profile-icon.png" alt="👤">
+  </a>
+
+  <a href="register.html" class="btn-primary">Войти</a>
+</div>
+
+
+
 
 </header>
+
 
   <!-- Внешняя контейнерная обёртка (container-fluid) оставляет ширину гибкой,
        но внутренняя .grid-layout — твоя сетка (CSS Grid) — НЕ трогаем -->
@@ -304,133 +415,91 @@ $(document).ready(function() {
 
 
 
-<section class="interactive-section container text-center my-5">
-  <h2 class="text-gradient mb-4">Интерактив Sakura</h2>
-
-  <!-- Greeting -->
-  <div class="greeting-box mb-4">
-    <p id="greetingText">Введите ваше имя:</p>
-    <input type="text" id="nameInput" placeholder="Ваше имя" class="form-control w-50 mx-auto">
-    <button id="greetBtn" class="btn btn-pink mt-3">Поздороваться 🌸</button>
-  </div>
-
-  <!-- Read More -->
-  <div class="read-more-box mt-5">
-    <p id="animeInfo">
-      Аниме — это искусство, объединяющее глубокие истории, визуальную красоту и эмоции.
-    </p>
-    <button id="readMoreBtn" class="btn btn-outline-light">Читать дальше</button>
-    <div id="extraContent" class="extra-content">
-      <p>На сайте SAKURA вы можете открыть для себя целый мир любимых тайтлов, добавлять их в закладки и делиться впечатлениями с друзьями!</p>
-    </div>
-  </div>
-
-  <!-- Time Display -->
-  <div class="time-section mt-5">
-    <button id="timeBtn" class="btn btn-pink">Показать текущее время ⏰</button>
-    <p id="timeDisplay" class="mt-3"></p>
-  </div>
-</section>
-
-<!-- Scroll To Top -->
-<button id="scrollTopBtn" class="scroll-top">⬆</button>
-<!-- <audio id="clickSound" src="click.mp3" preload="auto"></audio> -->
 
 
 
 
 
 
-<!-- Футер -->
+
 <footer class="site-footer container-fluid bg-dark text-light mt-5 p-4">
-  <div class="row">
-    <div class="footer-column col-md-3 col-12">
-      <h3>О нас</h3>
-      <p>SAKURA — это проект для аниме-фанов. Здесь можно искать, смотреть и сохранять любимые тайтлы.</p>
-    </div>
-    <div class="footer-column col-md-3 col-6">
-      <h3>Навигация</h3>
-      <ul>
-        <li><a href="index.html" class="text-light">Главная</a></li>
-        <li><a href="catalog.html" class="text-light">Каталог</a></li>
-        <li><a href="player.html" class="text-light">Плеер</a></li>
-        <li><a href="bookmarks.html" class="text-light">Закладки</a></li>
-      </ul>
-    </div>
-    <div class="footer-column col-md-3 col-6">
-      <h3>Контакты</h3>
-      <ul>
-        <li>Email: support@sakura-anime.com</li>
-        <li>Телефон: +7 (700) 123-45-67</li>
-      </ul>
-    </div>
-    <div class="footer-column col-md-3 col-12">
-      <h3>Мы в соцсетях</h3>
-      <div class="social-links">
-        <a href="#"><img src="telegram_icon.png" alt="telegram"></a><br>
-        <a href="#"><img src="vk_icon.png" alt=""VK"></a> <br>
-        <a href="#"><img src="Instagram_icon.png" alt="instagram"></a>
+  <div class="container">
+    <div class="row">
+      <!-- О нас -->
+      <div class="footer-column col-md-3 col-12">
+        <a href="about.html" class="text-light text-decoration-none d-block">
+          <h3>О нас</h3>
+          <p>SAKURA — это проект для аниме-фанов. Здесь можно искать, смотреть и сохранять любимые тайтлы.</p>
+        </a>
       </div>
+
+      <!-- Навигация -->
+      <div class="footer-column col-md-3 col-6">
+        <h3>Навигация</h3>
+        <ul>
+          <li><a href="index.html" class="text-light">Главная</a></li>
+          <li><a href="catalog.html" class="text-light">Каталог</a></li>
+          <li><a href="player.html" class="text-light">Плеер</a></li>
+          <li><a href="bookmarks.html" class="text-light">Закладки</a></li>
+        </ul>
+      </div>
+
+      <!-- Контакты -->
+      <div class="footer-column col-md-3 col-6">
+        <h3>Контакты</h3>
+        <ul>
+          <li>Email: support@sakura-anime.com</li>
+          <li>Телефон: +7 (700) 123-45-67</li>
+        </ul>
+      </div>
+
+      <!-- Соцсети -->
+      <div class="footer-column col-md-3 col-12">
+        <h3>Мы в соцсетях</h3>
+        <div class="social-links">
+          <a href="#"><img src="telegram_icon.png" alt="telegram"></a><br>
+          <a href="#"><img src="vk_icon.png" alt="vk"></a><br>
+          <a href="#"><img src="Instagram_icon.png" alt="instagram"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section mt-4">
+      <h2 class="faq-title">Часто задаваемые вопросы</h2>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-title">Как добавить аниме в закладки?</button>
+          <div class="accordion-content">
+            <p>Откройте страницу аниме и нажмите кнопку «Добавить в закладки». После этого тайтл появится на странице «Закладки».</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-title">Можно ли смотреть аниме без регистрации?</button>
+          <div class="accordion-content">
+            <p>Да, вы можете просматривать аниме и каталог без регистрации. Однако закладки сохраняются только при входе в аккаунт.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-title">Почему видео не воспроизводится?</button>
+          <div class="accordion-content">
+            <p>Попробуйте обновить страницу или проверить интернет-соединение. Если проблема сохраняется — обратитесь в поддержку.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Нижняя строка -->
+    <div class="footer-bottom text-center mt-3">
+      <p>© 2025 SAKURA Anime. Все права защищены. <br> Участники: Арман и Алихан (SE-2410)</p>
     </div>
   </div>
-
-  <section class="faq-section">
-  <h2 class="faq-title">Часто задаваемые вопросы</h2>
-
-  <div class="accordion">
-    <div class="accordion-item">
-      <button class="accordion-title">Как добавить аниме в закладки?</button>
-      <div class="accordion-content">
-        <p>Откройте страницу аниме и нажмите кнопку «Добавить в закладки». После этого тайтл появится на странице «Закладки».</p>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-title">Можно ли смотреть аниме без регистрации?</button>
-      <div class="accordion-content">
-        <p>Да, вы можете просматривать аниме и каталог без регистрации. Однако закладки сохраняются только при входе в аккаунт.</p>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-title">Почему видео не воспроизводится?</button>
-      <div class="accordion-content">
-        <p>Попробуйте обновить страницу или проверить интернет-соединение. Если проблема сохраняется — обратитесь в поддержку.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <div class="footer-bottom text-center mt-3">
-    <p>© 2025 SAKURA Anime. Все права защищены. <br> Участники: Арман и Алихан (SE-2410)</p>
-  </div>
-
-
 </footer>
-  
 
-<!-- Раздел статистики -->
-<section class="site-stats">
-  <h2>Наша статистика</h2>
 
-  <div class="stats-container">
-    <div class="stat">
-      <div class="count" data-target="1250">0</div>
-      <p>Пользователей</p>
-    </div>
-
-    <div class="stat">
-      <div class="count" data-target="560">0</div>
-      <p>Аниме добавлено</p>
-    </div>
-
-    <div class="stat">
-      <div class="count" data-target="98">0</div>
-      <p>Рецензий</p>
-    </div>
-  </div>
-</section>
 
 
 
