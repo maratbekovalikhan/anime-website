@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>О нас - Sakura Anime</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="app.js"></script>
+
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="global.css">
+  
+</head>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+
+  // Устанавливаем сохранённую тему
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeBtn.textContent = '🌸';
+  }
+
+  // Обработчик переключения
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+
+    themeBtn.textContent = isLight ? '🌸' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+});
+</script>
+
+
+<script>
+  const accordionItems = document.querySelectorAll(".accordion-item");
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      item.classList.toggle("active");
+    });
+  });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const accordionItems = document.querySelectorAll(".accordion-item");
+
+  accordionItems.forEach(item => {
+    const title = item.querySelector(".accordion-title");
+    title.addEventListener("click", () => {
+      // закрыть другие
+      accordionItems.forEach(i => i !== item && i.classList.remove("active"));
+      // открыть текущий
+      item.classList.toggle("active");
+    });
+  });
+});
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Добавляем звёзды к каждой карточке
+  document.querySelectorAll(".anime-card").forEach(card => {
+    const title = card.querySelector("h3")?.textContent.trim();
+    if (!title) return;
+
+    const starsContainer = document.createElement("div");
+    starsContainer.className = "stars";
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.dataset.value = i;
+      star.textContent = "★";
+      starsContainer.appendChild(star);
+    }
+    card.appendChild(starsContainer);
+
+    const savedRating = localStorage.getItem(`rating_${title}`) || 0;
+    highlightStars(starsContainer, savedRating);
+
+    starsContainer.addEventListener("click", e => {
+      if (!e.target.classList.contains("star")) return;
+      const rating = e.target.dataset.value;
+      localStorage.setItem(`rating_${title}`, rating);
+      highlightStars(starsContainer, rating);
+    });
+
+    function highlightStars(container, rating) {
+      container.querySelectorAll(".star").forEach((s, i) => {
+        s.style.color = i < rating ? "#FFD700" : "#888";
+      });
+    }
+  });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+  // Функция для проверки, виден ли элемент в области окна
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + 200 && // немного заранее
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  // Основная функция ленивой загрузки
+  function lazyLoadImages() {
+    $('.lazy').each(function() {
+      if (isInViewport(this) && $(this).attr('data-src')) {
+        $(this).attr('src', $(this).data('src'));
+        $(this).removeAttr('data-src'); // чтобы не загружалось повторно
+        $(this).hide().fadeIn(600); // плавное появление
+      }
+    });
+  }
+
+  // События скролла и загрузки
+  $(window).on('scroll resize load', function() {
+    lazyLoadImages();
+  });
+
+  // Первоначальная загрузка
+  lazyLoadImages();
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleSearch");
+  const closeBtn = document.getElementById("closeSearch");
+  const bar = document.getElementById("searchBar");
+
+  toggleBtn.addEventListener("click", () => {
+    bar.classList.toggle("active");
+    document.getElementById("searchInput").focus();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    bar.classList.remove("active");ы
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") bar.classList.remove("active");
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".nav-link");
+  const current = window.location.pathname.split("/").pop(); // берём имя файла (index.html и т.п.)
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href === current || (current === "" && href === "index.html")) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdown = document.querySelector(".sakura-dropdown");
+  const btn = dropdown.querySelector(".dropdown-btn");
+  const menu = dropdown.querySelector(".dropdown-menu");
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("open");
+  });
+
+  document.addEventListener("click", () => {
+    menu.classList.remove("open");
+  });
+});
+</script>
+
+
+
+<!-- Модальное окно поиска -->
+<div id="globalSearchModal" class="global-search">
+  <div class="global-search-content">
+    <div class="search-header">
+      <input type="text" id="globalSearchInput" placeholder="Поиск аниме..." autocomplete="off">
+      <button id="closeGlobalSearch" class="close-btn">✖</button>
+    </div>
+
+    <div id="searchResults" class="search-results">
+      <p class="placeholder-text">Начните вводить название тайтла 🌸</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<body>
+<!-- Шапка -->
+<header class="sakura-header">
+  <div class="container sakura-nav">
+    <!-- Левая часть -->
+    <div class="sakura-left">
+      <a href="index.html" class="sakura-logo">
+        <img src="icon Image .png" alt="Sakura Logo">
+        <span>SAKURA</span>
+      </a>
+    </div>
+
+    <!-- Центр навигации -->
+    <nav class="sakura-center">
+  <a href="index.html" class="nav-link">Главная</a>
+ <!-- Кнопка Каталог с выпадающим меню -->
+<div class="dropdown sakura-dropdown">
+  <button class="dropdown-btn">
+    <span>📚 Каталог ▾</span>
+  </button>
+  <div class="dropdown-menu">
+    <div class="dropdown-column">
+      <a href="#" class="dropdown-item">🔥 Сейчас смотрят</a>
+      <a href="#" class="dropdown-item">⭐ Коллекции</a>
+      <a href="#" class="dropdown-item">💬 Отзывы и рецензии</a>
+      <a href="#" class="dropdown-item">👥 Команды</a>
+      <a href="#" class="dropdown-item">🎭 Персонажи</a>
+      <a href="#" class="dropdown-item">🌸 Пользователи</a>
+    </div>
+
+    <div class="dropdown-column">
+      <span class="dropdown-subtitle">🎞 Тайтлы</span>
+      <a href="catalog.html" class="dropdown-item">TV Сериал</a>
+      <a href="#" class="dropdown-item">Фильм</a>
+      <a href="#" class="dropdown-item">OVA</a>
+      <a href="#" class="dropdown-item">ONA</a>
+      <a href="#" class="dropdown-item">Клип</a>
+      <a href="#" class="dropdown-item">Спешл</a>
+    </div>
+
+    <div class="dropdown-column special">
+      <button class="random-btn">🎲 Случайный тайтл</button>
+    </div>
+  </div>
+</div>
+
+  <button id="toggleSearch" class="btn-icon">🔍 Поиск</button>
+
+</nav>
+
+
+    <!-- Правая часть -->
+<div class="sakura-right">
+  <button id="themeBtn" class="btn-icon">🌙</button>
+
+  <!-- Кнопка профиля -->
+  <a href="bookmarks.html" class="profile-btn" title="Мои закладки">
+    <img src="profile-icon.png" alt="👤">
+  </a>
+
+  <a href="register.html" class="btn-primary">Войти</a>
+</div>
+
+
+
+
+</header>
+
+  <!-- Главный блок -->
+  <section class="about-hero">
+    <h1>О проекте Sakura Anime</h1>
+    <p>Место, где аниме оживает, а фанаты находят вдохновение 🌸</p>
+  </section>
+
+  <!-- Основной текст -->
+  <section class="about-section">
+    <h2>Наша миссия</h2>
+    <p>
+      Мы создали SAKURA как уютное место для всех аниме-фанов.  
+      Здесь вы можете открывать новые тайтлы, добавлять их в закладки, делиться впечатлениями и наслаждаться атмосферой японской культуры.  
+      Наша цель — объединить всех любителей аниме в одном пространстве без рекламы, спама и навязчивых баннеров.
+    </p>
+  </section>
+
+  <section class="about-section">
+    <h2>Что мы предлагаем</h2>
+    <p>
+      🌸 Удобный каталог тайтлов с фильтрацией и поиском. <br>
+      ⭐ Возможность сохранять любимые аниме и отслеживать прогресс. <br>
+      💬 Сообщество для общения и обмена отзывами. <br>
+      🎨 Современный дизайн и поддержка светлой и тёмной темы.
+    </p>
+  </section>
+
+  <section class="about-section">
+    <h2>Наша команда</h2>
+    <div class="team">
+      <div class="team-member">
+        <img src="avatar1.jpg" alt="Founder">
+        <h4>Arman</h4>
+        <p>Основатель проекта, разработчик фронтенда и дизайнер интерфейсов.</p>
+      </div>
+      <div class="team-member">
+        <img src="avatar2.jpg" alt="Dev">
+        <h4>Alikhan</h4>
+        <p> Cо-основатель и Frontend-разработчик, отвечает за анимации и адаптивность сайта.</p>
+      </div>
+  </section>
+
+
+
+
+  <section class="interactive-section container text-center my-5">
+  <h2 class="text-gradient mb-4">Интерактив Sakura</h2>
+
+  <!-- Greeting -->
+  <div class="greeting-box mb-4">
+    <p id="greetingText">Введите ваше имя:</p>
+    <input type="text" id="nameInput" placeholder="Ваше имя" class="form-control w-50 mx-auto">
+    <button id="greetBtn" class="btn btn-pink mt-3">Поздороваться 🌸</button>
+  </div>
+
+  <!-- Read More -->
+  <div class="read-more-box mt-5">
+    <p id="animeInfo">
+      Аниме — это искусство, объединяющее глубокие истории, визуальную красоту и эмоции.
+    </p>
+    <button id="readMoreBtn" class="btn btn-outline-light">Читать дальше</button>
+    <div id="extraContent" class="extra-content">
+      <p>На сайте SAKURA вы можете открыть для себя целый мир любимых тайтлов, добавлять их в закладки и делиться впечатлениями с друзьями!</p>
+    </div>
+  </div>
+
+  <!-- Time Display -->
+  <div class="time-section mt-5">
+    <button id="timeBtn" class="btn btn-pink">Показать текущее время ⏰</button>
+    <p id="timeDisplay" class="mt-3"></p>
+  </div>
+</section>
+
+<!-- Scroll To Top -->
+<button id="scrollTopBtn" class="scroll-top">⬆</button>
+<!-- <audio id="clickSound" src="click.mp3" preload="auto"></audio> -->
+
+  <section class="contact-block">
+    <h2>Связаться с нами</h2>
+    <p>Есть идеи, предложения или нашли ошибку?  
+      Напишите нам на <a href="mailto:support@sakura-anime.com">support@sakura-anime.com</a>
+    </p>
+  </section>
+
+
+
+
+  
+<!-- Раздел статистики -->
+<section class="site-stats">
+  <h2>Наша статистика</h2>
+
+  <div class="stats-container">
+    <div class="stat">
+      <div class="count" data-target="1250">0</div>
+      <p>Пользователей</p>
+    </div>
+
+    <div class="stat">
+      <div class="count" data-target="560">0</div>
+      <p>Аниме добавлено</p>
+    </div>
+
+    <div class="stat">
+      <div class="count" data-target="98">0</div>
+      <p>Рецензий</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Футер -->
+  <footer class="site-footer bg-dark text-light text-center py-4">
+    <p>© 2025 SAKURA Anime. Все права защищены.</p>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Прокрутка карусели
+  (function () {
+    const carousel = document.getElementById('anime-carousel');
+    const prev = document.getElementById('prev-btn');
+    const next = document.getElementById('next-btn');
+
+    function scrollByCard(dir = 1) {
+      const card = carousel.querySelector('.anime-card');
+      if (!card) return;
+      const style = getComputedStyle(carousel);
+      const gap = parseInt(style.columnGap || style.gap || 16);
+      const cardWidth = card.offsetWidth + gap;
+      carousel.scrollBy({ left: cardWidth * dir, behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', () => scrollByCard(-1));
+    next.addEventListener('click', () => scrollByCard(1));
+  })();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".count");
+  let started = false; // чтобы не запускалось повторно
+
+  function startCounting() {
+    counters.forEach(counter => {
+      const target = +counter.getAttribute("data-target");
+      const duration = 2000; // 2 секунды
+      const step = target / (duration / 16); // шаг обновления примерно каждые 16ms
+
+      let count = 0;
+
+      const update = () => {
+        count += step;
+        if (count < target) {
+          counter.textContent = Math.floor(count);
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = target;
+        }
+      };
+
+      update();
+    });
+  }
+
+  // Проверяем, виден ли блок на экране
+  function isVisible(element) {
+    const rect = element.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom >= 0;
+  }
+
+  // Запуск, когда статистика появляется в зоне видимости
+  function checkScroll() {
+    const statsSection = document.querySelector(".site-stats");
+    if (!started && isVisible(statsSection)) {
+      started = true;
+      startCounting();
+      window.removeEventListener("scroll", checkScroll);
+    }
+  }
+
+  window.addEventListener("scroll", checkScroll);
+  checkScroll(); // на случай, если блок уже в зоне видимости
+});
+</script>
+
+
+</body>
+</html>
