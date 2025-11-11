@@ -2714,6 +2714,24 @@ body.light-theme .team-member p {
   color: #333;
 }
 
+/* === Меню каталога в светлой теме === */
+body.light-theme .dropdown-menu {
+  background-color: #222 !important; /* тёмный фон */
+  border: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+body.light-theme .dropdown-menu a,
+body.light-theme .dropdown-item {
+  color: #fff !important; /* белый текст */
+}
+
+body.light-theme .dropdown-menu a:hover,
+body.light-theme .dropdown-item:hover {
+  background-color: #d63384 !important; /* розовый фон при наведении */
+  color: #fff !important;
+}
+
+
 /* ===== НАВБАР ===== */
 .navbar {
 padding: 10px 20px;
@@ -2781,5 +2799,6 @@ color: #ffffff;
 background-color: #3a3576;
 color: #f0f0f0;
 }
+
 
 
