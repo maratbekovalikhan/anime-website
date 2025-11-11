@@ -1011,38 +1011,56 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </div>
-<script>
-    const animeCards = document.querySelectorAll('.anime-card');
-const modal = document.getElementById('trailerModal'); // твоя модалка
-const modalContent = modal.querySelector('.modal-content'); 
+
+ <script>   
+const animeCards = document.querySelectorAll('.anime-card');
+const trailerModal = new bootstrap.Modal(document.getElementById('trailerModal'));
+const trailerVideo = document.getElementById('trailerVideo');
+const trailerSource = trailerVideo.querySelector('source');
 
 animeCards.forEach(card => {
     card.addEventListener('click', () => {
         const trailerUrl = card.dataset.trailer;
         if (!trailerUrl) return alert('Трейлер недоступен');
 
-        let embedContent = '';
         if (trailerUrl.includes('youtube.com/watch')) {
             const embedUrl = trailerUrl.replace('watch?v=', 'embed/');
-            embedContent = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+            // заменяем видео на iframe для YouTube
+            trailerVideo.style.display = 'none';
+            trailerSource.src = '';
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = '500';
+            iframe.src = embedUrl;
+            iframe.frameBorder = '0';
+            iframe.allow = 'fullscreen';
+            iframe.id = 'youtubeTrailer';
+            document.querySelector('#trailerModal .modal-body').appendChild(iframe);
         } else {
-            embedContent = `<video width="560" height="315" controls>
-                                <source src="${trailerUrl}" type="video/mp4">
-                            </video>`;
+            // видео mp4
+            trailerVideo.style.display = 'block';
+            const existingIframe = document.getElementById('youtubeTrailer');
+            if (existingIframe) existingIframe.remove();
+
+            trailerSource.src = trailerUrl;
+            trailerVideo.load();
         }
 
-        modalContent.innerHTML = embedContent;
-        modal.style.display = 'block';
+        trailerModal.show();
     });
 });
 
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-        modalContent.innerHTML = '';
-    }
+// Сброс при закрытии модалки
+document.getElementById('trailerModal').addEventListener('hidden.bs.modal', () => {
+    trailerVideo.pause();
+    trailerVideo.currentTime = 0;
+    trailerSource.src = '';
+    const existingIframe = document.getElementById('youtubeTrailer');
+    if (existingIframe) existingIframe.remove();
 });
 </script>
+
+
 
 </body>
 </html>
