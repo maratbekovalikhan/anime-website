@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <!-- Поисковая панель -->
 
 
-        <article class="anime-card" data-title="Naruto" data-type="TV" data-age="12+">
+        <article class="anime-card" data-title="Naruto" data-type="TV" data-age="12+" data-trailer="https://www.youtube.com/watch?v=qZnyKGVOKOc">
           <img data-src="naruto.jpg" src="placeholder.jpg" alt="Naruto" class="lazy">
           <h3>Naruto</h3>
           <p>Shounen · Action</p>
@@ -361,6 +361,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <option value="favorites">Любимые</option>
             </select>
             <button class="bookmark-btn btn btn-primary btn-sm">Добавить в закладки</button>
+
+
           </div>
         </article>
 
@@ -971,6 +973,24 @@ document.addEventListener("DOMContentLoaded", () => {
   <script src="app.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="trailerModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Трейлер</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <video id="trailerVideo" width="100%" controls>
+          <source src="" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 
