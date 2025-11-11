@@ -948,6 +948,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </footer>
 
+    <div id="trailerModal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Трейлер</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <video id="trailerVideo" width="100%" controls>
+              <source src="" type="video/mp4">
+              Ваш браузер не поддерживает видео.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    
   <!-- JS для закладок -->
   <script>
     const buttons = document.querySelectorAll(".bookmark-btn");
