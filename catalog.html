@@ -1060,6 +1060,33 @@ document.getElementById('trailerModal').addEventListener('hidden.bs.modal', () =
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const animeCards = document.querySelectorAll(".anime-card");
+
+  animeCards.forEach(card => {
+    card.addEventListener("click", (e) => {
+      // Чтобы клик не срабатывал на кнопках внутри карточки
+      if(e.target.closest(".bookmark-btn") || e.target.closest(".status-select")) return;
+
+      const title = card.dataset.title;
+      const trailer = card.dataset.trailer;
+
+      // Если хочешь открыть трейлер в модальном окне
+      if(trailer) {
+        const trailerVideo = document.getElementById("trailerVideo");
+        trailerVideo.querySelector("source").src = trailer;
+        trailerVideo.load();
+        const trailerModal = new bootstrap.Modal(document.getElementById("trailerModal"));
+        trailerModal.show();
+      }
+
+      // Или если хочешь перейти на отдельную страницу
+      // window.location.href = `anime.html?title=${encodeURIComponent(title)}`;
+    });
+  });
+});
+</script>
 
 
 </body>
