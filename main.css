@@ -2714,3 +2714,72 @@ body.light-theme .team-member p {
   color: #333;
 }
 
+/* ===== НАВБАР ===== */
+.navbar {
+padding: 10px 20px;
+font-family: Arial, sans-serif;
+}
+
+/* --- Светлая тема --- */
+.navbar.light-theme {
+background-color: #ffffff;  /* светлый фон */
+color: #333333;             /* цвет текста */
+}
+
+.navbar.light-theme a.nav-link,
+.navbar.light-theme .navbar-brand {
+color: #333333;             /* ссылки и бренд */
+}
+
+.navbar.light-theme a.nav-link:hover,
+.navbar.light-theme .navbar-brand:hover {
+color: #000000;             /* при наведении */
+}
+
+/* Выпадающее меню светлой темы */
+.navbar.light-theme .dropdown-menu {
+background-color: #ffffff;
+border: 1px solid #ddd;
+}
+
+.navbar.light-theme .dropdown-item {
+color: #333333;
+}
+
+.navbar.light-theme .dropdown-item:hover {
+background-color: #f0f0f0;
+color: #000000;
+}
+
+/* --- Темная тема --- */
+.navbar.dark-theme {
+background-color: #24243e;  /* темный фон */
+color: #ffffff;             /* цвет текста */
+}
+
+.navbar.dark-theme a.nav-link,
+.navbar.dark-theme .navbar-brand {
+color: #ffffff;
+}
+
+.navbar.dark-theme a.nav-link:hover,
+.navbar.dark-theme .navbar-brand:hover {
+color: #f0f0f0;
+}
+
+/* Выпадающее меню темной темы */
+.navbar.dark-theme .dropdown-menu {
+background-color: #302b63;
+border: 1px solid #444;
+}
+
+.navbar.dark-theme .dropdown-item {
+color: #ffffff;
+}
+
+.navbar.dark-theme .dropdown-item:hover {
+background-color: #3a3576;
+color: #f0f0f0;
+}
+
+
