@@ -546,8 +546,22 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
   
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".anime-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const title = card.querySelector("h3").textContent.trim();
+      localStorage.setItem("selectedAnime", title);
+      window.location.href = "anime.html";
+    });
+  });
+});
+</script>
+
+  
 </body>
 </html>   
+
 
 
 
