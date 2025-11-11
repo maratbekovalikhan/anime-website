@@ -990,6 +990,38 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </div>
+<script>
+    const animeCards = document.querySelectorAll('.anime-card');
+const modal = document.getElementById('trailerModal'); // твоя модалка
+const modalContent = modal.querySelector('.modal-content'); 
+
+animeCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const trailerUrl = card.dataset.trailer;
+        if (!trailerUrl) return alert('Трейлер недоступен');
+
+        let embedContent = '';
+        if (trailerUrl.includes('youtube.com/watch')) {
+            const embedUrl = trailerUrl.replace('watch?v=', 'embed/');
+            embedContent = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+        } else {
+            embedContent = `<video width="560" height="315" controls>
+                                <source src="${trailerUrl}" type="video/mp4">
+                            </video>`;
+        }
+
+        modalContent.innerHTML = embedContent;
+        modal.style.display = 'block';
+    });
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        modalContent.innerHTML = '';
+    }
+});
+</script>
 
 </body>
 </html>
