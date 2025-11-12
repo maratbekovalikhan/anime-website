@@ -948,24 +948,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </footer>
 
-    <div id="trailerModal" class="modal fade" tabindex="-1">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Трейлер</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <video id="trailerVideo" width="100%" controls>
-              <source src="" type="video/mp4">
-              Ваш браузер не поддерживает видео.
-            </video>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
+  
 
 
     
@@ -993,72 +976,8 @@ document.addEventListener("DOMContentLoaded", () => {
   </script>
   <script src="app.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <div id="trailerModal" class="modal fade" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Трейлер</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <video id="trailerVideo" width="100%" controls>
-          <source src="" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
-      </div>
-    </div>
-  </div>
-</div>
 
- <script>   
-const animeCards = document.querySelectorAll('.anime-card');
-const trailerModal = new bootstrap.Modal(document.getElementById('trailerModal'));
-const trailerVideo = document.getElementById('trailerVideo');
-const trailerSource = trailerVideo.querySelector('source');
-
-animeCards.forEach(card => {
-    card.addEventListener('click', () => {
-        const trailerUrl = card.dataset.trailer;
-        if (!trailerUrl) return alert('Трейлер недоступен');
-
-        if (trailerUrl.includes('youtube.com/watch')) {
-            const embedUrl = trailerUrl.replace('watch?v=', 'embed/');
-            // заменяем видео на iframe для YouTube
-            trailerVideo.style.display = 'none';
-            trailerSource.src = '';
-            const iframe = document.createElement('iframe');
-            iframe.width = '100%';
-            iframe.height = '500';
-            iframe.src = embedUrl;
-            iframe.frameBorder = '0';
-            iframe.allow = 'fullscreen';
-            iframe.id = 'youtubeTrailer';
-            document.querySelector('#trailerModal .modal-body').appendChild(iframe);
-        } else {
-            // видео mp4
-            trailerVideo.style.display = 'block';
-            const existingIframe = document.getElementById('youtubeTrailer');
-            if (existingIframe) existingIframe.remove();
-
-            trailerSource.src = trailerUrl;
-            trailerVideo.load();
-        }
-
-        trailerModal.show();
-    });
-});
-
-// Сброс при закрытии модалки
-document.getElementById('trailerModal').addEventListener('hidden.bs.modal', () => {
-    trailerVideo.pause();
-    trailerVideo.currentTime = 0;
-    trailerSource.src = '';
-    const existingIframe = document.getElementById('youtubeTrailer');
-    if (existingIframe) existingIframe.remove();
-});
-</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1067,26 +986,20 @@ document.addEventListener("DOMContentLoaded", () => {
   animeCards.forEach(card => {
     card.addEventListener("click", (e) => {
       // Чтобы клик не срабатывал на кнопках внутри карточки
-      if(e.target.closest(".bookmark-btn") || e.target.closest(".status-select")) return;
+      if (e.target.closest(".bookmark-btn") || e.target.closest(".status-select")) return;
 
       const title = card.dataset.title;
-      const trailer = card.dataset.trailer;
 
-      // Если хочешь открыть трейлер в модальном окне
-      if(trailer) {
-        const trailerVideo = document.getElementById("trailerVideo");
-        trailerVideo.querySelector("source").src = trailer;
-        trailerVideo.load();
-        const trailerModal = new bootstrap.Modal(document.getElementById("trailerModal"));
-        trailerModal.show();
-      }
+      // Сохраняем название выбранного аниме
+      localStorage.setItem("selectedAnime", title);
 
-      // Или если хочешь перейти на отдельную страницу
-      // window.location.href = `anime.html?title=${encodeURIComponent(title)}`;
+      // Переходим на отдельную страницу
+      window.location.href = "anime.html";
     });
   });
 });
 </script>
+
 
 
 </body>
