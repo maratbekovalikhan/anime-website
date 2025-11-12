@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Жанр — Anime World</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+    <a href="index.html">← Назад</a>
+    <h1 id="genreTitle">Жанр</h1>
+  </header>
+
+  <main class="genre-page">
+    <section id="genreInfo">
+      <p>Загрузка описания...</p>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const genreName = params.get("name");
+
+      const genreData = {
+        shounen: {
+          title: "Сёнэн (Shounen)",
+          desc: "Сёнэн — жанр аниме и манги, ориентированный на подростков мужского пола. Обычно содержит экшен, юмор и развитие дружбы и силы."
+        },
+        shoujo: {
+          title: "Сёдзё (Shoujo)",
+          desc: "Сёдзё — жанр, нацеленный на девушек, часто сосредоточен на романтике, эмоциях и личностных отношениях."
+        },
+        seinen: {
+          title: "Сэйнэн (Seinen)",
+          desc: "Сэйнэн — жанр для взрослой мужской аудитории, отличается более серьёзными темами, психологизмом и реалистичными сюжетами."
+        },
+        josei: {
+          title: "Дзёсэй (Josei)",
+          desc: "Дзёсэй — жанр для взрослых женщин, часто показывает реалистичные истории о любви, работе и повседневной жизни."
+        },
+        kodomo: {
+          title: "Кодомо (Kodomo)",
+          desc: "Кодомо — жанр для детей. Сюжеты добрые, поучительные, часто несут мораль или образовательное значение."
+        }
+      };
+
+      const genreInfo = genreData[genreName];
+      const titleEl = document.getElementById("genreTitle");
+      const infoEl = document.getElementById("genreInfo");
+
+      if (genreInfo) {
+        titleEl.textContent = genreInfo.title;
+        infoEl.innerHTML = `<p>${genreInfo.desc}</p>`;
+      } else {
+        titleEl.textContent = "Жанр не найден";
+        infoEl.innerHTML = `<p>Информация об этом жанре пока недоступна.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
