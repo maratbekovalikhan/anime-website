@@ -100,34 +100,32 @@
       const params = new URLSearchParams(window.location.search);
       const genreName = params.get("name");
 
-      const genreData = {
+            const genreData = {
         shounen: {
           title: "Сёнэн (Shounen)",
           desc: "Сёнэн — жанр аниме и манги, ориентированный на подростков мужского пола. Обычно включает динамичные бои, дружбу, соревнование и преодоление трудностей. Это самый популярный жанр, известный сериями вроде Naruto, One Piece и My Hero Academia.",
-          img: "https://static.zerochan.net/Naruto.full.2591749.jpg"
+          img: "https://upload.wikimedia.org/wikipedia/en/9/94/Naruto_Uzumaki.png" // постер Naruto
         },
         shoujo: {
           title: "Сёдзё (Shoujo)",
           desc: "Сёдзё — жанр для девушек, в центре внимания которого — эмоции, романтика и межличностные отношения. Он сочетает мягкие визуальные стили, драму и темы взросления. Примеры: Fruits Basket, Sailor Moon.",
-          img: "https://static.zerochan.net/Cardcaptor.Sakura.full.2714570.jpg"
+          img: "https://upload.wikimedia.org/wikipedia/en/2/2c/SailorMoonCrystal.jpg" // постер Sailor Moon
         },
         seinen: {
           title: "Сэйнэн (Seinen)",
           desc: "Сэйнэн — жанр для взрослой мужской аудитории. Сюжеты часто более глубокие, с элементами психологии, философии и реализма. Примеры: Berserk, Tokyo Ghoul, Vinland Saga.",
-          img: "https://static.zerochan.net/Vinland.Saga.full.3040973.jpg"
+          img: "https://upload.wikimedia.org/wikipedia/en/4/4c/Tokyo_Ghoul_volume_1_cover.jpg" // постер Tokyo Ghoul
         },
         josei: {
           title: "Дзёсэй (Josei)",
           desc: "Дзёсэй — жанр для взрослых женщин. Темы включают реальную жизнь, карьеру, сложные отношения и самопознание. Примеры: Nana, Paradise Kiss.",
-          img: "https://static.zerochan.net/NANA.full.2350985.jpg"
+          img: "https://upload.wikimedia.org/wikipedia/en/6/66/NANA_manga_cover.png" // постер Nana
         },
-
         kodomo: {
           title: "Кодомо (Kodomo)",
           desc: "Кодомо — жанр, рассчитанный на детей. Обычно это добрые, поучительные истории с простым юмором и позитивными героями. Примеры: Doraemon, Pokémon.",
-          img: "https://upload.wikimedia.org/wikipedia/en/7/73/Pokemon_cover_art.png" // безопасный постер Pokémon
+          img: "https://upload.wikimedia.org/wikipedia/en/7/73/Pokemon_cover_art.png" // постер Pokémon
         }
-
       };
 
       const genreInfo = genreData[genreName];
