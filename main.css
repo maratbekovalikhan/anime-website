@@ -2800,5 +2800,21 @@ background-color: #3a3576;
 color: #f0f0f0;
 }
 
+/* Стили для жанров */
+.genre-page {
+  max-width: 800px;
+  margin: 50px auto;
+  background: var(--card-bg, #1a1a1a);
+  color: var(--text-color, #fff);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+.genre-page p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
 
 
