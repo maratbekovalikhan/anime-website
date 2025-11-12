@@ -5,6 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Жанр — Anime World</title>
   <link rel="stylesheet" href="main.css">
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: "Poppins", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      background: linear-gradient(90deg, #ff4da6, #ff6ec4);
+      color: white;
+      position: relative;
+    }
+
+    header a {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 6px 12px;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    header a:hover {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    #banner {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-bottom: 3px solid #ff6ec4;
+      display: block;
+    }
+
+    .genre-page {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #1b1b1b;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
+    }
+
+    .genre-page h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #ff70b8;
+    }
+
+    .genre-page p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      text-align: justify;
+      color: #e3e3e3;
+    }
+
+    @media (max-width: 768px) {
+      .genre-page {
+        margin: 20px;
+        padding: 20px;
+      }
+      #banner {
+        height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -12,8 +86,11 @@
     <h1 id="genreTitle">Жанр</h1>
   </header>
 
+  <img id="banner" src="" alt="Баннер жанра">
+
   <main class="genre-page">
     <section id="genreInfo">
+      <h2>Описание</h2>
       <p>Загрузка описания...</p>
     </section>
   </main>
@@ -26,36 +103,47 @@
       const genreData = {
         shounen: {
           title: "Сёнэн (Shounen)",
-          desc: "Сёнэн — жанр аниме и манги, ориентированный на подростков мужского пола. Обычно содержит экшен, юмор и развитие дружбы и силы."
+          desc: "Сёнэн — жанр аниме и манги, ориентированный на подростков мужского пола. Обычно включает динамичные бои, дружбу, соревнование и преодоление трудностей. Это самый популярный жанр, известный сериями вроде Naruto, One Piece и My Hero Academia.",
+          img: "https://static.zerochan.net/Naruto.full.2591749.jpg"
         },
         shoujo: {
           title: "Сёдзё (Shoujo)",
-          desc: "Сёдзё — жанр, нацеленный на девушек, часто сосредоточен на романтике, эмоциях и личностных отношениях."
+          desc: "Сёдзё — жанр для девушек, в центре внимания которого — эмоции, романтика и межличностные отношения. Он сочетает мягкие визуальные стили, драму и темы взросления. Примеры: Fruits Basket, Sailor Moon.",
+          img: "https://static.zerochan.net/Cardcaptor.Sakura.full.2714570.jpg"
         },
         seinen: {
           title: "Сэйнэн (Seinen)",
-          desc: "Сэйнэн — жанр для взрослой мужской аудитории, отличается более серьёзными темами, психологизмом и реалистичными сюжетами."
+          desc: "Сэйнэн — жанр для взрослой мужской аудитории. Сюжеты часто более глубокие, с элементами психологии, философии и реализма. Примеры: Berserk, Tokyo Ghoul, Vinland Saga.",
+          img: "https://static.zerochan.net/Vinland.Saga.full.3040973.jpg"
         },
         josei: {
           title: "Дзёсэй (Josei)",
-          desc: "Дзёсэй — жанр для взрослых женщин, часто показывает реалистичные истории о любви, работе и повседневной жизни."
+          desc: "Дзёсэй — жанр для взрослых женщин. Темы включают реальную жизнь, карьеру, сложные отношения и самопознание. Примеры: Nana, Paradise Kiss.",
+          img: "https://static.zerochan.net/NANA.full.2350985.jpg"
         },
         kodomo: {
           title: "Кодомо (Kodomo)",
-          desc: "Кодомо — жанр для детей. Сюжеты добрые, поучительные, часто несут мораль или образовательное значение."
+          desc: "Кодомо — жанр, рассчитанный на детей. Обычно это добрые, поучительные истории с простым юмором и позитивными героями. Примеры: Doraemon, Pokémon.",
+          img: "https://static.zerochan.net/Pokemon.full.2852811.jpg"
         }
       };
 
       const genreInfo = genreData[genreName];
       const titleEl = document.getElementById("genreTitle");
       const infoEl = document.getElementById("genreInfo");
+      const bannerEl = document.getElementById("banner");
 
       if (genreInfo) {
         titleEl.textContent = genreInfo.title;
-        infoEl.innerHTML = `<p>${genreInfo.desc}</p>`;
+        bannerEl.src = genreInfo.img;
+        infoEl.innerHTML = `
+          <h2>Описание жанра</h2>
+          <p>${genreInfo.desc}</p>
+        `;
       } else {
         titleEl.textContent = "Жанр не найден";
         infoEl.innerHTML = `<p>Информация об этом жанре пока недоступна.</p>`;
+        bannerEl.style.display = "none";
       }
     });
   </script>
